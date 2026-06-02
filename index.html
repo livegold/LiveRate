@@ -1,231 +1,970 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sattardina - Premium Gold Rates</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Playfair+Display:wght@500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-  
-  <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body {
-      min-height: 100vh;
-      background: linear-gradient(135deg, #0a0a15 0%, #121226 100%);
-      color: #f5f5f5;
-      font-family: 'Roboto', sans-serif;
-      overflow-x: hidden;
-    }
-    .container { max-width: 1400px; margin: 0 auto; padding: 2.5rem 1.5rem; }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sattardina — Gold Rate Display</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
+<style>
+/* ═══════════════════════════════════════
+   ROOT VARIABLES
+═══════════════════════════════════════ */
+:root {
+  --gold:       #d4a843;
+  --gold2:      #f0c84a;
+  --gold3:      #fff0a0;
+  --gold-dim:   #7a5c1a;
+  --bg:         #040608;
+  --bg2:        #080c10;
+  --bg3:        #0d1118;
+  --panel:      rgba(255,255,255,0.03);
+  --border:     rgba(212,168,67,0.18);
+  --border2:    rgba(212,168,67,0.35);
+  --text:       #e8dfc0;
+  --text-dim:   #7a7060;
+  --up:         #3ecf82;
+  --down:       #e05555;
+  --blue:       #3a8fd4;
+  --blue-dim:   #1a3f60;
+}
 
-    .header {
-      text-align: center;
-      padding: 3rem 0 2rem;
-      position: relative;
-    }
-    .header h1 {
-      font-family: 'Cinzel Decorative', cursive;
-      font-size: 5rem;
-      background: linear-gradient(90deg, #d4af37, #ffd700, #d4af37);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      letter-spacing: 8px;
-      text-shadow: 0 0 40px rgba(212,175,55,0.5);
-    }
-    .brand {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.2rem;
-      color: #d4af37;
-      margin-top: 1rem;
-      letter-spacing: 10px;
-      font-weight: 700;
-    }
-    .star { color: #ffd700; font-size: 2.8rem; animation: glow 4s infinite alternate; }
-    @keyframes glow { 0% { text-shadow: 0 0 10px #ffd700; } 100% { text-shadow: 0 0 30px #ffd700; } }
+* { margin:0; padding:0; box-sizing:border-box; }
 
-    .highlight-cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-      gap: 2.5rem;
-      margin: 3rem 0;
-    }
-    .lux-card {
-      background: linear-gradient(145deg, rgba(20,20,40,0.8), rgba(30,30,60,0.6));
-      backdrop-filter: blur(15px);
-      border: 1px solid rgba(212,175,55,0.25);
-      border-radius: 24px;
-      padding: 3rem 2rem;
-      text-align: center;
-      box-shadow: 0 15px 50px rgba(0,0,0,0.7), inset 0 0 30px rgba(212,175,55,0.08);
-      transition: all 0.4s ease;
-    }
-    .lux-card:hover {
-      transform: translateY(-12px) scale(1.02);
-      box-shadow: 0 30px 80px rgba(212,175,55,0.25), inset 0 0 50px rgba(212,175,55,0.12);
-    }
-    .label { font-size: 1.6rem; color: #ccc; margin-bottom: 1rem; letter-spacing: 2px; }
-    .value { font-size: 6rem; font-weight: 700; color: #ffd700; line-height: 1; text-shadow: 0 8px 25px rgba(255,215,0,0.5); }
-    .currency { font-size: 2.4rem; color: #ffea80; margin-top: 0.8rem; }
+html, body {
+  width:100%; height:100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Cormorant Garamond', serif;
+  overflow: hidden;
+}
 
-    .rates-panel {
-      background: rgba(15,15,35,0.75);
-      backdrop-filter: blur(18px);
-      border-radius: 24px;
-      border: 1px solid rgba(212,175,55,0.2);
-      padding: 3rem;
-      margin: 3rem 0;
-    }
-    .panel-title {
-      text-align: center;
-      font-family: 'Playfair Display', serif;
-      font-size: 2.8rem;
-      color: #d4af37;
-      margin-bottom: 2.5rem;
-      letter-spacing: 3px;
-    }
-    .rates-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-    }
-    .rate-box {
-      background: linear-gradient(135deg, rgba(30,30,55,0.7), rgba(50,50,80,0.5));
-      border-radius: 18px;
-      padding: 2rem;
-      text-align: center;
-      border: 1px solid rgba(212,175,55,0.15);
-    }
-    .karat { font-size: 3.2rem; font-weight: 700; color: #ffea80; }
-    .price { font-size: 4.2rem; font-weight: 700; color: #ffffff; margin: 1rem 0 0.5rem; text-shadow: 0 4px 15px rgba(255,255,255,0.3); }
-    .unit { font-size: 1.5rem; color: #ccc; }
+/* ═══════════════════════════════════════
+   ANIMATED BACKGROUND
+═══════════════════════════════════════ */
+.bg-layer {
+  position: fixed; inset:0; z-index:0;
+  background:
+    radial-gradient(ellipse 120% 60% at 50% -10%, rgba(212,168,67,0.07) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 80% at -10% 50%, rgba(58,143,212,0.04) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 70% at 110% 80%, rgba(212,168,67,0.04) 0%, transparent 50%);
+  pointer-events:none;
+}
 
-    .making-premium {
-      margin: 4rem 0 2rem;
-    }
-    .making-title {
-      text-align: center;
-      font-size: 2.5rem;
-      color: #d4af37;
-      margin-bottom: 2rem;
-      letter-spacing: 2px;
-    }
-    .making-list {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1.8rem;
-    }
-    .making-card {
-      background: linear-gradient(145deg, rgba(25,25,50,0.65), rgba(40,40,70,0.5));
-      border-radius: 16px;
-      padding: 1.8rem 2.2rem;
-      min-width: 220px;
-      text-align: center;
-      border: 1px solid rgba(212,175,55,0.18);
-      transition: all 0.3s;
-    }
-    .making-card:hover { background: linear-gradient(145deg, rgba(40,40,70,0.8), rgba(60,60,90,0.6)); transform: scale(1.05); }
-    .type { font-size: 1.3rem; color: #ffea80; margin-bottom: 0.8rem; font-weight: 500; }
-    .charge { font-size: 2.4rem; font-weight: 700; color: white; }
+/* Scanline effect for TV feel */
+.scanlines {
+  position:fixed; inset:0; z-index:1;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0,0,0,0.08) 3px,
+    rgba(0,0,0,0.08) 4px
+  );
+  pointer-events:none;
+}
 
-    .footer {
-      text-align: center;
-      padding: 3rem 0;
-      color: #777;
-      font-size: 1.2rem;
-      border-top: 1px solid rgba(212,175,55,0.1);
-    }
-  </style>
+/* ═══════════════════════════════════════
+   MAIN LAYOUT — TV 16:9 optimized
+═══════════════════════════════════════ */
+.screen {
+  position: relative; z-index:2;
+  width:100vw; height:100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: 1.8vh 2vw 1.5vh;
+  gap: 1.5vh;
+}
+
+/* ═══════════════════════════════════════
+   TOP BAR
+═══════════════════════════════════════ */
+.topbar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1.2vh;
+  gap: 1vw;
+}
+
+.brand-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(1.8rem, 3.5vw, 4rem);
+  color: var(--gold2);
+  letter-spacing: 6px;
+  line-height:1;
+}
+
+.brand-sub {
+  font-size: clamp(0.5rem, 1vw, 0.9rem);
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-top: 2px;
+}
+
+.center-logo {
+  text-align:center;
+}
+
+.logo-star {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(1.2rem, 2.5vw, 3rem);
+  background: linear-gradient(180deg, var(--gold3), var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 3px;
+}
+
+.logo-ps {
+  display: inline-block;
+  width: clamp(28px,3vw,50px);
+  height: clamp(28px,3vw,50px);
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold-dim), var(--gold));
+  display: flex; align-items:center; justify-content:center;
+  margin: 0 auto;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(0.8rem,1.5vw,1.5rem);
+  color: #000;
+  border: 2px solid var(--gold2);
+  box-shadow: 0 0 20px rgba(212,168,67,0.4);
+  animation: psGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes psGlow {
+  from { box-shadow: 0 0 15px rgba(212,168,67,0.3); }
+  to   { box-shadow: 0 0 35px rgba(212,168,67,0.7); }
+}
+
+.right-info {
+  text-align:right;
+  display:flex; flex-direction:column; gap:4px;
+}
+
+.live-row {
+  display:flex; align-items:center; justify-content:flex-end; gap:8px;
+}
+
+.live-dot {
+  width:8px; height:8px;
+  border-radius:50%;
+  background: var(--up);
+  animation: blink 1.2s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%,100%{ opacity:1; }
+  50%{ opacity:0.2; }
+}
+
+.live-text {
+  font-family:'Share Tech Mono', monospace;
+  font-size: clamp(0.5rem,0.9vw,0.85rem);
+  color: var(--up);
+  letter-spacing:3px;
+}
+
+.clock {
+  font-family:'Share Tech Mono', monospace;
+  font-size: clamp(0.8rem,1.5vw,1.5rem);
+  color: var(--gold2);
+  letter-spacing:2px;
+}
+
+.date-text {
+  font-size: clamp(0.45rem,0.8vw,0.75rem);
+  color: var(--text-dim);
+  letter-spacing:2px;
+}
+
+/* ═══════════════════════════════════════
+   MIDDLE — MAIN CONTENT
+═══════════════════════════════════════ */
+.main-grid {
+  display: grid;
+  grid-template-columns: 1fr 2.2fr 1.4fr;
+  gap: 1.5vw;
+  min-height:0;
+}
+
+/* ── LEFT COLUMN ── */
+.left-col {
+  display:flex; flex-direction:column; gap:1.5vh;
+}
+
+.spot-card {
+  flex:1;
+  background: linear-gradient(145deg, rgba(58,143,212,0.12), rgba(26,63,96,0.2));
+  border: 1px solid rgba(58,143,212,0.35);
+  border-radius: 12px;
+  padding: 2vh 1.5vw;
+  display:flex; flex-direction:column; justify-content:center; align-items:center;
+  text-align:center;
+  position:relative; overflow:hidden;
+}
+
+.spot-card::before {
+  content:'';
+  position:absolute; top:0; left:0; right:0; height:2px;
+  background: linear-gradient(90deg, transparent, var(--blue), transparent);
+}
+
+.tola-card {
+  flex:1;
+  background: linear-gradient(145deg, rgba(212,168,67,0.12), rgba(122,92,26,0.15));
+  border: 1px solid var(--border2);
+  border-radius:12px;
+  padding:2vh 1.5vw;
+  display:flex; flex-direction:column; justify-content:center; align-items:center;
+  text-align:center;
+  position:relative; overflow:hidden;
+}
+
+.tola-card::before {
+  content:'';
+  position:absolute; top:0; left:0; right:0; height:2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.card-label {
+  font-size: clamp(0.5rem,0.9vw,0.85rem);
+  letter-spacing:4px;
+  text-transform:uppercase;
+  color: var(--text-dim);
+  margin-bottom:0.8vh;
+}
+
+.card-value {
+  font-family:'Bebas Neue', sans-serif;
+  font-size: clamp(2rem,4.5vw,5.5rem);
+  line-height:1;
+  color:#fff;
+}
+
+.spot-card .card-value { color: #7ac8f5; }
+.tola-card .card-value { color: var(--gold2); }
+
+.card-currency {
+  font-size: clamp(0.6rem,1.1vw,1rem);
+  letter-spacing:3px;
+  margin-top:0.5vh;
+}
+
+.spot-card .card-currency { color: var(--blue); }
+.tola-card .card-currency { color: var(--gold); }
+
+.card-change {
+  display:flex; align-items:center; gap:5px;
+  font-family:'Share Tech Mono', monospace;
+  font-size: clamp(0.45rem,0.8vw,0.75rem);
+  margin-top:0.8vh;
+  padding: 4px 10px;
+  border-radius:20px;
+  background: rgba(0,0,0,0.3);
+}
+
+.card-change.up   { color:var(--up); }
+.card-change.down { color:var(--down); }
+
+/* ── CENTER COLUMN — KARAT RATES ── */
+.center-col {
+  display:flex; flex-direction:column;
+}
+
+.karat-header {
+  text-align:center;
+  font-family:'Bebas Neue', sans-serif;
+  font-size: clamp(0.9rem,1.6vw,1.8rem);
+  color: var(--gold);
+  letter-spacing:6px;
+  margin-bottom:1.5vh;
+  padding-bottom:1vh;
+  border-bottom:1px solid var(--border);
+}
+
+.karat-grid {
+  display:grid;
+  grid-template-columns: repeat(3,1fr);
+  gap:1.2vw;
+  flex:1;
+}
+
+.karat-box {
+  background: var(--panel);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:1.5vh 1vw;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+  transition: border-color 0.4s;
+}
+
+.karat-box::after {
+  content:'';
+  position:absolute; inset:0;
+  background: linear-gradient(135deg, rgba(212,168,67,0.04), transparent);
+  pointer-events:none;
+}
+
+/* highlight 22K 21K 18K */
+.karat-box.featured {
+  border-color: rgba(212,168,67,0.35);
+  background: linear-gradient(145deg, rgba(212,168,67,0.08), rgba(212,168,67,0.03));
+}
+
+.karat-box.flash-up   { animation: fUp 0.7s ease; }
+.karat-box.flash-down { animation: fDn 0.7s ease; }
+
+@keyframes fUp { 0%,100%{background:var(--panel)} 40%{background:rgba(62,207,130,0.12)} }
+@keyframes fDn { 0%,100%{background:var(--panel)} 40%{background:rgba(224,85,85,0.12)} }
+
+.kb-karat {
+  font-family:'Bebas Neue', sans-serif;
+  font-size: clamp(1.2rem,2.2vw,2.8rem);
+  color: var(--gold2);
+  line-height:1;
+}
+
+.kb-purity {
+  font-size: clamp(0.4rem,0.7vw,0.65rem);
+  letter-spacing:2px;
+  color: var(--text-dim);
+  text-transform:uppercase;
+  margin: 2px 0 8px;
+}
+
+.kb-price {
+  font-family:'Share Tech Mono', monospace;
+  font-size: clamp(0.9rem,1.7vw,2rem);
+  color:#fff;
+  letter-spacing:1px;
+}
+
+.kb-unit {
+  font-size: clamp(0.38rem,0.65vw,0.6rem);
+  letter-spacing:2px;
+  color: var(--text-dim);
+  text-transform:uppercase;
+  margin-top:3px;
+}
+
+.kb-change {
+  font-family:'Share Tech Mono', monospace;
+  font-size: clamp(0.38rem,0.65vw,0.6rem);
+  margin-top:5px;
+}
+.kb-change.up   { color:var(--up); }
+.kb-change.down { color:var(--down); }
+
+/* ── RIGHT COLUMN — MAKING CHARGES ── */
+.right-col {
+  display:flex; flex-direction:column;
+}
+
+.making-header {
+  text-align:center;
+  font-family:'Bebas Neue', sans-serif;
+  font-size: clamp(0.8rem,1.4vw,1.5rem);
+  color: var(--gold);
+  letter-spacing:5px;
+  margin-bottom:1vh;
+  padding-bottom:1vh;
+  border-bottom:1px solid var(--border);
+}
+
+.making-sub {
+  text-align:center;
+  font-size: clamp(0.38rem,0.65vw,0.6rem);
+  color: var(--text-dim);
+  letter-spacing:3px;
+  text-transform:uppercase;
+  margin-bottom:1.5vh;
+}
+
+.making-list {
+  display:flex; flex-direction:column; gap:0.8vh; flex:1;
+}
+
+.making-row {
+  display:flex; align-items:center;
+  background: var(--panel);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding: 0.8vh 1vw;
+  gap:0.8vw;
+  transition: background 0.3s;
+}
+
+.making-row:hover {
+  background: rgba(212,168,67,0.07);
+  border-color: var(--border2);
+}
+
+.making-flag {
+  width: clamp(18px,2vw,28px);
+  height: clamp(18px,2vw,28px);
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size: clamp(0.6rem,1vw,1rem);
+  flex-shrink:0;
+  background: rgba(212,168,67,0.15);
+  border:1px solid var(--border);
+}
+
+.making-name {
+  flex:1;
+  font-size: clamp(0.5rem,0.9vw,0.85rem);
+  color: var(--text);
+  letter-spacing:1px;
+}
+
+.making-price {
+  font-family:'Share Tech Mono', monospace;
+  font-size: clamp(0.6rem,1.1vw,1rem);
+  color: var(--gold2);
+  letter-spacing:1px;
+}
+
+.making-omr {
+  font-size: clamp(0.35rem,0.6vw,0.55rem);
+  color: var(--text-dim);
+  letter-spacing:1px;
+}
+
+/* ═══════════════════════════════════════
+   BOTTOM TICKER
+═══════════════════════════════════════ */
+.ticker-bar {
+  border-top:1px solid var(--border);
+  padding-top:1vh;
+  overflow:hidden;
+  height: clamp(1.5rem,3vh,2.5rem);
+  position:relative;
+}
+
+.ticker-track {
+  display:flex; gap:4vw;
+  white-space:nowrap;
+  animation: tickerScroll 35s linear infinite;
+  position:absolute; top:50%; transform:translateY(-50%);
+}
+
+@keyframes tickerScroll {
+  from { transform: translateY(-50%) translateX(0); }
+  to   { transform: translateY(-50%) translateX(-50%); }
+}
+
+.ticker-item {
+  display:inline-flex; align-items:center; gap:0.8vw;
+  font-family:'Share Tech Mono', monospace;
+  font-size: clamp(0.5rem,0.85vw,0.8rem);
+}
+
+.tick-label { color: var(--text-dim); letter-spacing:2px; }
+.tick-val   { color: var(--gold2); }
+.tick-sep   { color: var(--gold-dim); }
+
+/* ═══════════════════════════════════════
+   STATUS OVERLAY (loading / error)
+═══════════════════════════════════════ */
+#statusOverlay {
+  position:fixed; inset:0; z-index:100;
+  background: rgba(4,6,8,0.92);
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  gap:1rem;
+  transition: opacity 0.6s;
+}
+
+#statusOverlay.hidden {
+  opacity:0; pointer-events:none;
+}
+
+.spinner {
+  width:50px; height:50px;
+  border: 3px solid var(--border);
+  border-top-color: var(--gold);
+  border-radius:50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin { to { transform:rotate(360deg); } }
+
+.status-msg {
+  font-family:'Share Tech Mono', monospace;
+  font-size:0.9rem;
+  color: var(--gold);
+  letter-spacing:3px;
+}
+
+.status-err {
+  font-size:0.75rem;
+  color: var(--down);
+  letter-spacing:2px;
+  text-align:center;
+  max-width:500px;
+  line-height:1.6;
+}
+
+.retry-btn {
+  padding:8px 24px;
+  background:transparent;
+  border:1px solid var(--gold);
+  color:var(--gold);
+  font-family:'Bebas Neue', sans-serif;
+  font-size:1rem;
+  letter-spacing:4px;
+  cursor:pointer;
+  border-radius:4px;
+  margin-top:8px;
+  transition:all 0.2s;
+}
+.retry-btn:hover { background:var(--gold); color:#000; }
+
+/* API Key input */
+.key-box {
+  display:flex; flex-direction:column; align-items:center; gap:0.6rem;
+  margin-top:1rem;
+}
+
+.key-input {
+  width:320px;
+  padding:8px 14px;
+  background: rgba(255,255,255,0.05);
+  border:1px solid var(--border2);
+  border-radius:4px;
+  color: var(--text);
+  font-family:'Share Tech Mono', monospace;
+  font-size:0.8rem;
+  letter-spacing:2px;
+  text-align:center;
+  outline:none;
+}
+
+.key-input:focus { border-color:var(--gold); }
+
+.key-label {
+  font-size:0.65rem;
+  color:var(--text-dim);
+  letter-spacing:3px;
+  text-transform:uppercase;
+}
+
+.save-btn {
+  padding:7px 20px;
+  background: var(--gold);
+  border:none;
+  color:#000;
+  font-family:'Bebas Neue', sans-serif;
+  font-size:0.95rem;
+  letter-spacing:3px;
+  cursor:pointer;
+  border-radius:4px;
+  transition:all 0.2s;
+}
+
+.save-btn:hover { background:var(--gold2); }
+
+/* ═══════════════════════════════════════
+   LAST UPDATED badge
+═══════════════════════════════════════ */
+.last-updated {
+  font-family:'Share Tech Mono', monospace;
+  font-size: clamp(0.38rem,0.65vw,0.6rem);
+  color: var(--text-dim);
+  letter-spacing:2px;
+  text-align:right;
+  margin-top:2px;
+}
+</style>
 </head>
 <body>
 
-<div class="container">
-
-  <div class="header">
-    <h1>GOLD RATE LIVE</h1>
-    <div class="brand">SATTARDINA <span class="star">★</span> Ps</div>
-  </div>
-
-  <div class="highlight-cards">
-    <div class="lux-card">
-      <div class="label">1 Ounce (International)</div>
-      <div class="value">4481</div>
-      <div class="currency">USD</div>
-    </div>
-
-    <div class="lux-card">
-      <div class="label">21K Tola (Local)</div>
-      <div class="value">572.528</div>
-      <div class="currency">OMR</div>
+<!-- Status Overlay -->
+<div id="statusOverlay">
+  <div class="spinner" id="spinnerEl"></div>
+  <div class="status-msg" id="statusMsg">CONNECTING TO GOLD MARKET</div>
+  <div class="status-err" id="statusErr" style="display:none"></div>
+  <div class="key-box" id="keyBox" style="display:none">
+    <div class="key-label">Enter your GoldAPI.io API Key</div>
+    <input class="key-input" id="apiKeyInput" placeholder="goldapi-xxxxxxxxxxxxxxxx" />
+    <button class="save-btn" onclick="saveKey()">CONNECT</button>
+    <div class="key-label" style="margin-top:4px">
+      Free key at <span style="color:var(--gold)">goldapi.io</span>
     </div>
   </div>
+  <button class="retry-btn" id="retryBtn" style="display:none" onclick="init()">RETRY</button>
+</div>
 
-  <div class="rates-panel">
-    <div class="panel-title">Gold Purity Rates per Gram (OMR)</div>
-    <div class="rates-grid">
-      <div class="rate-box">
-        <div class="karat">22K</div>
-        <div class="price">51.316</div>
-        <div class="unit">OMR / gram</div>
-      </div>
-      <div class="rate-box">
-        <div class="karat">21K</div>
-        <div class="price">49.085</div>
-        <div class="unit">OMR / gram</div>
-      </div>
-      <div class="rate-box">
-        <div class="karat">18K</div>
-        <div class="price">42.113</div>
-        <div class="unit">OMR / gram</div>
-      </div>
+<!-- Background layers -->
+<div class="bg-layer"></div>
+<div class="scanlines"></div>
+
+<!-- Main Screen -->
+<div class="screen">
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="brand-left">
+      <div class="brand-name">SATTARDINA</div>
+      <div class="brand-sub">Premium Gold · Muscat, Oman</div>
     </div>
-  </div>
-
-  <div class="making-premium">
-    <div class="making-title">Making Charges Starting From (OMR per gram)</div>
-    <div class="making-list">
-      <div class="making-card">
-        <div class="type">Omani Hand Made</div>
-        <div class="charge">3.500</div>
+    <div class="center-logo">
+      <div class="logo-star">GOLD RATE LIVE</div>
+      <div class="logo-ps">PS</div>
+    </div>
+    <div class="right-info">
+      <div class="live-row">
+        <div class="live-dot"></div>
+        <div class="live-text">LIVE MARKET</div>
       </div>
-      <div class="making-card">
-        <div class="type">Omani Machine Made</div>
-        <div class="charge">2.000</div>
-      </div>
-      <div class="making-card">
-        <div class="type">Singapore</div>
-        <div class="charge">3.500</div>
-      </div>
-      <div class="making-card">
-        <div class="type">Saudi</div>
-        <div class="charge">4.000</div>
-      </div>
-      <div class="making-card">
-        <div class="type">Turkish</div>
-        <div class="charge">4.500</div>
-      </div>
-      <div class="making-card">
-        <div class="type">Kuwaiti</div>
-        <div class="charge">4.000</div>
-      </div>
-      <div class="making-card">
-        <div class="type">Bahraini</div>
-        <div class="charge">4.500</div>
-      </div>
-      <div class="making-card">
-        <div class="type">Emirati</div>
-        <div class="charge">3.500</div>
-      </div>
+      <div class="clock" id="clock">--:--:--</div>
+      <div class="date-text" id="dateText">---</div>
+      <div class="last-updated" id="lastUpdated">Last update: —</div>
     </div>
   </div>
 
-  <div class="footer">
-    Sattardina • Live Gold Market • Updated in Real-Time • Muscat, Oman
+  <!-- MAIN GRID -->
+  <div class="main-grid">
+
+    <!-- LEFT: Spot + Tola -->
+    <div class="left-col">
+      <div class="spot-card">
+        <div class="card-label">1 Ounce · International</div>
+        <div class="card-value" id="spotVal">—</div>
+        <div class="card-currency">USD / Troy Oz</div>
+        <div class="card-change neutral" id="spotChange">⬤ —</div>
+      </div>
+      <div class="tola-card">
+        <div class="card-label">21K Tola · Local</div>
+        <div class="card-value" id="tolaVal">—</div>
+        <div class="card-currency">OMR</div>
+        <div class="card-change neutral" id="tolaChange">⬤ —</div>
+      </div>
+    </div>
+
+    <!-- CENTER: All Karats -->
+    <div class="center-col">
+      <div class="karat-header">◆ GOLD PURITY RATES PER GRAM · OMR ◆</div>
+      <div class="karat-grid" id="karatGrid">
+        <!-- filled by JS -->
+      </div>
+    </div>
+
+    <!-- RIGHT: Making Charges -->
+    <div class="right-col">
+      <div class="making-header">MAKING CHARGES</div>
+      <div class="making-sub">Starting from · OMR per gram</div>
+      <div class="making-list" id="makingList">
+        <!-- filled by JS -->
+      </div>
+    </div>
+
+  </div>
+
+  <!-- TICKER -->
+  <div class="ticker-bar">
+    <div class="ticker-track" id="tickerTrack">
+      <!-- filled by JS -->
+    </div>
   </div>
 
 </div>
 
+<script>
+/* ════════════════════════════════════════════
+   CONFIGURATION
+════════════════════════════════════════════ */
+const CONFIG = {
+  USD_OMR:    0.385,       // 1 USD = 0.385 OMR (update if rate changes)
+  TROY_TO_G:  31.1035,     // 1 troy oz = 31.1035 grams
+  TOLA_GRAMS: 11.6638,     // 1 tola = 11.6638 grams
+  REFRESH_MS: 60000,       // refresh every 60 seconds
+};
+
+// ── Karat definitions ──────────────────────
+const KARATS = [
+  { k:'24K', purity:'99.9%', f:1.0000,   featured:false },
+  { k:'22K', purity:'91.6%', f:22/24,    featured:true  },
+  { k:'21K', purity:'87.5%', f:21/24,    featured:true  },
+  { k:'20K', purity:'83.3%', f:20/24,    featured:false },
+  { k:'18K', purity:'75.0%', f:18/24,    featured:true  },
+  { k:'16K', purity:'66.6%', f:16/24,    featured:false },
+  { k:'14K', purity:'58.3%', f:14/24,    featured:false },
+  { k:'10K', purity:'41.6%', f:10/24,    featured:false },
+  { k:'9K',  purity:'37.5%', f: 9/24,    featured:false },
+];
+
+// ── Making charges ─────────────────────────
+const MAKING = [
+  { name:'Omani Hand Made',    flag:'🇴🇲', charge:3.500 },
+  { name:'Omani Machine Made', flag:'🇴🇲', charge:2.000 },
+  { name:'Singapore',          flag:'🇸🇬', charge:3.500 },
+  { name:'Saudi',              flag:'🇸🇦', charge:4.000 },
+  { name:'Turkish',            flag:'🇹🇷', charge:4.500 },
+  { name:'Kuwaiti',            flag:'🇰🇼', charge:4.000 },
+  { name:'Bahraini',           flag:'🇧🇭', charge:4.500 },
+  { name:'Emirati',            flag:'🇦🇪', charge:3.500 },
+];
+
+/* ════════════════════════════════════════════
+   STATE
+════════════════════════════════════════════ */
+let state = {
+  spotUSD: 0,
+  prevSpot: 0,
+  apiKey: localStorage.getItem('goldapi_key') || '',
+};
+
+/* ════════════════════════════════════════════
+   CLOCK
+════════════════════════════════════════════ */
+function tickClock() {
+  const now = new Date();
+  document.getElementById('clock').textContent =
+    now.toLocaleTimeString('en-GB', { hour:'2-digit', minute:'2-digit', second:'2-digit' });
+  document.getElementById('dateText').textContent =
+    now.toLocaleDateString('en-GB', { weekday:'long', day:'2-digit', month:'long', year:'numeric' }).toUpperCase();
+}
+setInterval(tickClock, 1000);
+tickClock();
+
+/* ════════════════════════════════════════════
+   FORMULAS
+════════════════════════════════════════════ */
+function calc24KperGramOMR(spotUSD) {
+  // spotUSD = price per troy oz in USD
+  // per gram in USD = spotUSD / 31.1035
+  // per gram in OMR = (spotUSD / 31.1035) * 0.385
+  return (spotUSD / CONFIG.TROY_TO_G) * CONFIG.USD_OMR;
+}
+
+function calcKaratOMR(spotUSD, factor) {
+  return calc24KperGramOMR(spotUSD) * factor;
+}
+
+function calc21KTolaOMR(spotUSD) {
+  // 21K per gram OMR × 11.6638
+  return calcKaratOMR(spotUSD, 21/24) * CONFIG.TOLA_GRAMS;
+}
+
+function fmt3(n) { return n.toFixed(3); }
+function fmt0(n) { return Math.round(n).toLocaleString('en-US'); }
+
+/* ════════════════════════════════════════════
+   API FETCH
+════════════════════════════════════════════ */
+async function fetchGoldPrice() {
+  // GoldAPI.io — XAU/USD endpoint
+  const key = state.apiKey;
+  const url = 'https://www.goldapi.io/api/XAU/USD';
+
+  const res = await fetch(url, {
+    headers: {
+      'x-access-token': key,
+      'Content-Type':   'application/json',
+    }
+  });
+
+  if (!res.ok) {
+    const txt = await res.text();
+    throw new Error(`API ${res.status}: ${txt}`);
+  }
+
+  const data = await res.json();
+  // data.price = spot price per troy oz in USD
+  return parseFloat(data.price);
+}
+
+/* ════════════════════════════════════════════
+   RENDER
+════════════════════════════════════════════ */
+function renderAll(spotUSD, prevSpot) {
+  const change    = prevSpot ? spotUSD - prevSpot : 0;
+  const changePct = prevSpot ? (change / prevSpot) * 100 : 0;
+
+  // ── Spot card ──
+  document.getElementById('spotVal').textContent = fmt0(spotUSD);
+  const scEl = document.getElementById('spotChange');
+  if (change > 0)      { scEl.textContent = `▲ +${fmt3(change)} (+${changePct.toFixed(2)}%)`; scEl.className='card-change up'; }
+  else if (change < 0) { scEl.textContent = `▼ ${fmt3(change)} (${changePct.toFixed(2)}%)`; scEl.className='card-change down'; }
+  else                 { scEl.textContent = `⬤ Market Open`; scEl.className='card-change neutral'; }
+
+  // ── Tola card ──
+  const tolaOMR = calc21KTolaOMR(spotUSD);
+  document.getElementById('tolaVal').textContent = fmt3(tolaOMR);
+  const tcEl = document.getElementById('tolaChange');
+  if (change > 0)      { tcEl.textContent = `▲ Today's High`; tcEl.className='card-change up'; }
+  else if (change < 0) { tcEl.textContent = `▼ Today's Low`;  tcEl.className='card-change down'; }
+  else                 { tcEl.textContent = `⬤ Stable`;        tcEl.className='card-change neutral'; }
+
+  // ── Karat grid ──
+  renderKarats(spotUSD, change);
+
+  // ── Making list (static) ──
+  renderMaking();
+
+  // ── Ticker ──
+  renderTicker(spotUSD);
+
+  // ── Timestamp ──
+  const now = new Date();
+  document.getElementById('lastUpdated').textContent =
+    'Last update: ' + now.toLocaleTimeString('en-GB', { hour:'2-digit', minute:'2-digit', second:'2-digit' });
+}
+
+function renderKarats(spotUSD, globalChange) {
+  const grid = document.getElementById('karatGrid');
+  grid.innerHTML = '';
+
+  KARATS.forEach(k => {
+    const priceOMR = calcKaratOMR(spotUSD, k.f);
+    const chg = globalChange ? (globalChange / CONFIG.TROY_TO_G) * CONFIG.USD_OMR * k.f : 0;
+    const chgPct = spotUSD ? (chg / priceOMR) * 100 : 0;
+
+    const box = document.createElement('div');
+    box.className = 'karat-box' + (k.featured ? ' featured' : '');
+    box.id = 'kb-' + k.k;
+
+    const chgClass = chg > 0 ? 'up' : chg < 0 ? 'down' : '';
+    const chgArrow = chg > 0 ? '▲' : chg < 0 ? '▼' : '⬤';
+    const chgStr   = chg !== 0
+      ? `${chgArrow} ${Math.abs(chgPct).toFixed(2)}%`
+      : `${chgArrow} Stable`;
+
+    box.innerHTML = `
+      <div class="kb-karat">${k.k}</div>
+      <div class="kb-purity">${k.purity} Pure</div>
+      <div class="kb-price">${fmt3(priceOMR)}</div>
+      <div class="kb-unit">OMR / gram</div>
+      <div class="kb-change ${chgClass}">${chgStr}</div>
+    `;
+
+    grid.appendChild(box);
+
+    // Flash animation
+    setTimeout(() => {
+      if (globalChange > 0) { box.classList.add('flash-up');   setTimeout(()=>box.classList.remove('flash-up'),800); }
+      if (globalChange < 0) { box.classList.add('flash-down'); setTimeout(()=>box.classList.remove('flash-down'),800); }
+    }, 100);
+  });
+}
+
+function renderMaking() {
+  const list = document.getElementById('makingList');
+  if (list.children.length > 0) return; // render once
+  list.innerHTML = '';
+
+  MAKING.forEach(m => {
+    const row = document.createElement('div');
+    row.className = 'making-row';
+    row.innerHTML = `
+      <div class="making-flag">${m.flag}</div>
+      <div class="making-name">${m.name}</div>
+      <div>
+        <div class="making-price">${m.charge.toFixed(3)}</div>
+        <div class="making-omr">OMR/g</div>
+      </div>
+    `;
+    list.appendChild(row);
+  });
+}
+
+function renderTicker(spotUSD) {
+  const items = KARATS.map(k => {
+    const p = calcKaratOMR(spotUSD, k.f);
+    return `<span class="ticker-item">
+      <span class="tick-label">${k.k}</span>
+      <span class="tick-val">${fmt3(p)} OMR</span>
+      <span class="tick-sep">◆</span>
+    </span>`;
+  }).join('');
+
+  // duplicate for seamless loop
+  const track = document.getElementById('tickerTrack');
+  track.innerHTML = items + items;
+}
+
+/* ════════════════════════════════════════════
+   INIT & REFRESH LOOP
+════════════════════════════════════════════ */
+function showOverlay(msg, err, showKey, showRetry) {
+  const ov = document.getElementById('statusOverlay');
+  ov.classList.remove('hidden');
+  document.getElementById('statusMsg').textContent    = msg;
+  document.getElementById('spinnerEl').style.display  = (err || showKey) ? 'none' : 'block';
+  document.getElementById('statusErr').style.display  = err ? 'block' : 'none';
+  document.getElementById('statusErr').textContent    = err || '';
+  document.getElementById('keyBox').style.display     = showKey ? 'flex' : 'none';
+  document.getElementById('retryBtn').style.display   = showRetry ? 'block' : 'none';
+}
+
+function hideOverlay() {
+  document.getElementById('statusOverlay').classList.add('hidden');
+}
+
+function saveKey() {
+  const val = document.getElementById('apiKeyInput').value.trim();
+  if (!val) return;
+  state.apiKey = val;
+  localStorage.setItem('goldapi_key', val);
+  init();
+}
+
+async function loadPrices() {
+  try {
+    const spot = await fetchGoldPrice();
+    state.prevSpot = state.spotUSD || spot;
+    state.spotUSD  = spot;
+    renderAll(spot, state.prevSpot);
+    hideOverlay();
+  } catch(e) {
+    console.error(e);
+    // If we already have data, keep showing it
+    if (state.spotUSD > 0) {
+      hideOverlay();
+      document.getElementById('lastUpdated').textContent = 'Update failed — using cached price';
+      return;
+    }
+    // No data — show error
+    const isAuthErr = e.message.includes('401') || e.message.includes('403') || e.message.includes('access');
+    if (isAuthErr || !state.apiKey) {
+      showOverlay('API KEY REQUIRED', null, true, false);
+    } else {
+      showOverlay(
+        'CONNECTION ERROR',
+        'Could not fetch live prices.\n' + e.message,
+        false, true
+      );
+    }
+  }
+}
+
+async function init() {
+  if (!state.apiKey) {
+    showOverlay('API KEY REQUIRED', null, true, false);
+    document.getElementById('apiKeyInput').value = '';
+    return;
+  }
+  showOverlay('CONNECTING TO GOLD MARKET', null, false, false);
+  renderMaking();
+  await loadPrices();
+}
+
+// Auto-refresh every minute
+setInterval(loadPrices, CONFIG.REFRESH_MS);
+
+// Start
+init();
+</script>
 </body>
 </html>
