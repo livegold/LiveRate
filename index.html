@@ -3,474 +3,359 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Sattardina Gold Rate Live</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Cinzel:wght@400;600;900&family=Cormorant:ital,wght@1,300&display=swap" rel="stylesheet"/>
+<title>Sattardina Gold Rate</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&family=Noto+Kufi+Arabic:wght@400;600;700&display=swap" rel="stylesheet"/>
 <style>
-:root {
-  --gold:        #C9A84C;
-  --gold-light:  #F0D080;
-  --gold-pale:   #E8C96A;
-  --gold-dark:   #8B6914;
-  --obsidian:    #060504;
-  --obsidian-2:  #0D0B08;
-  --obsidian-3:  #141209;
-  --cream:       #F5EDD8;
-  --cream-dim:   rgba(245,237,216,0.55);
-  --line:        rgba(201,168,76,0.18);
-  --line-bright: rgba(201,168,76,0.45);
-}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{width:100vw;height:100vh;overflow:hidden;font-family:'Rajdhani',sans-serif;}
 
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+/* SLIDES */
+.slides-wrap{width:200vw;height:100vh;display:flex;transition:transform 0.9s cubic-bezier(0.77,0,0.18,1);}
+.slide{width:100vw;height:100vh;flex-shrink:0;display:flex;flex-direction:column;position:relative;overflow:hidden;}
 
-body {
-  width:100vw; height:100vh; overflow:hidden;
-  background: var(--obsidian);
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  color: var(--cream);
-  position: relative;
-}
+/* BROWN PREMIUM BACKGROUND */
+.slide-en{background:linear-gradient(160deg,#2a1a00 0%,#1a0f00 40%,#0d0800 100%);}
+.slide-ar{background:linear-gradient(160deg,#2a1a00 0%,#1a0f00 40%,#0d0800 100%);direction:rtl;}
 
-/* Atmospheric background */
-body::before {
-  content:'';
-  position:fixed; inset:0;
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
   background:
-    radial-gradient(ellipse 60% 50% at 50% -10%, rgba(201,168,76,0.11) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 60% at 10%  90%, rgba(201,168,76,0.06) 0%, transparent 60%),
-    radial-gradient(ellipse 30% 40% at 90%  85%, rgba(201,168,76,0.05) 0%, transparent 60%);
-  pointer-events:none;
-  z-index:0;
-}
-
-/* Noise grain */
-body::after {
-  content:'';
-  position:fixed; inset:0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events:none; z-index:0; opacity:0.5;
-}
-
-.screen {
-  position:relative; z-index:1;
-  width:100%; height:100%;
-  padding: 2.4vh 3.2vw;
-  display:flex; flex-direction:column; gap:1.8vh;
-}
+    radial-gradient(ellipse 80% 40% at 50% 0%,rgba(212,150,30,0.12) 0%,transparent 55%),
+    radial-gradient(ellipse 40% 60% at 0% 100%,rgba(160,100,20,0.07) 0%,transparent 50%),
+    radial-gradient(ellipse 40% 60% at 100% 100%,rgba(160,100,20,0.07) 0%,transparent 50%);}
 
 /* HEADER */
-.header {
-  display:grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items:center;
-  padding-bottom: 2vh;
-  border-bottom: 1px solid var(--line-bright);
-  position:relative;
-}
+.hdr{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+  padding:1.8vh 2.5vw 1.5vh;flex-shrink:0;position:relative;z-index:1;
+  border-bottom:1px solid rgba(212,150,30,0.2);}
+.hdr::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(212,150,30,0.5),rgba(255,200,50,0.8),rgba(212,150,30,0.5),transparent);}
 
-.header::before, .header::after {
-  content:'◆';
-  position:absolute;
-  bottom:-8px;
-  color: var(--gold);
-  font-size:0.75rem;
-  background: var(--obsidian);
-  padding: 0 8px;
-}
-.header::before { left: 0; }
-.header::after  { right: 0; }
+.brand-en{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.8rem,5.2vw,6rem);
+  letter-spacing:10px;line-height:1;
+  background:linear-gradient(180deg,#FFF5CC 0%,#FFD700 40%,#B8860B 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 20px rgba(255,200,50,0.4));}
+.brand-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:clamp(2.2rem,4.2vw,5rem);
+  font-weight:700;line-height:1;
+  background:linear-gradient(180deg,#FFF5CC 0%,#FFD700 40%,#B8860B 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 20px rgba(255,200,50,0.4));}
 
-.brand {
-  font-family: 'Cinzel', serif;
-  font-size: clamp(2.2rem, 4.2vw, 5rem);
-  font-weight: 900;
-  letter-spacing: 0.22em;
-  color: var(--gold-light);
-  text-shadow: 0 0 60px rgba(240,208,128,0.35), 0 2px 4px rgba(0,0,0,0.9);
-  line-height:1;
-}
-.tagline {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(0.7rem, 1vw, 1rem);
-  letter-spacing: 0.45em;
-  color: var(--gold-dark);
-  margin-top: 6px;
-  text-transform: uppercase;
-}
+/* LOGO CENTER */
+.logo-wrap{display:flex;flex-direction:column;align-items:center;gap:6px;}
+.logo-ring{width:clamp(55px,6.5vw,85px);height:clamp(55px,6.5vw,85px);border-radius:50%;
+  border:2px solid rgba(212,150,30,0.5);
+  background:rgba(30,15,0,0.7);
+  display:flex;align-items:center;justify-content:center;overflow:hidden;
+  box-shadow:0 0 25px rgba(212,150,30,0.35),inset 0 0 20px rgba(0,0,0,0.4);
+  animation:ringPulse 3s ease-in-out infinite alternate;}
+@keyframes ringPulse{from{box-shadow:0 0 15px rgba(212,150,30,0.25);}to{box-shadow:0 0 45px rgba(212,150,30,0.65),0 0 60px rgba(212,150,30,0.15);}}
+.logo-ph{font-family:'Bebas Neue',sans-serif;font-size:clamp(0.6rem,1.1vw,1.1rem);color:rgba(212,150,30,0.35);letter-spacing:1px;text-align:center;line-height:1.3;}
+.logo-txt{font-family:'Bebas Neue',sans-serif;font-size:clamp(0.55rem,1vw,1.1rem);
+  background:linear-gradient(90deg,#B8860B,#FFD700,#B8860B);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:5px;}
+.logo-txt-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:clamp(0.6rem,1vw,1rem);
+  background:linear-gradient(90deg,#B8860B,#FFD700,#B8860B);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
 
-.emblem {
-  text-align:center;
-  line-height:1;
-}
-.emblem-ring {
-  display:inline-flex; flex-direction:column; align-items:center;
-  border: 1px solid var(--line-bright);
-  border-radius: 50%;
-  width: clamp(80px, 9vw, 120px);
-  height: clamp(80px, 9vw, 120px);
-  justify-content:center;
-  box-shadow: 0 0 0 5px var(--obsidian), 0 0 0 6px var(--line), 0 0 40px rgba(201,168,76,0.15);
-  animation: ringGlow 6s ease-in-out infinite;
-}
-@keyframes ringGlow {
-  0%,100% { box-shadow: 0 0 0 5px var(--obsidian), 0 0 0 6px var(--line), 0 0 40px rgba(201,168,76,0.15); }
-  50%      { box-shadow: 0 0 0 5px var(--obsidian), 0 0 0 6px rgba(201,168,76,0.5), 0 0 70px rgba(201,168,76,0.3); }
-}
-.emblem-star {
-  font-size: clamp(2rem, 4vw, 4.5rem);
-  color: var(--gold);
-  filter: drop-shadow(0 0 16px var(--gold));
-  animation: starSpin 25s linear infinite;
-}
-@keyframes starSpin { to { transform:rotate(360deg); } }
+/* LIVE BADGE — top right */
+.hdr-right{display:flex;flex-direction:column;align-items:flex-end;gap:5px;}
+.hdr-left-ar{display:flex;flex-direction:column;align-items:flex-start;gap:5px;}
+.live-pill{display:flex;align-items:center;gap:7px;background:rgba(0,200,100,0.08);
+  border:1px solid rgba(0,200,100,0.25);padding:4px 14px;border-radius:30px;}
+.dot{width:8px;height:8px;border-radius:50%;background:#00e676;animation:blink 1.2s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.15}}
+.live-lbl{font-family:'Share Tech Mono',monospace;font-size:clamp(0.36rem,0.66vw,0.64rem);color:#00e676;letter-spacing:3px;}
 
-.right-block { text-align:right; }
-.live-badge {
-  display:inline-flex; align-items:center; gap:10px;
-  border: 1px solid rgba(240,208,128,0.3);
-  border-radius: 4px;
-  padding: 6px 18px;
-  font-family:'Cinzel',serif;
-  font-size: clamp(0.6rem, 0.9vw, 0.9rem);
-  letter-spacing:0.25em;
-  color: var(--gold-pale);
-  background: rgba(201,168,76,0.06);
-}
-.live-dot {
-  width:8px; height:8px;
-  background: #4ade80;
-  border-radius:50%;
-  animation: blink 2s ease-in-out infinite;
-  box-shadow: 0 0 8px #4ade80;
-}
-@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+/* MAIN BODY */
+.body{display:grid;grid-template-columns:1fr 1.2fr 1.8fr;gap:1.5vw;flex:1;min-height:0;
+  padding:1.5vh 2.5vw;position:relative;z-index:1;}
 
-.clock {
-  font-family:'Cinzel',serif;
-  font-size: clamp(1.4rem, 2.5vw, 2.8rem);
-  color: var(--gold-pale);
-  letter-spacing:0.12em;
-  margin-top: 10px;
-  text-shadow: 0 0 30px rgba(240,208,128,0.4);
-}
+/* OZ CARD */
+.oz-card{border-radius:14px;
+  background:linear-gradient(160deg,rgba(30,60,100,0.7),rgba(10,30,70,0.85));
+  border:1px solid rgba(100,160,255,0.35);
+  box-shadow:0 8px 40px rgba(0,0,0,0.5),inset 0 1px 0 rgba(150,200,255,0.1);
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;position:relative;overflow:hidden;}
+.oz-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,#40c4ff,rgba(150,210,255,0.9),#40c4ff,transparent);}
 
-/* MAIN */
-.main {
-  display:grid;
-  grid-template-columns: 1fr 1fr 2.2fr;
-  gap: 2vw;
-  flex:1;
-}
+/* TOLA CARD */
+.tola-card{border-radius:14px;
+  background:linear-gradient(160deg,rgba(80,50,0,0.75),rgba(40,25,0,0.9));
+  border:1px solid rgba(212,150,30,0.45);
+  box-shadow:0 8px 40px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,200,50,0.08);
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;position:relative;overflow:hidden;}
+.tola-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,#D4AF37,rgba(255,215,0,0.9),#D4AF37,transparent);}
 
-.spot-card {
-  border-radius: 3px;
-  padding: 3.5vh 2.5vw;
-  text-align:center;
-  display:flex; flex-direction:column; justify-content:center; align-items:center;
-  position:relative; overflow:hidden;
-  transition: transform 0.5s cubic-bezier(.22,.68,0,1.2);
-}
-.spot-card:hover { transform:translateY(-8px); }
+.card-lbl{font-size:clamp(0.4rem,0.75vw,0.72rem);letter-spacing:4px;text-transform:uppercase;margin-bottom:0.6vh;}
+.oz-card .card-lbl{color:rgba(150,210,255,0.6);}
+.tola-card .card-lbl{color:rgba(212,175,55,0.6);}
+.card-lbl-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:clamp(0.55rem,0.9vw,0.85rem);margin-bottom:0.6vh;color:rgba(212,175,55,0.6);}
+.oz-lbl-ar{color:rgba(150,210,255,0.6)!important;}
 
-.card-oz {
-  background: linear-gradient(160deg, #04101a 0%, #030d15 100%);
-  border: 1px solid rgba(103,232,249,0.25);
-  box-shadow: 0 0 60px rgba(103,232,249,0.05), inset 0 1px 0 rgba(103,232,249,0.1);
-}
-.card-tola {
-  background: linear-gradient(160deg, #1a1200 0%, #120d00 100%);
-  border: 1px solid rgba(201,168,76,0.35);
-  box-shadow: 0 0 60px rgba(201,168,76,0.08), inset 0 1px 0 rgba(201,168,76,0.15);
-}
+.card-val{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,6vw,7.5rem);line-height:1;color:#fff;}
+.oz-card .card-val{text-shadow:0 0 30px rgba(100,180,255,0.5);}
+.tola-card .card-val{text-shadow:0 0 30px rgba(255,200,50,0.5);}
+.card-unit{font-size:clamp(0.5rem,0.9vw,0.88rem);letter-spacing:4px;margin-top:4px;}
+.oz-card .card-unit{color:rgba(150,210,255,0.5);}
+.tola-card .card-unit{color:rgba(212,175,55,0.5);}
 
-.spot-label {
-  font-family:'Cinzel',serif;
-  font-size: clamp(0.55rem, 0.85vw, 0.9rem);
-  letter-spacing: 0.4em;
-  opacity:0.8;
-  margin-bottom: 14px;
-}
-.card-oz  .spot-label { color:#67e8f9; }
-.card-tola .spot-label { color: var(--gold-pale); }
-
-.spot-value {
-  font-family:'Cinzel',serif;
-  font-size: clamp(3rem, 5.5vw, 6.5rem);
-  font-weight:900;
-  line-height:1;
-  letter-spacing:-0.02em;
-}
-.card-oz   .spot-value { color:#67e8f9; text-shadow:0 0 50px rgba(103,232,249,0.5); }
-.card-tola .spot-value { color: var(--gold-light); text-shadow:0 0 50px rgba(240,208,128,0.5); }
-
-.spot-unit {
-  font-family:'Cinzel',serif;
-  font-size: clamp(0.55rem, 0.8vw, 0.85rem);
-  letter-spacing:0.5em;
-  color: var(--cream-dim);
-  margin-top:12px;
-}
-
-/* Karat Panel */
-.karat-panel {
-  background: var(--obsidian-3);
-  border: 1px solid var(--line-bright);
-  border-radius:3px;
-  padding: 2.5vh 2.5vw;
-  display:flex; flex-direction:column;
-}
-.panel-title {
-  font-family:'Cinzel',serif;
-  font-size: clamp(0.6rem, 0.9vw, 1rem);
-  letter-spacing:0.5em;
-  color: var(--gold);
-  text-align:center;
-  margin-bottom: 2.5vh;
-  text-transform:uppercase;
-}
-
-.karat-grid {
-  display:grid; grid-template-columns:repeat(3,1fr); gap:1.5vw;
-  flex:1;
-}
-.karat-item {
-  background: rgba(0,0,0,0.45);
-  border:1px solid var(--line);
-  border-radius:3px;
-  padding: 2vh 1vw;
-  text-align:center;
-  display:flex; flex-direction:column; justify-content:center; align-items:center;
-}
-.karat-badge {
-  font-family:'Cinzel',serif;
-  font-size: clamp(1.2rem, 2.2vw, 2.8rem);
-  font-weight:900;
-  color: var(--gold);
-  text-shadow: 0 0 20px rgba(201,168,76,0.4);
-}
-.karat-divider {
-  width:30px; height:1px;
-  background: linear-gradient(90deg, transparent, var(--gold-dark), transparent);
-  margin: 8px auto;
-}
-.karat-price {
-  font-family:'Cormorant Garamond',serif;
-  font-size: clamp(1.3rem, 2.3vw, 2.8rem);
-  font-weight:600;
-  color: var(--cream);
-}
-.karat-curr {
-  font-size: clamp(0.5rem, 0.7vw, 0.75rem);
-  letter-spacing:0.3em;
-  color: var(--gold-dark);
-  margin-top:4px;
-  font-family:'Cinzel',serif;
-}
-
-/* Making Section */
-.making-section {
-  position:relative;
-}
-.section-title {
-  font-family:'Cinzel',serif;
-  font-size: clamp(0.5rem, 0.8vw, 0.85rem);
-  letter-spacing:0.55em;
-  color: var(--gold-dark);
-  text-align:center;
-  margin-bottom: 1.8vh;
-  padding-top:1.5vh;
-  text-transform:uppercase;
-}
-
-.making-grid {
-  display:grid;
-  grid-template-columns:repeat(8,1fr);
-  gap:1vw;
-}
-.mk-item {
-  background: linear-gradient(170deg, rgba(30,22,8,0.9) 0%, rgba(18,13,4,0.95) 100%);
-  border:1px solid rgba(201,168,76,0.2);
-  border-radius:3px;
-  padding:1.4vh 0.5vw;
-  text-align:center;
-  transition: all 0.3s;
-}
-.mk-item:hover {
-  border-color: var(--gold);
-  transform:translateY(-4px);
-}
-.mk-name {
-  font-family:'Cinzel',serif;
-  font-size: clamp(0.38rem, 0.6vw, 0.68rem);
-  letter-spacing:0.08em;
-  color: rgba(240,208,128,0.75);
-  line-height:1.4;
-  margin-bottom:6px;
-  text-transform:uppercase;
-}
-.mk-price {
-  font-family:'Cormorant Garamond',serif;
-  font-size: clamp(1.1rem, 1.9vw, 2.2rem);
-  font-weight:700;
-  color: var(--gold-pale);
-}
+/* KARAT PANEL */
+.karat-panel{border-radius:14px;
+  background:rgba(40,25,0,0.55);
+  border:1px solid rgba(212,150,30,0.25);
+  box-shadow:0 8px 40px rgba(0,0,0,0.3);
+  display:flex;flex-direction:column;overflow:hidden;position:relative;}
+.karat-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(212,150,30,0.5),rgba(255,200,50,0.85),rgba(212,150,30,0.5),transparent);}
+.karat-hdr{padding:1vh 1.5vw;text-align:center;
+  background:rgba(60,35,0,0.5);border-bottom:1px solid rgba(212,150,30,0.18);
+  font-family:'Bebas Neue',sans-serif;font-size:clamp(0.85rem,1.5vw,1.7rem);
+  color:rgba(255,210,80,0.9);letter-spacing:5px;}
+.karat-hdr-ar{padding:1vh 1.5vw;text-align:center;
+  background:rgba(60,35,0,0.5);border-bottom:1px solid rgba(212,150,30,0.18);
+  font-family:'Noto Kufi Arabic',sans-serif;font-size:clamp(0.9rem,1.5vw,1.6rem);
+  color:rgba(255,210,80,0.9);}
+.karat-rows{display:flex;flex-direction:column;flex:1;justify-content:space-around;padding:0.8vh 1.2vw;}
+.krow{display:flex;align-items:center;justify-content:space-between;
+  padding:0.9vh 1.2vw;border-radius:10px;
+  background:rgba(30,18,0,0.55);border:1px solid rgba(212,150,30,0.18);
+  position:relative;overflow:hidden;}
+.krow::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:linear-gradient(180deg,transparent,rgba(212,150,30,0.7),transparent);}
+.krow.flash{animation:kflash 0.8s ease;}
+@keyframes kflash{0%,100%{}50%{background:rgba(212,150,30,0.15);border-color:rgba(255,200,50,0.45);}}
+.krow-karat{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,3.5vw,4.5rem);color:#FFD700;line-height:1;}
+.krow-price{font-family:'Share Tech Mono',monospace;font-size:clamp(1.5rem,3vw,3.8rem);color:#fff;letter-spacing:1px;}
+.krow-unit{font-size:clamp(0.28rem,0.5vw,0.48rem);letter-spacing:3px;color:rgba(212,175,55,0.4);text-transform:uppercase;margin-top:2px;text-align:right;}
 
 /* FOOTER */
-.footer {
-  display:flex; justify-content:space-between; align-items:center;
-  padding-top:1.2vh;
-  border-top:1px solid var(--line);
-}
-.footer-left, .footer-right {
-  font-family:'Cinzel',serif;
-  font-size: clamp(0.4rem, 0.6vw, 0.65rem);
-  letter-spacing:0.35em;
-  color: rgba(201,168,76,0.4);
-  text-transform:uppercase;
-}
-.footer-center {
-  font-family:'Cormorant',serif;
-  font-style:italic;
-  font-size: clamp(0.55rem, 0.8vw, 0.85rem);
-  color: rgba(201,168,76,0.3);
-  letter-spacing:0.2em;
-}
+.ftr{padding:0.9vh 2.5vw;border-top:1px solid rgba(212,150,30,0.15);
+  display:flex;align-items:center;gap:1.5vw;
+  background:rgba(20,10,0,0.5);flex-shrink:0;position:relative;z-index:1;}
+.ftr::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(212,150,30,0.4),rgba(255,200,50,0.6),rgba(212,150,30,0.4),transparent);}
+
+.last-upd{font-family:'Share Tech Mono',monospace;font-size:clamp(0.32rem,0.6vw,0.58rem);
+  color:rgba(212,175,55,0.5);letter-spacing:2px;white-space:nowrap;flex-shrink:0;}
+
+.ticker-wrap{flex:1;overflow:hidden;position:relative;height:clamp(1.2rem,2vh,1.8rem);}
+.ticker-wrap::before,.ticker-wrap::after{content:'';position:absolute;top:0;bottom:0;z-index:2;width:60px;}
+.ticker-wrap::before{left:0;background:linear-gradient(90deg,rgba(20,10,0,0.9),transparent);}
+.ticker-wrap::after{right:0;background:linear-gradient(-90deg,rgba(20,10,0,0.9),transparent);}
+.ticker-inner{display:flex;gap:3vw;white-space:nowrap;animation:tickScroll 50s linear infinite;position:absolute;top:50%;transform:translateY(-50%);}
+@keyframes tickScroll{from{transform:translateY(-50%) translateX(0)}to{transform:translateY(-50%) translateX(-50%)}}
+.ti{display:inline-flex;align-items:center;gap:0.5vw;font-family:'Share Tech Mono',monospace;font-size:clamp(0.35rem,0.65vw,0.63rem);}
+.ti-l{color:rgba(212,175,55,0.45);letter-spacing:2px;}.ti-v{color:#FFD700;}.ti-s{color:rgba(212,150,30,0.25);}
+
+/* SLIDE DOTS */
+.slide-dots{display:flex;gap:8px;align-items:center;flex-shrink:0;}
+.sd{width:8px;height:8px;border-radius:50%;background:rgba(212,150,30,0.2);border:1px solid rgba(212,150,30,0.3);transition:all 0.3s;}
+.sd.active{background:rgba(255,200,50,0.85);box-shadow:0 0 10px rgba(212,150,30,0.6);}
+
+/* REFRESH BTN */
+#refreshBtn{background:linear-gradient(90deg,rgba(80,50,0,0.8),rgba(50,30,0,0.9));
+  color:rgba(255,210,80,0.85);font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(0.55rem,1vw,1rem);letter-spacing:3px;padding:5px 16px;
+  border:1px solid rgba(212,150,30,0.35);border-radius:20px;cursor:pointer;
+  white-space:nowrap;flex-shrink:0;transition:all 0.2s;}
+#refreshBtn:hover{background:rgba(100,65,0,0.9);border-color:rgba(255,200,50,0.5);}
 </style>
 </head>
 <body>
-<div class="screen">
 
-  <!-- HEADER -->
-  <div class="header">
-    <div class="brand-block">
-      <div class="brand">SATTARDINA</div>
-      <div class="tagline">Premium Gold &nbsp;•&nbsp; Muscat, Sultanate of Oman</div>
-    </div>
+<div class="slides-wrap" id="slidesWrap">
 
-    <div class="emblem">
-      <div class="emblem-ring">
-        <span class="emblem-star">✦</span>
-        <span class="emblem-label">EST.</span>
+  <!-- ══ SLIDE 1: ENGLISH ══ -->
+  <div class="slide slide-en">
+    <div class="hdr">
+      <div><div class="brand-en">SATTARDINA</div></div>
+      <div class="logo-wrap">
+        <div class="logo-ring"><div class="logo-ph">LOGO<br>HERE</div></div>
+        <div class="logo-txt">GOLD PRICE</div>
+      </div>
+      <div class="hdr-right">
+        <div class="live-pill"><div class="dot"></div><div class="live-lbl">LIVE MARKET</div></div>
       </div>
     </div>
 
-    <div class="right-block">
-      <div class="live-badge">
-        <span class="live-dot"></span>
-        Live Market
+    <div class="body">
+      <div class="oz-card">
+        <div class="card-lbl">1 OZ · International</div>
+        <div class="card-val" id="ozEN">—</div>
+        <div class="card-unit">USD</div>
       </div>
-      <div class="clock" id="clock"></div>
-    </div>
-  </div>
-
-  <!-- MAIN -->
-  <div class="main">
-
-    <div class="spot-card card-oz">
-      <div class="spot-label">1 Ounce</div>
-      <div class="spot-value" id="ozVal">—</div>
-      <div class="spot-unit">USD</div>
-    </div>
-
-    <div class="spot-card card-tola">
-      <div class="spot-label">21K Tola</div>
-      <div class="spot-value" id="tolaVal">—</div>
-      <div class="spot-unit">OMR</div>
-    </div>
-
-    <div class="karat-panel">
-      <div class="panel-title">Gold Rate per Gram &nbsp;—&nbsp; OMR</div>
-      <div class="karat-grid">
-        <div class="karat-item">
-          <div class="karat-badge">22K</div>
-          <div class="karat-divider"></div>
-          <div class="karat-price" id="k22">—</div>
-          <div class="karat-curr">OMR / g</div>
-        </div>
-        <div class="karat-item">
-          <div class="karat-badge">21K</div>
-          <div class="karat-divider"></div>
-          <div class="karat-price" id="k21">—</div>
-          <div class="karat-curr">OMR / g</div>
-        </div>
-        <div class="karat-item">
-          <div class="karat-badge">18K</div>
-          <div class="karat-divider"></div>
-          <div class="karat-price" id="k18">—</div>
-          <div class="karat-curr">OMR / g</div>
+      <div class="tola-card">
+        <div class="card-lbl">21K Tola</div>
+        <div class="card-val" id="tolaEN">—</div>
+        <div class="card-unit">OMR</div>
+      </div>
+      <div class="karat-panel">
+        <div class="karat-hdr">◆ GOLD RATE PER GRAM ( OMR ) ◆</div>
+        <div class="karat-rows">
+          <div class="krow" id="enKb22">
+            <div class="krow-karat">22K</div>
+            <div style="text-align:right"><div class="krow-price" id="enK22">—</div><div class="krow-unit">OMR / gram</div></div>
+          </div>
+          <div class="krow" id="enKb21">
+            <div class="krow-karat">21K</div>
+            <div style="text-align:right"><div class="krow-price" id="enK21">—</div><div class="krow-unit">OMR / gram</div></div>
+          </div>
+          <div class="krow" id="enKb18">
+            <div class="krow-karat">18K</div>
+            <div style="text-align:right"><div class="krow-price" id="enK18">—</div><div class="krow-unit">OMR / gram</div></div>
+          </div>
         </div>
       </div>
     </div>
 
-  </div>
-
-  <!-- MAKING CHARGES -->
-  <div class="making-section">
-    <div class="section-title">Making Charges &nbsp;—&nbsp; Starting From &nbsp;( OMR per Gram )</div>
-    <div class="making-grid">
-      <div class="mk-item"><div class="mk-name">Omani<br>Hand Made</div><div class="mk-price">3.500</div></div>
-      <div class="mk-item"><div class="mk-name">Omani<br>Machine Made</div><div class="mk-price">2.000</div></div>
-      <div class="mk-item"><div class="mk-name">Singapore</div><div class="mk-price">3.500</div></div>
-      <div class="mk-item"><div class="mk-name">Saudi</div><div class="mk-price">4.000</div></div>
-      <div class="mk-item"><div class="mk-name">Turkish</div><div class="mk-price">4.500</div></div>
-      <div class="mk-item"><div class="mk-name">Kuwaiti</div><div class="mk-price">4.000</div></div>
-      <div class="mk-item"><div class="mk-name">Bahraini</div><div class="mk-price">4.500</div></div>
-      <div class="mk-item"><div class="mk-name">Emirati</div><div class="mk-price">3.500</div></div>
+    <div class="ftr">
+      <div class="last-upd" id="updEN">Last Updated: —</div>
+      <div class="ticker-wrap"><div class="ticker-inner" id="tickerEN"></div></div>
+      <div class="slide-dots">
+        <div class="sd active" id="dot0"></div>
+        <div class="sd" id="dot1"></div>
+      </div>
+      <button id="refreshBtn" onclick="loadPrices()">↻ REFRESH</button>
     </div>
   </div>
 
-  <!-- FOOTER -->
-  <div class="footer">
-    <div class="footer-left">Sattardina &nbsp;•&nbsp; Muscat</div>
-    <div class="footer-center">Last Updated: <span id="updateTime"></span></div>
-    <div class="footer-right">Sultanate of Oman</div>
+  <!-- ══ SLIDE 2: ARABIC ══ -->
+  <div class="slide slide-ar">
+    <div class="hdr">
+      <div><div class="brand-ar">ستاردينا</div></div>
+      <div class="logo-wrap">
+        <div class="logo-ring"><div class="logo-ph">LOGO<br>HERE</div></div>
+        <div class="logo-txt-ar">سعر الذهب</div>
+      </div>
+      <div class="hdr-left-ar">
+        <div class="live-pill"><div class="dot"></div><div class="live-lbl">سوق مباشر</div></div>
+      </div>
+    </div>
+
+    <div class="body" style="direction:ltr;">
+      <div class="oz-card">
+        <div class="card-lbl-ar oz-lbl-ar">١ أونصة</div>
+        <div class="card-val" id="ozAR">—</div>
+        <div class="card-unit" style="color:rgba(150,210,255,0.5)">USD</div>
+      </div>
+      <div class="tola-card">
+        <div class="card-lbl-ar">تولة ٢١ عيار</div>
+        <div class="card-val" id="tolaAR">—</div>
+        <div class="card-unit" style="color:rgba(212,175,55,0.5)">ر.ع</div>
+      </div>
+      <div class="karat-panel">
+        <div class="karat-hdr-ar">◆ سعر جرام الذهب ( ر.ع ) ◆</div>
+        <div class="karat-rows">
+          <div class="krow" id="arKb22">
+            <div class="krow-karat" style="font-family:'Noto Kufi Arabic',sans-serif;font-size:clamp(1.5rem,2.8vw,3.5rem);">عيار ٢٢</div>
+            <div style="text-align:right"><div class="krow-price" id="arK22">—</div><div class="krow-unit">ر.ع / جرام</div></div>
+          </div>
+          <div class="krow" id="arKb21">
+            <div class="krow-karat" style="font-family:'Noto Kufi Arabic',sans-serif;font-size:clamp(1.5rem,2.8vw,3.5rem);">عيار ٢١</div>
+            <div style="text-align:right"><div class="krow-price" id="arK21">—</div><div class="krow-unit">ر.ع / جرام</div></div>
+          </div>
+          <div class="krow" id="arKb18">
+            <div class="krow-karat" style="font-family:'Noto Kufi Arabic',sans-serif;font-size:clamp(1.5rem,2.8vw,3.5rem);">عيار ١٨</div>
+            <div style="text-align:right"><div class="krow-price" id="arK18">—</div><div class="krow-unit">ر.ع / جرام</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ftr">
+      <div class="last-upd" id="updAR" style="direction:rtl;">آخر تحديث: —</div>
+      <div class="ticker-wrap"><div class="ticker-inner" id="tickerAR"></div></div>
+      <div class="slide-dots">
+        <div class="sd" id="dot0b"></div>
+        <div class="sd active" id="dot1b"></div>
+      </div>
+    </div>
   </div>
 
 </div>
 
 <script>
-// Calculation Functions
-function p24kOMR(spot) { return (spot * 1.4485 + 15) / 116.64; }
-function karatOMR(spot, f) { return p24kOMR(spot) * f; }
-function tola21OMR(spot) { return karatOMR(spot, 0.879) * 11.664; }
+// ── AUTO SLIDE every 20s ──
+let cur = 0;
+function goSlide(n) {
+  cur = n;
+  document.getElementById('slidesWrap').style.transform = `translateX(-${n*100}vw)`;
+  [0,1].forEach(i=>{
+    document.getElementById('dot'+i).className  = 'sd'+(i===n?' active':'');
+    document.getElementById('dot'+i+'b').className = 'sd'+(i===n?' active':'');
+  });
+}
+setInterval(()=>goSlide(cur===0?1:0), 20000);
 
-async function fetchGoldPrice() {
+// ── RENDER ──
+function renderPrices(p) {
+  // EXACT formula from your working reference script
+  const p24k = (p * 1.4485 + 15) / 116.64;
+  const fmt  = x => x.toFixed(3);
+
+  const oz   = Math.floor(p).toLocaleString('en-US');
+  const tola = fmt(p24k * 0.879 * 11.664);
+  const k22  = fmt(p24k * 0.920);
+  const k21  = fmt(p24k * 0.879);
+  const k18  = fmt(p24k * 0.755);
+
+  // English
+  document.getElementById('ozEN').textContent   = oz;
+  document.getElementById('tolaEN').textContent = tola;
+  document.getElementById('enK22').textContent  = k22;
+  document.getElementById('enK21').textContent  = k21;
+  document.getElementById('enK18').textContent  = k18;
+
+  // Arabic
+  document.getElementById('ozAR').textContent   = oz;
+  document.getElementById('tolaAR').textContent = tola;
+  document.getElementById('arK22').textContent  = k22;
+  document.getElementById('arK21').textContent  = k21;
+  document.getElementById('arK18').textContent  = k18;
+
+  // Flash
+  ['enKb22','enKb21','enKb18','arKb22','arKb21','arKb18'].forEach(id=>{
+    const el=document.getElementById(id);
+    el.classList.remove('flash');void el.offsetWidth;el.classList.add('flash');
+  });
+
+  // Ticker
+  const ticks=[
+    {l:'22K',v:k22+' OMR'},{l:'21K',v:k21+' OMR'},{l:'18K',v:k18+' OMR'},
+    {l:'21K TOLA',v:tola+' OMR'},{l:'1 OZ',v:oz+' USD'},
+  ];
+  const items=ticks.map(t=>`<span class="ti"><span class="ti-l">${t.l}</span><span class="ti-v">${t.v}</span><span class="ti-s">◆</span></span>`).join('');
+  document.getElementById('tickerEN').innerHTML=items+items;
+  document.getElementById('tickerAR').innerHTML=items+items;
+
+  // Last updated time
+  const now = new Date();
+  const t = now.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  const d = now.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
+  document.getElementById('updEN').textContent = `Last Updated: ${d} · ${t}`;
+  document.getElementById('updAR').textContent = `آخر تحديث: ${d} · ${t}`;
+}
+
+// ── FETCH — exact same as your working script ──
+async function loadPrices() {
+  const btn = document.getElementById("refreshBtn");
+  if(btn) btn.innerText = "REFRESHING...";
   try {
-    const response = await fetch("https://api.gold-api.com/price/XAU");
-    const data = await response.json();
-    const spot = parseFloat(data.price);
-
-    if (!isNaN(spot)) {
-      // Update Ounce
-      document.getElementById('ozVal').textContent = Math.floor(spot).toLocaleString('en-US');
-
-      // Update Tola
-      document.getElementById('tolaVal').textContent = tola21OMR(spot).toFixed(3);
-
-      // Update Karats
-      document.getElementById('k22').textContent = karatOMR(spot, 0.920).toFixed(3);
-      document.getElementById('k21').textContent = karatOMR(spot, 0.879).toFixed(3);
-      document.getElementById('k18').textContent = karatOMR(spot, 0.755).toFixed(3);
-    }
-  } catch (err) {
-    console.error("API Error:", err);
-    document.getElementById('ozVal').textContent = "Error";
+    const res  = await fetch("https://api.gold-api.com/price/XAU");
+    const data = await res.json();
+    renderPrices(data.price);
+  } catch(e) {
+    document.getElementById('updEN').textContent = "Error: "+e.message;
+    console.error(e);
   }
+  if(btn) btn.innerText = "↻ REFRESH";
 }
 
-// Clock & Update Time
-function updateClock() {
-  const t = new Date();
-  document.getElementById('clock').textContent =
-    t.toLocaleTimeString('en-GB', { hour:'2-digit', minute:'2-digit', second:'2-digit' });
-  document.getElementById('updateTime').textContent =
-    t.toLocaleDateString('en-GB', { weekday:'long', day:'2-digit', month:'long', year:'numeric' });
-}
-
-// Initialize
-fetchGoldPrice();
-setInterval(fetchGoldPrice, 30000);   // Update every 30 seconds
-setInterval(updateClock, 1000);
-updateClock();
+window.onload = loadPrices;
+setInterval(loadPrices, 30000);
 </script>
 </body>
 </html>
