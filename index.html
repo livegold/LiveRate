@@ -1,4 +1,4 @@
-Cat > /mnt/user-data/outputs/sattardina-tv-display.html << 'HTMLEOF'
+cat > /mnt/user-data/outputs/sattardina-tv-display.html << 'HTMLEOF'
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +10,6 @@ Cat > /mnt/user-data/outputs/sattardina-tv-display.html << 'HTMLEOF'
 *{margin:0;padding:0;box-sizing:border-box;}
 html,body{
   width:100%;height:100%;overflow:hidden;
-  /* Fixed: Zoom out karne par background color blank/black na dikhe */
   background:linear-gradient(160deg,#001830 0%,#00102a 50%,#001428 100%);
 }
 
@@ -20,10 +19,10 @@ html,body{
   top:0;left:0;
   width:1920px;height:1080px;
   transform-origin:top left;
-  overflow:hidden; /* KEY: hides second slide bleed */
+  overflow:hidden; 
 }
 
-/* SLIDES TRACK */
+/* SLIDES TRACK — contains only the body sections now */
 .sw{
   width:3840px;height:1080px;
   display:flex;
@@ -33,7 +32,7 @@ html,body{
 
 .slide{
   width:1920px;height:1080px;
-  flex:0 0 1920px; /* strict fixed width */
+  flex:0 0 1920px; 
   display:flex;flex-direction:column;
   overflow:hidden;position:relative;
   background:linear-gradient(160deg,#001830 0%,#00102a 50%,#001428 100%);
@@ -78,8 +77,7 @@ html,body{
   display:grid;
   grid-template-rows:1fr 1.1fr auto;
   gap:32px;
-  /* Adjusted padding bottom to account for fixed footer space */
-  padding:36px 56px 84px;
+  padding:36px 56px 84px; /* Space saved for footer */
   position:relative;z-index:1;
 }
 
@@ -131,17 +129,16 @@ html,body{
 .last-upd{font-family:'Share Tech Mono',monospace;font-size:18px;color:rgba(140,200,255,0.8);letter-spacing:2px;text-align:center;text-shadow:0 0 10px rgba(0,140,255,0.3);}
 .last-upd-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:16px;color:rgba(140,200,255,0.8);text-align:center;text-shadow:0 0 10px rgba(0,140,255,0.3);}
 
-/* ══ FOOTER 56px (FIXED OUTSIDE ZOOM) ══ */
+/* ══ FOOTER 56px (LOCK INSIDE ZOOM CONTAINER) ══ */
 .ftr {
-  position: fixed;
-  bottom: 0; left: 0; right: 0;
+  position: absolute;
+  bottom: 0; left: 0; width: 1920px;
   height: 56px;
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 56px;
   border-top: 1px solid rgba(60,130,255,0.15);
-  z-index: 9999; /* Always on top */
+  z-index: 99; 
   background: rgba(0,8,30,0.95);
-  backdrop-filter: blur(10px);
 }
 .ftr::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(60,130,255,0.35),rgba(100,180,255,0.6),rgba(60,130,255,0.35),transparent);}
 .ftr-left-dots {display: flex; gap: 7px; align-items: center;}
@@ -160,135 +157,138 @@ html,body{
 <body>
 
 <div id="zw">
-<div class="sw" id="sw">
+  <!-- SLIDES CONTAINER -->
+  <div class="sw" id="sw">
 
-<!-- ══ ENGLISH ══ -->
-<div class="slide">
-  <div class="hdr">
-    <div class="brand">SATTARDINA</div>
-    <div class="hdr-mid">
-      <div class="logo-ring">
-        <img src="https://i.ibb.co/pBK5Zct0/file-00000000e73c7246bafe41f8ba02719e.png" class="logo-img" alt="Logo">
+    <!-- ══ ENGLISH ══ -->
+    <div class="slide">
+      <div class="hdr">
+        <div class="brand">SATTARDINA</div>
+        <div class="hdr-mid">
+          <div class="logo-ring">
+            <img src="https://i.ibb.co/pBK5Zct0/file-00000000e73c7246bafe41f8ba02719e.png" class="logo-img" alt="Logo">
+          </div>
+        </div>
+        <div class="hdr-right">
+          <div class="hdr-live-title">GOLD PRICE · LIVE</div>
+          <div class="clock" id="clockEN">--:--:--</div>
+          <div class="date-lbl" id="dateEN">---</div>
+        </div>
       </div>
-    </div>
-    <div class="hdr-right">
-      <div class="hdr-live-title">GOLD PRICE · LIVE</div>
-      <div class="clock" id="clockEN">--:--:--</div>
-      <div class="date-lbl" id="dateEN">---</div>
-    </div>
-  </div>
 
-  <div class="body">
-    <div class="row-spots">
-      <div class="spot-card oz-card">
-        <div class="s-lbl">1 Ounce · International</div>
-        <div class="s-val" id="ozEN">—</div>
-        <div class="s-unit">USD</div>
-      </div>
-      <div class="spot-card tola-card">
-        <div class="s-lbl">21K Tola</div>
-        <div class="s-val" id="tolaEN">—</div>
-        <div class="s-unit">OMR</div>
-      </div>
-      <div class="spot-card tentola-card">
-        <div class="s-lbl">Ten Tola · 10 Tola</div>
-        <div class="s-val" id="tenTolaEN">—</div>
-        <div class="s-unit">OMR</div>
-      </div>
-    </div>
+      <div class="body">
+        <div class="row-spots">
+          <div class="spot-card oz-card">
+            <div class="s-lbl">1 Ounce · International</div>
+            <div class="s-val" id="ozEN">—</div>
+            <div class="s-unit">USD</div>
+          </div>
+          <div class="spot-card tola-card">
+            <div class="s-lbl">21K Tola</div>
+            <div class="s-val" id="tolaEN">—</div>
+            <div class="s-unit">OMR</div>
+          </div>
+          <div class="spot-card tentola-card">
+            <div class="s-lbl">Ten Tola · 10 Tola</div>
+            <div class="s-val" id="tenTolaEN">—</div>
+            <div class="s-unit">OMR</div>
+          </div>
+        </div>
 
-    <div class="row-karat">
-      <div class="karat-block">
-        <div class="karat-row">
-          <div class="kb" id="enKb24"><div class="kb-k">24K</div><div class="kb-r"><div class="kb-price" id="enK24">—</div><div class="kb-unit">OMR / Gram</div></div></div>
-          <div class="kb" id="enKb22"><div class="kb-k">22K</div><div class="kb-r"><div class="kb-price" id="enK22">—</div><div class="kb-unit">OMR / Gram</div></div></div>
-          <div class="kb" id="enKb21"><div class="kb-k">21K</div><div class="kb-r"><div class="kb-price" id="enK21">—</div><div class="kb-unit">OMR / Gram</div></div></div>
-          <div class="kb" id="enKb18"><div class="kb-k">18K</div><div class="kb-r"><div class="kb-price" id="enK18">—</div><div class="kb-unit">OMR / Gram</div></div></div>
+        <div class="row-karat">
+          <div class="karat-block">
+            <div class="karat-row">
+              <div class="kb" id="enKb24"><div class="kb-k">24K</div><div class="kb-r"><div class="kb-price" id="enK24">—</div><div class="kb-unit">OMR / Gram</div></div></div>
+              <div class="kb" id="enKb22"><div class="kb-k">22K</div><div class="kb-r"><div class="kb-price" id="enK22">—</div><div class="kb-unit">OMR / Gram</div></div></div>
+              <div class="kb" id="enKb21"><div class="kb-k">21K</div><div class="kb-r"><div class="kb-price" id="enK21">—</div><div class="kb-unit">OMR / Gram</div></div></div>
+              <div class="kb" id="enKb18"><div class="kb-k">18K</div><div class="kb-r"><div class="kb-price" id="enK18">—</div><div class="kb-unit">OMR / Gram</div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bottom-status-bar">
+          <div class="last-upd" id="updEN">Last Updated: —</div>
         </div>
       </div>
     </div>
 
-    <div class="bottom-status-bar">
-      <div class="last-upd" id="updEN">Last Updated: —</div>
-    </div>
-  </div>
-</div>
+    <!-- ══ ARABIC ══ -->
+    <div class="slide" style="direction:rtl;">
+      <div class="hdr">
+        <div class="brand-ar">ستاردينا</div>
+        <div class="hdr-mid">
+          <div class="logo-ring">
+            <img src="https://i.ibb.co/pBK5Zct0/file-00000000e73c7246bafe41f8ba02719e.png" class="logo-img" alt="Logo">
+          </div>
+        </div>
+        <div class="hdr-left-ar">
+          <div class="hdr-live-title-ar">سعر الذهب · مباشر</div>
+          <div class="clock-ar" id="clockAR">--:--:--</div>
+          <div class="date-lbl-ar" id="dateAR">---</div>
+        </div>
+      </div>
 
-<!-- ══ ARABIC ══ -->
-<div class="slide" style="direction:rtl;">
-  <div class="hdr">
-    <div class="brand-ar">ستاردينا</div>
-    <div class="hdr-mid">
-      <div class="logo-ring">
-        <img src="https://i.ibb.co/pBK5Zct0/file-00000000e73c7246bafe41f8ba02719e.png" class="logo-img" alt="Logo">
-      </div>
-    </div>
-    <div class="hdr-left-ar">
-      <div class="hdr-live-title-ar">سعر الذهب · مباشر</div>
-      <div class="clock-ar" id="clockAR">--:--:--</div>
-      <div class="date-lbl-ar" id="dateAR">---</div>
-    </div>
-  </div>
+      <div class="body" style="direction:rtl;">
+        <div class="row-spots">
+          <div class="spot-card oz-card">
+            <div class="s-lbl-ar">١ أونصة عالمي</div>
+            <div class="s-val-ar" id="ozAR">—</div>
+            <div class="s-unit-ar" style="color:rgba(100,180,255,0.45)">دولار</div>
+          </div>
+          <div class="spot-card tola-card">
+            <div class="s-lbl-ar">تولة ٢١ عيار</div>
+            <div class="s-val-ar" id="tolaAR">—</div>
+            <div class="s-unit-ar" style="color:rgba(0,200,100,0.45)">ر.ع</div>
+          </div>
+          <div class="spot-card tentola-card">
+            <div class="s-lbl-ar">عشرة تولات</div>
+            <div class="s-val-ar" id="tenTolaAR">—</div>
+            <div class="s-unit-ar" style="color:rgba(160,100,255,0.45)">ر.ع</div>
+          </div>
+        </div>
 
-  <div class="body" style="direction:rtl;">
-    <div class="row-spots">
-      <div class="spot-card oz-card">
-        <div class="s-lbl-ar">١ أونصة عالمي</div>
-        <div class="s-val-ar" id="ozAR">—</div>
-        <div class="s-unit-ar" style="color:rgba(100,180,255,0.45)">دولار</div>
-      </div>
-      <div class="spot-card tola-card">
-        <div class="s-lbl-ar">تولة ٢١ عيار</div>
-        <div class="s-val-ar" id="tolaAR">—</div>
-        <div class="s-unit-ar" style="color:rgba(0,200,100,0.45)">ر.ع</div>
-      </div>
-      <div class="spot-card tentola-card">
-        <div class="s-lbl-ar">عشرة تولات</div>
-        <div class="s-val-ar" id="tenTolaAR">—</div>
-        <div class="s-unit-ar" style="color:rgba(160,100,255,0.45)">ر.ع</div>
-      </div>
-    </div>
+        <div class="row-karat">
+          <div class="karat-block">
+            <div class="karat-row">
+              <div class="kb" id="arKb24"><div class="kb-k-ar">٢٤ عيار</div><div class="kb-r"><div class="kb-price-ar" id="arK24">—</div><div class="kb-unit-ar">ر.ع / جرام</div></div></div>
+              <div class="kb" id="arKb22"><div class="kb-k-ar">٢٢ عيار</div><div class="kb-r"><div class="kb-price-ar" id="arK22">—</div><div class="kb-unit-ar">ر.ع / جرام</div></div></div>
+              <div class="kb" id="arKb21"><div class="kb-k-ar">٢١ عيار</div><div class="kb-r"><div class="kb-price-ar" id="arK21">—</div><div class="kb-unit-ar">ر.ع / جرام</div></div></div>
+              <div class="kb" id="arKb18"><div class="kb-k-ar">١٨ عيار</div><div class="kb-r"><div class="kb-price-ar" id="arK18">—</div><div class="kb-unit-ar">ر.ع / جرام</div></div></div>
+            </div>
+          </div>
+        </div>
 
-    <div class="row-karat">
-      <div class="karat-block">
-        <div class="karat-row">
-          <div class="kb" id="arKb24"><div class="kb-k-ar">٢٤ عيار</div><div class="kb-r"><div class="kb-price-ar" id="arK24">—</div><div class="kb-unit-ar">ر.ع / جرام</div></div></div>
-          <div class="kb" id="arKb22"><div class="kb-k-ar">٢٢ عيار</div><div class="kb-r"><div class="kb-price-ar" id="arK22">—</div><div class="kb-unit-ar">ر.ع / جرام</div></div></div>
-          <div class="kb" id="arKb21"><div class="kb-k-ar">٢١ عيار</div><div class="kb-r"><div class="kb-price-ar" id="arK21">—</div><div class="kb-unit-ar">ر.ع / جرام</div></div></div>
-          <div class="kb" id="arKb18"><div class="kb-k-ar">١٨ عيار</div><div class="kb-r"><div class="kb-price-ar" id="arK18">—</div><div class="kb-unit-ar">ر.ع / جرام</div></div></div>
+        <div class="bottom-status-bar">
+          <div class="last-upd-ar" id="updAR">آخر تحديث: —</div>
         </div>
       </div>
     </div>
 
-    <div class="bottom-status-bar">
-      <div class="last-upd-ar" id="updAR">آخر تحديث: —</div>
+  </div><!-- sw -->
+
+  <!-- ══ FIXED FOOTER (WITH FULLSCREEN BUTTON) ══ -->
+  <div class="ftr">
+    <div class="ftr-left-dots">
+      <div class="slide-dots">
+        <div class="sd active" id="d0"></div>
+        <div class="sd" id="d1"></div>
+      </div>
+    </div>
+    
+    <div class="ftr-controls">
+      <!-- FULLSCREEN BUTTON -->
+      <button class="rbtn" onclick="toggleFS()" style="border-color: rgba(0,230,118,0.4); color: #00e676;">🖥️ FULLSCREEN</button>
+      
+      <div class="zoom-wrap">
+        <button class="zbtn" onclick="z(-0.05)" title="Zoom Out">−</button>
+        <span class="zpct" id="zpct">100%</span>
+        <button class="zbtn" onclick="z(+0.05)" title="Zoom In">+</button>
+      </div>
+      <button class="rbtn" onclick="load()">↻ REFRESH</button>
     </div>
   </div>
-</div>
 
-</div><!-- sw -->
 </div><!-- zw -->
-
-<!-- ══ FIXED FOOTER (OUTSIDE OF ZOOM WRAPPER) ══ -->
-<div class="ftr">
-  <!-- Slide Dots (Left aligned or Right depending on preference, kept unified here) -->
-  <div class="ftr-left-dots">
-    <div class="slide-dots">
-      <div class="sd active" id="d0"></div>
-      <div class="sd" id="d1"></div>
-    </div>
-  </div>
-  
-  <!-- Right Controls -->
-  <div class="ftr-controls">
-    <div class="zoom-wrap">
-      <button class="zbtn" onclick="z(-0.05)" title="Zoom Out">−</button>
-      <span class="zpct" id="zpct">100%</span>
-      <button class="zbtn" onclick="z(+0.05)" title="Zoom In">+</button>
-    </div>
-    <button class="rbtn" onclick="load()">↻ REFRESH</button>
-  </div>
-</div>
 
 <script>
 function toAr(n){const id=['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];return n.toString().replace(/[0-9]/g,w=>id[+w]);}
@@ -305,11 +305,22 @@ function tick(){
 }
 setInterval(tick,1000);tick();
 
+/* ── FULLSCREEN TOGGLE ── */
+function toggleFS() {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch(err => {
+      alert(`Error trying to enable fullscreen: ${err.message}`);
+    });
+  } else {
+    document.exitFullscreen();
+  }
+}
+
 /* ── ZOOM ── */
 let sc=1;
 function applyZoom(){
   const vw=window.innerWidth, vh=window.innerHeight;
-  const fit=Math.min(vw/1920, vh/1080);  // base fit-to-screen
+  const fit=Math.min(vw/1920, vh/1080);  
   const s=fit*sc;
   const el=document.getElementById('zw');
   el.style.transform='scale('+s+')';
@@ -374,8 +385,8 @@ function render(p){
 
 /* ── FETCH ── */
 async function load(){
-  const btn=document.querySelector('.rbtn');
-  if(btn)btn.textContent='...';
+  const btn=document.querySelectorAll('.rbtn');
+  if(btn)btn.forEach(b => { if(b.textContent.includes('REFRESH')) b.textContent='...'; });
   try{
     const res=await fetch("https://api.gold-api.com/price/XAU");
     const data=await res.json();
@@ -384,9 +395,10 @@ async function load(){
     document.getElementById('updEN').textContent='Error: '+e.message;
     console.error(e);
   }
-  if(btn)btn.textContent='↻ REFRESH';
+  if(btn)btn.forEach(b => { if(b.textContent==='...') b.textContent='↻ REFRESH'; });
 }
 window.onload=function(){applyZoom();load();};
+window.addEventListener('resize',applyZoom);
 setInterval(load,30000);
 </script>
 </body>
