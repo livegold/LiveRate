@@ -1,4 +1,4 @@
-cat > /mnt/user-data/outputs/sattardina-tv-display.html << 'HTMLEOF'
+Cat > /mnt/user-data/outputs/sattardina-tv-display.html << 'HTMLEOF'
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +8,11 @@ cat > /mnt/user-data/outputs/sattardina-tv-display.html << 'HTMLEOF'
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&family=Noto+Kufi+Arabic:wght@400;600;700&display=swap" rel="stylesheet"/>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-html,body{width:100%;height:100%;overflow:hidden;background:#000;}
+html,body{
+  width:100%;height:100%;overflow:hidden;
+  /* Fixed: Zoom out karne par background color blank/black na dikhe */
+  background:linear-gradient(160deg,#001830 0%,#00102a 50%,#001428 100%);
+}
 
 /* ZOOM WRAPPER — clips to exactly viewport */
 #zw{
@@ -74,7 +78,8 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;}
   display:grid;
   grid-template-rows:1fr 1.1fr auto;
   gap:32px;
-  padding:36px 56px 28px;
+  /* Adjusted padding bottom to account for fixed footer space */
+  padding:36px 56px 84px;
   position:relative;z-index:1;
 }
 
@@ -126,16 +131,20 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;}
 .last-upd{font-family:'Share Tech Mono',monospace;font-size:18px;color:rgba(140,200,255,0.8);letter-spacing:2px;text-align:center;text-shadow:0 0 10px rgba(0,140,255,0.3);}
 .last-upd-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:16px;color:rgba(140,200,255,0.8);text-align:center;text-shadow:0 0 10px rgba(0,140,255,0.3);}
 
-/* ══ FOOTER 56px ══ */
-.ftr{
-  flex:0 0 56px;
-  display:flex;align-items:center;justify-content:flex-end;
-  padding:0 56px;
-  border-top:1px solid rgba(60,130,255,0.15);
-  position:relative;z-index:2;
-  background:rgba(0,8,30,0.9);
+/* ══ FOOTER 56px (FIXED OUTSIDE ZOOM) ══ */
+.ftr {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 56px;
+  border-top: 1px solid rgba(60,130,255,0.15);
+  z-index: 9999; /* Always on top */
+  background: rgba(0,8,30,0.95);
+  backdrop-filter: blur(10px);
 }
 .ftr::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(60,130,255,0.35),rgba(100,180,255,0.6),rgba(60,130,255,0.35),transparent);}
+.ftr-left-dots {display: flex; gap: 7px; align-items: center;}
 .ftr-controls{display:flex;align-items:center;gap:18px;}
 .slide-dots{display:flex;gap:7px;align-items:center;}
 .sd{width:8px;height:8px;border-radius:50%;background:rgba(60,130,255,0.15);border:1px solid rgba(60,130,255,0.25);transition:all 0.3s;}
@@ -149,6 +158,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;}
 </style>
 </head>
 <body>
+
 <div id="zw">
 <div class="sw" id="sw">
 
@@ -200,18 +210,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;}
 
     <div class="bottom-status-bar">
       <div class="last-upd" id="updEN">Last Updated: —</div>
-    </div>
-  </div>
-
-  <div class="ftr">
-    <div class="ftr-controls">
-      <div class="slide-dots"><div class="sd active" id="d0"></div><div class="sd" id="d1"></div></div>
-      <div class="zoom-wrap">
-        <button class="zbtn" onclick="z(-0.05)" title="Zoom Out">−</button>
-        <span class="zpct" id="zpct">100%</span>
-        <button class="zbtn" onclick="z(+0.05)" title="Zoom In">+</button>
-      </div>
-      <button class="rbtn" onclick="load()">↻ REFRESH</button>
     </div>
   </div>
 </div>
@@ -266,16 +264,31 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;}
       <div class="last-upd-ar" id="updAR">آخر تحديث: —</div>
     </div>
   </div>
-
-  <div class="ftr" style="justify-content:flex-start;">
-    <div class="ftr-controls">
-      <div class="slide-dots"><div class="sd" id="d0b"></div><div class="sd active" id="d1b"></div></div>
-    </div>
-  </div>
 </div>
 
 </div><!-- sw -->
 </div><!-- zw -->
+
+<!-- ══ FIXED FOOTER (OUTSIDE OF ZOOM WRAPPER) ══ -->
+<div class="ftr">
+  <!-- Slide Dots (Left aligned or Right depending on preference, kept unified here) -->
+  <div class="ftr-left-dots">
+    <div class="slide-dots">
+      <div class="sd active" id="d0"></div>
+      <div class="sd" id="d1"></div>
+    </div>
+  </div>
+  
+  <!-- Right Controls -->
+  <div class="ftr-controls">
+    <div class="zoom-wrap">
+      <button class="zbtn" onclick="z(-0.05)" title="Zoom Out">−</button>
+      <span class="zpct" id="zpct">100%</span>
+      <button class="zbtn" onclick="z(+0.05)" title="Zoom In">+</button>
+    </div>
+    <button class="rbtn" onclick="load()">↻ REFRESH</button>
+  </div>
+</div>
 
 <script>
 function toAr(n){const id=['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];return n.toString().replace(/[0-9]/g,w=>id[+w]);}
@@ -292,12 +305,7 @@ function tick(){
 }
 setInterval(tick,1000);tick();
 
-/* ── ZOOM ──
-   #zw is always 1920×1080.
-   We scale it so it fits the actual screen,
-   then multiply by user zoom (sc).
-   left/top keep it centered.
-*/
+/* ── ZOOM ── */
 let sc=1;
 function applyZoom(){
   const vw=window.innerWidth, vh=window.innerHeight;
@@ -319,11 +327,9 @@ window.addEventListener('resize',applyZoom);
 let cur=0;
 function goSlide(n){
   cur=n;
-  // Move by exactly 1920px — matches fixed slide width
   document.getElementById('sw').style.transform='translateX('+(n*-1920)+'px)';
   [0,1].forEach(i=>{
     document.getElementById('d'+i).className='sd'+(i===n?' active':'');
-    document.getElementById('d'+i+'b').className='sd'+(i===n?' active':'');
   });
 }
 setInterval(()=>goSlide(cur===0?1:0),20000);
@@ -387,3 +393,4 @@ setInterval(load,30000);
 </html>
 HTMLEOF
 echo "done"
+
