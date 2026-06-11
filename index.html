@@ -1,3 +1,4 @@
+cat > /mnt/user-data/outputs/sattardina-tv-display.html << 'HTMLEOF'
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,11 +22,11 @@ html,body{
   overflow:hidden; 
 }
 
-/* SLIDES TRACK — contains only the body sections now */
+/* SLIDES TRACK — 2 Slides Only */
 .sw{
   width:3840px;height:1080px;
   display:flex;
-  transition:transform 1s cubic-bezier(0.77,0,0.18,1);
+  transition:transform 1.2s cubic-bezier(0.77,0,0.18,1);
   will-change:transform;
 }
 
@@ -74,9 +75,9 @@ html,body{
 .body{
   flex:1;min-height:0;
   display:grid;
-  grid-template-rows:1fr 1.1fr auto;
-  gap:32px;
-  padding:36px 56px 84px; /* Space saved for footer */
+  grid-template-rows:1fr 1.1fr auto auto;
+  gap:24px;
+  padding:30px 56px 84px; 
   position:relative;z-index:1;
 }
 
@@ -104,9 +105,6 @@ html,body{
 .tentola-card .s-val,.tentola-card .s-val-ar{text-shadow:0 0 30px rgba(160,80,255,0.5);}
 .s-unit{font-family:'Rajdhani',sans-serif;font-size:18px;letter-spacing:4px;margin-top:8px;font-weight:600;}
 .s-unit-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:18px;margin-top:8px;font-weight:600;}
-.oz-card .s-unit{color:rgba(100,180,255,0.5);}
-.tola-card .s-unit{color:rgba(0,200,100,0.5);}
-.tentola-card .s-unit{color:rgba(160,100,255,0.5);}
 
 /* KARATS */
 .row-karat{display:flex;flex-direction:column;justify-content:center;}
@@ -123,12 +121,70 @@ html,body{
 .kb-unit{font-size:13px;font-family:'Rajdhani',sans-serif;letter-spacing:1px;color:rgba(140,200,255,0.6);text-transform:uppercase;font-weight:600;}
 .kb-unit-ar{font-size:13px;font-family:'Noto Kufi Arabic',sans-serif;color:rgba(140,200,255,0.7);font-weight:600;}
 
-/* LAST UPDATED */
-.bottom-status-bar{display:flex;align-items:center;justify-content:center;padding:4px 0 0 0;}
-.last-upd{font-family:'Share Tech Mono',monospace;font-size:18px;color:rgba(140,200,255,0.8);letter-spacing:2px;text-align:center;text-shadow:0 0 10px rgba(0,140,255,0.3);}
-.last-upd-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:16px;color:rgba(140,200,255,0.8);text-align:center;text-shadow:0 0 10px rgba(0,140,255,0.3);}
+/* ══ PERFECT RIGHT-TO-LEFT TICKER SCROLL FOR BOTH SLIDES ══ */
+.row-marquee {
+  width: 100%; overflow: hidden; height: 56px;
+  background: linear-gradient(90deg, rgba(0, 32, 74, 0.9) 0%, rgba(0, 52, 112, 0.95) 50%, rgba(0, 32, 74, 0.9) 100%);
+  border-top: 2px solid rgba(255, 215, 0, 0.4); border-bottom: 2px solid rgba(255, 215, 0, 0.4);
+  border-radius: 8px; display: flex; align-items: center; position: relative;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  transition: all 0.4s ease-in-out;
+}
+.row-marquee.hide-mc {
+  opacity: 0; height: 0; padding: 0; margin: 0; border: none; pointer-events: none;
+}
+.mq-wrap {
+  position: absolute; display: flex; align-items: center; white-space: nowrap; width: 100%; left: 0; height: 100%;
+}
 
-/* ══ FOOTER 56px (LOCK INSIDE ZOOM CONTAINER) ══ */
+/* English Line — Starts at 1920px (right) and moves left */
+.mq-text {
+  position: absolute; display: flex; align-items: center; white-space: nowrap; height: 100%;
+  font-family: 'Rajdhani', sans-serif; font-size: 22px; font-weight: 700; color: #ffffff; letter-spacing: 1px;
+  line-height: 1; transform: translate3d(1920px, 0, 0);
+}
+.slide-active-0 .mq-text {
+  animation: run-ticker 24.5s linear forwards;
+}
+
+/* Arabic Line — Correct text sequence order, forced into Left-To-Right layout logic, scrolling from Right to Left */
+.mq-text-ar {
+  position: absolute; display: flex; align-items: center; white-space: nowrap; height: 100%;
+  font-family: 'Noto Kufi Arabic', sans-serif; font-size: 20px; font-weight: 600; color: #ffffff; letter-spacing: 0.5px;
+  line-height: 1; transform: translate3d(1920px, 0, 0); direction: ltr !important; text-align: left;
+}
+.slide-active-1 .mq-text-ar {
+  animation: run-ticker 24.5s linear forwards;
+}
+
+/* Inline items configurations */
+.mq-text span, .mq-text-ar span {
+  color: #ffd700; font-family: 'Share Tech Mono', monospace; font-size: 24px; margin-right: 30px; margin-left: 8px;
+  background: rgba(0, 10, 30, 0.6); padding: 2px 10px; border-radius: 4px; border: 1px solid rgba(255, 215, 0, 0.25);
+  display: inline-flex; align-items: center; line-height: 1;
+}
+.mq-text-ar span {
+  font-family: 'Noto Kufi Arabic', sans-serif; font-size: 20px; font-weight: 700; display: inline-flex; direction: rtl !important;
+}
+.mq-text-ar .main-lbl-ar {
+  font-family: 'Noto Kufi Arabic', sans-serif; font-size: 20px; font-weight: 700; color: #ffffff; background: none; border: none; padding: 0; margin-right: 25px;
+}
+.flag-emoji {
+  font-size: 24px; vertical-align: middle; margin-right: 6px; margin-left: 10px; display: inline-block; line-height: 1;
+}
+
+/* Uniform Ticker Keyframe: Moves everything right to left dynamically based on content width */
+@keyframes run-ticker {
+  0% { transform: translate3d(1920px, 0, 0); }
+  100% { transform: translate3d(calc(960px - 100%), 0, 0); }
+}
+
+/* LAST UPDATED */
+.bottom-status-bar{display:flex;align-items:center;justify-content:center;padding:2px 0 0 0;}
+.last-upd{font-family:'Share Tech Mono',monospace;font-size:18px;color:rgba(140,200,255,0.8);letter-spacing:2px;}
+.last-upd-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:16px;color:rgba(140,200,255,0.8);}
+
+/* ══ FOOTER 56px ══ */
 .ftr {
   position: absolute;
   bottom: 0; left: 0; width: 1920px;
@@ -140,26 +196,39 @@ html,body{
   background: rgba(0,8,30,0.95);
 }
 .ftr::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(60,130,255,0.35),rgba(100,180,255,0.6),rgba(60,130,255,0.35),transparent);}
-.ftr-left-dots {display: flex; gap: 7px; align-items: center;}
-.ftr-controls{display:flex;align-items:center;gap:18px;}
+.ftr-left-dots {display: flex; gap: 20px; align-items: center;}
+.ftr-controls{display:flex;align-items:center;gap:24px;}
 .slide-dots{display:flex;gap:7px;align-items:center;}
 .sd{width:8px;height:8px;border-radius:50%;background:rgba(60,130,255,0.15);border:1px solid rgba(60,130,255,0.25);transition:all 0.3s;}
 .sd.active{background:rgba(100,180,255,0.9);box-shadow:0 0 10px rgba(60,130,255,0.5);}
+
+/* TOGGLE WITH PRICE TAG ICON ONLY */
+.toggle-wrap{display:flex;align-items:center;gap:8px;user-select:none;}
+.toggle-icon{font-size:20px;color:rgba(140,200,255,0.85);line-height:1;}
+.switch{position:relative;display:inline-block;width:46px;height:22px;}
+.switch input{opacity:0;width:0;height:0;}
+.slider{position:absolute;cursor:pointer;inset:0;background-color:rgba(255,255,255,0.1);border:1px solid rgba(60,130,255,0.3);border-radius:22px;transition:.3s;}
+.slider:before{position:absolute;content:"";height:14px;width:14px;left:3px;bottom:3px;background-color:#7ab8ff;border-radius:50%;transition:.3s;}
+input:checked + .slider{background-color:rgba(0,230,118,0.2);border-color:#00e676;}
+input:checked + .slider:before{transform:translateX(24px);background-color:#00e676;box-shadow:0 0 8px #00e676;}
+
 .zoom-wrap{display:flex;align-items:center;gap:6px;}
 .zbtn{width:34px;height:34px;border-radius:50%;background:rgba(0,20,70,0.9);border:1px solid rgba(60,130,255,0.35);color:#7ab8ff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;user-select:none;}
 .zbtn:hover{background:rgba(0,40,120,0.9);}
 .zpct{font-family:'Share Tech Mono',monospace;font-size:13px;color:rgba(100,170,255,0.6);min-width:42px;text-align:center;}
-.rbtn{padding:6px 16px;background:rgba(0,20,70,0.9);color:rgba(100,180,255,0.75);font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:3px;border:1px solid rgba(60,130,255,0.3);border-radius:4px;cursor:pointer;}
-.rbtn:hover{background:rgba(0,40,120,0.9);}
+
+/* ICON BUTTONS */
+.ibtn{width:38px;height:38px;background:rgba(0,20,70,0.9);color:rgba(100,180,255,0.85);font-size:18px;border:1px solid rgba(60,130,255,0.3);border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
+.ibtn:hover{background:rgba(0,40,120,0.9);color:#fff;}
+.ibtn-fs{border-color:rgba(0,230,118,0.3);color:#00e676;}
+.ibtn-fs:hover{background:rgba(0,100,50,0.4);border-color:#00e676;}
 </style>
 </head>
-<body>
+<body class="slide-active-0">
 
 <div id="zw">
-  <!-- SLIDES CONTAINER -->
   <div class="sw" id="sw">
 
-    <!-- ══ ENGLISH ══ -->
     <div class="slide">
       <div class="hdr">
         <div class="brand">SATTARDINA</div>
@@ -205,15 +274,30 @@ html,body{
           </div>
         </div>
 
+        <div class="row-marquee mq-container">
+          <div class="mq-wrap">
+            <div class="mq-text">
+              Making Charge Starting From: 
+              <span class="flag-emoji">🇴🇲</span>OMANI (Hand Made) <span>3.500 OMR</span> 
+              <span class="flag-emoji">🇴🇲</span>OMANI (Machine Made) <span>2.000 OMR</span> 
+              <span class="flag-emoji">🇸🇬</span>SINGAPORE <span>3.500 OMR</span> 
+              <span class="flag-emoji">🇸🇦</span>SAUDI <span>4.000 OMR</span> 
+              <span class="flag-emoji">🇹🇷</span>TURKISH <span>4.500 OMR</span> 
+              <span class="flag-emoji">🇰🇼</span>KUWAITI <span>4.000 OMR</span> 
+              <span class="flag-emoji">🇧🇭</span>BAHRAINI <span>4.500 OMR</span> 
+              <span class="flag-emoji">🇦🇪</span>EMIRATI <span>3.500 OMR</span>
+            </div>
+          </div>
+        </div>
+
         <div class="bottom-status-bar">
           <div class="last-upd" id="updEN">Last Updated: —</div>
         </div>
       </div>
     </div>
 
-    <!-- ══ ARABIC ══ -->
-    <div class="slide" style="direction:rtl;">
-      <div class="hdr">
+    <div class="slide">
+      <div class="hdr" style="direction:rtl;">
         <div class="brand-ar">ستاردينا</div>
         <div class="hdr-mid">
           <div class="logo-ring">
@@ -227,8 +311,8 @@ html,body{
         </div>
       </div>
 
-      <div class="body" style="direction:rtl;">
-        <div class="row-spots">
+      <div class="body">
+        <div class="row-spots" style="direction:rtl;">
           <div class="spot-card oz-card">
             <div class="s-lbl-ar">١ أونصة عالمي</div>
             <div class="s-val-ar" id="ozAR">—</div>
@@ -246,7 +330,7 @@ html,body{
           </div>
         </div>
 
-        <div class="row-karat">
+        <div class="row-karat" style="direction:rtl;">
           <div class="karat-block">
             <div class="karat-row">
               <div class="kb" id="arKb24"><div class="kb-k-ar">٢٤ عيار</div><div class="kb-r"><div class="kb-price-ar" id="arK24">—</div><div class="kb-unit-ar">ر.ع / جرام</div></div></div>
@@ -257,39 +341,58 @@ html,body{
           </div>
         </div>
 
-        <div class="bottom-status-bar">
+        <div class="row-marquee mq-container">
+          <div class="mq-wrap">
+            <div class="mq-text-ar">
+              <span class="main-lbl-ar">أسعار المصنعية تبدأ من:</span>
+              <span class="flag-emoji">🇴🇲</span> <span>عُماني (صنع يدوي)</span> <span>٣.٥٠٠ ر.ع</span> 
+              <span class="flag-emoji">🇴🇲</span> <span>عُماني (صنع آلي)</span> <span>٢.٠٠٠ ر.ع</span> 
+              <span class="flag-emoji">🇸🇬</span> <span>سنغافوري</span> <span>٣.٥٠٠ ر.ع</span> 
+              <span class="flag-emoji">🇸🇦</span> <span>سعودي</span> <span>٤.٠٠٠ ر.ع</span> 
+              <span class="flag-emoji">🇹🇷</span> <span>تركي</span> <span>٤.٥٠٠ ر.ع</span> 
+              <span class="flag-emoji">🇰🇼</span> <span>كويتي</span> <span>٤.٠٠٠ ر.ع</span> 
+              <span class="flag-emoji">🇧🇭</span> <span>بحريني</span> <span>٤.٥٠٠ ر.ع</span> 
+              <span class="flag-emoji">🇦🇪</span> <span>إماراتي</span> <span>٣.٥٠٠ ر.ع</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bottom-status-bar" style="direction:rtl;">
           <div class="last-upd-ar" id="updAR">آخر تحديث: —</div>
         </div>
       </div>
     </div>
 
-  </div><!-- sw -->
-
-  <!-- ══ FIXED FOOTER (WITH FULLSCREEN BUTTON) ══ -->
-  <div class="ftr">
+  </div><div class="ftr">
     <div class="ftr-left-dots">
       <div class="slide-dots">
         <div class="sd active" id="d0"></div>
         <div class="sd" id="d1"></div>
       </div>
+      
+      <div class="toggle-wrap">
+        <span class="toggle-icon" title="Toggle Making Charges">🏷️</span>
+        <label class="switch">
+          <input type="checkbox" id="mcToggle" checked onchange="toggleMarquee()">
+          <span class="slider"></span>
+        </label>
+      </div>
     </div>
     
     <div class="ftr-controls">
-      <!-- FULLSCREEN BUTTON -->
-      <button class="rbtn" onclick="toggleFS()" style="border-color: rgba(0,230,118,0.4); color: #00e676;">🖥️ FULLSCREEN</button>
+      <button class="ibtn ibtn-fs" onclick="toggleFS()" title="Full Screen">🖥️</button>
       
       <div class="zoom-wrap">
         <button class="zbtn" onclick="z(-0.05)" title="Zoom Out">−</button>
         <span class="zpct" id="zpct">100%</span>
         <button class="zbtn" onclick="z(+0.05)" title="Zoom In">+</button>
       </div>
-      <button class="rbtn" onclick="load()">↻ REFRESH</button>
+      
+      <button class="ibtn" onclick="load()" title="Refresh Rates">↻</button>
     </div>
   </div>
 
-</div><!-- zw -->
-
-<script>
+</div><script>
 function toAr(n){const id=['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];return n.toString().replace(/[0-9]/g,w=>id[+w]);}
 
 function tick(){
@@ -333,18 +436,34 @@ function z(d){
 }
 window.addEventListener('resize',applyZoom);
 
-/* ── SLIDE ── */
+/* ── MARQUEE VISIBILITY TOGGLE ── */
+function toggleMarquee() {
+  const isChecked = document.getElementById('mcToggle').checked;
+  const containers = document.querySelectorAll('.mq-container');
+  containers.forEach(el => {
+    if (isChecked) {
+      el.classList.remove('hide-mc');
+    } else {
+      el.classList.add('hide-mc');
+    }
+  });
+}
+
+/* ── SLIDE TIMING (EXACT 25 SECONDS WITH LINEAR RESETS) ── */
 let cur=0;
 function goSlide(n){
   cur=n;
   document.getElementById('sw').style.transform='translateX('+(n*-1920)+'px)';
+  
+  document.body.className = 'slide-active-' + n;
+
   [0,1].forEach(i=>{
     document.getElementById('d'+i).className='sd'+(i===n?' active':'');
   });
 }
-setInterval(()=>goSlide(cur===0?1:0),20000);
+setInterval(()=>goSlide(cur===0?1:0), 25000);
 
-/* ── RENDER ── */
+/* ── RENDER DATA ── */
 function render(p){
   const p24k=(p*1.4485+15)/116.64;
   const p22k=p24k*0.920, p21k=p24k*0.879, p18k=p24k*0.755;
@@ -372,7 +491,7 @@ function render(p){
   document.getElementById('arK18').textContent=toAr(f(p18k));
 
   ['enKb24','enKb22','enKb21','enKb18','arKb24','arKb22','arKb21','arKb18'].forEach(id=>{
-    const e=document.getElementById(id);e.classList.remove('flash');void e.offsetWidth;e.classList.add('flash');
+    const e=document.getElementById(id);if(e){e.classList.remove('flash');void e.offsetWidth;e.classList.add('flash');}
   });
 
   const now=new Date();
@@ -382,10 +501,10 @@ function render(p){
   document.getElementById('updAR').textContent='آخر تحديث: '+toAr(tsAR);
 }
 
-/* ── FETCH ── */
+/* ── FETCH API ── */
 async function load(){
-  const btn=document.querySelectorAll('.rbtn');
-  if(btn)btn.forEach(b => { if(b.textContent.includes('REFRESH')) b.textContent='...'; });
+  const refreshBtn = document.querySelector('.ftr-controls .ibtn:not(.ibtn-fs)');
+  if(refreshBtn) refreshBtn.textContent = '...';
   try{
     const res=await fetch("https://api.gold-api.com/price/XAU");
     const data=await res.json();
@@ -394,12 +513,18 @@ async function load(){
     document.getElementById('updEN').textContent='Error: '+e.message;
     console.error(e);
   }
-  if(btn)btn.forEach(b => { if(b.textContent==='...') b.textContent='↻ REFRESH'; });
+  if(refreshBtn) refreshBtn.textContent = '↻';
 }
-window.onload=function(){applyZoom();load();};
+
+window.onload=function(){
+  applyZoom();
+  load();
+};
 window.addEventListener('resize',applyZoom);
 setInterval(load,30000);
 </script>
 </body>
 </html>
+HTMLEOF
+echo "done"
 
