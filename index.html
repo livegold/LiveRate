@@ -27,148 +27,136 @@ html,body{
 /* SLIDES TRACK */
 .sw{
   width:3840px;height:1080px;
-  display:flex;
+  display:block;
+  white-space: nowrap;
   transition:transform 1.0s cubic-bezier(0.25,1,0.5,1);
   will-change:transform;
 }
 
 .slide{
   width:1920px;height:1080px;
-  flex:0 0 1920px; 
-  display:flex;flex-direction:column;
+  display: inline-block;
+  vertical-align: top;
+  white-space: normal;
   overflow:hidden;position:relative;
   background:linear-gradient(160deg,#001428 0%,#000a18 60%,#000f22 100%);
 }
 
 /* ══ HEADER ══ */
 .hdr{
-  flex:0 0 110px;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 56px;position:relative;z-index:2;
+  height:110px;
+  display:block;position:relative;z-index:2;
   background:rgba(0,8,24,0.95);
+  padding: 0 56px;
 }
 .hdr::after{
   content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
   background:linear-gradient(90deg,transparent,rgba(30,120,255,0.4) 15%,rgba(100,180,255,0.8) 50%,rgba(30,120,255,0.4) 85%,transparent);
 }
-.brand{font-family:'Bebas Neue',sans-serif;font-size:54px;letter-spacing:10px;color:#fff;text-shadow:0 0 20px rgba(80,160,255,0.4);}
-.brand-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:46px;font-weight:700;color:#fff;text-shadow:0 0 20px rgba(80,160,255,0.4);}
-.hdr-mid{display:flex;flex-direction:column;align-items:center;}
-.logo-ring{width:80px;height:80px;border-radius:50%;background:rgba(0,15,45,0.9);border:2px solid rgba(80,160,255,0.4);display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 0 20px rgba(50,130,255,0.3);}
+.hdr-table {
+  width: 100%; height: 100%; border-collapse: collapse;
+}
+.brand{font-family:'Bebas Neue',sans-serif;font-size:54px;letter-spacing:10px;color:#fff;text-shadow:0 0 20px rgba(80,160,255,0.4); line-height: 110px;}
+.brand-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:46px;font-weight:700;color:#fff;text-shadow:0 0 20px rgba(80,160,255,0.4); line-height: 110px; text-align: right;}
+.logo-ring{width:80px;height:80px;border-radius:50%;background:rgba(0,15,45,0.9);border:2px solid rgba(80,160,255,0.4);display:inline-block;overflow:hidden;box-shadow:0 0 20px rgba(50,130,255,0.3); margin-top: 15px;}
 .logo-img{width:72px;height:72px;object-fit:contain;border-radius:50%;}
-.hdr-right{display:flex;flex-direction:column;align-items:flex-end;gap:2px;}
-.hdr-left-ar{display:flex;flex-direction:column;align-items:flex-start;gap:2px;}
-.hdr-live-title{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:3px;color:#00e676;}
-.hdr-live-title-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:20px;font-weight:600;color:#00e676;}
-.clock{font-family:'Share Tech Mono',monospace;font-size:26px;color:#fff;letter-spacing:1px;line-height:1;}
-.clock-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:22px;color:#fff;line-height:1;}
+.hdr-right-box{text-align: right; padding-top: 15px;}
+.hdr-left-box-ar{text-align: left; padding-top: 15px;}
+.hdr-live-title{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:3px;color:#00e676; line-height: 1;}
+.hdr-live-title-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:20px;font-weight:600;color:#00e676; line-height: 1;}
+.clock{font-family:'Share Tech Mono',monospace;font-size:26px;color:#fff;letter-spacing:1px;line-height:1.2;}
+.clock-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:22px;color:#fff;line-height:1.2;}
 .date-lbl{font-family:'Rajdhani',sans-serif;font-size:12px;color:rgba(120,190,255,0.5);letter-spacing:1px;}
 .date-lbl-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:12px;color:rgba(120,190,255,0.5);}
 
-/* ══ BODY WITH DYNAMIC SPACING ══ */
+/* ══ BODY SYSTEM ══ */
 .body{
-  flex:1;min-height:0;
-  display:flex;flex-direction:column;
-  gap:16px;
-  padding:16px 56px 76px; 
+  height: 894px;
+  padding:20px 56px 0px; 
   position:relative;z-index:1;
 }
 
-/* SPOTS */
-.row-spots{
-  display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;
-  flex:2; transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+/* SPOTS LAYOUT VIA TABLE */
+.row-spots-table {
+  width: 100%; border-collapse: separate; border-spacing: 24px 0; margin-left: -24px; width: calc(100% + 48px);
+  height: 230px;
 }
-.spot-card{border-radius:16px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;box-shadow:0 15px 35px rgba(0,0,0,0.4);transition: all 0.4s ease;}
+.spot-card{border-radius:16px; text-align:center; box-shadow:0 15px 35px rgba(0,0,0,0.4); vertical-align: middle;}
 .oz-card{background:linear-gradient(160deg,rgba(0,50,140,0.65),rgba(0,20,80,0.85));border:1px solid rgba(80,160,255,0.35);}
 .tola-card{background:linear-gradient(160deg,rgba(0,70,35,0.65),rgba(0,35,15,0.85));border:1px solid rgba(0,200,100,0.3);}
 .tentola-card{background:linear-gradient(160deg,rgba(75,0,150,0.65),rgba(40,0,90,0.85));border:1px solid rgba(160,80,255,0.35);}
 
 .s-lbl{font-family:'Rajdhani',sans-serif;font-size:18px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:6px;color:rgba(160,210,255,0.85);}
 .s-lbl-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:20px;font-weight:600;margin-bottom:6px;color:rgba(160,210,255,0.85);}
-.s-val{font-family:'Share Tech Mono',monospace;font-size:86px;line-height:1;color:#fff;text-shadow:0 0 30px rgba(255,255,255,0.15);transition: font-size 0.4s ease;}
-.s-val-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:68px;line-height:1;color:#fff;font-weight:700;text-shadow:0 0 30px rgba(255,255,255,0.15);transition: font-size 0.4s ease;}
+.s-val{font-family:'Share Tech Mono',monospace;font-size:86px;line-height:1;color:#fff;text-shadow:0 0 30px rgba(255,255,255,0.15);}
+.s-val-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:62px;line-height:1;color:#fff;font-weight:700;text-shadow:0 0 30px rgba(255,255,255,0.15);}
 .s-unit{font-family:'Rajdhani',sans-serif;font-size:16px;letter-spacing:2px;margin-top:6px;font-weight:700;color:rgba(255,255,255,0.8);}
 .s-unit-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:16px;margin-top:6px;font-weight:600;color:rgba(255,255,255,0.8);}
 
-/* KARATS ROW */
-.row-karat{
-  flex:2; display:flex; align-items:center;
-  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+/* KARATS LAYOUT VIA TABLE */
+.row-karat-table {
+  width: 100%; border-collapse: separate; border-spacing: 24px 0; margin-left: -24px; width: calc(100% + 48px);
+  height: 210px; margin-top: 20px;
 }
-.karat-row{width:100%;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:24px;height:100%;}
-.kb{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;border-radius:16px;background:linear-gradient(145deg,rgba(0,40,100,0.65),rgba(0,20,60,0.9));border-top:4px solid rgba(0,140,255,0.8);border-left:1px solid rgba(0,140,255,0.25);border-right:1px solid rgba(0,140,255,0.25);border-bottom:1px solid rgba(0,140,255,0.25);box-shadow:0 15px 30px rgba(0,0,0,0.4);text-align:center;gap:4px;transition: all 0.4s ease;}
+.kb{vertical-align: middle; text-align: center; border-radius:16px;background:linear-gradient(145deg,rgba(0,40,100,0.65),rgba(0,20,60,0.9));border-top:4px solid rgba(0,140,255,0.8);border-left:1px solid rgba(0,140,255,0.25);border-right:1px solid rgba(0,140,255,0.25);border-bottom:1px solid rgba(0,140,255,0.25);box-shadow:0 15px 30px rgba(0,0,0,0.4);padding: 10px 0;}
 .kb.flash{animation:kf 0.5s ease;}
 @keyframes kf{0%,100%{}50%{background:rgba(0,100,255,0.25);}}
 
-.kb-k{font-family:'Bebas Neue',sans-serif;font-size:52px;color:#fff;line-height:1;letter-spacing:2px;}
-.kb-k-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:36px;color:#fff;font-weight:700;line-height:1;}
-.kb-r{display:flex;flex-direction:column;align-items:center;}
-.kb-price{font-family:'Share Tech Mono',monospace;font-size:56px;color:#fff;letter-spacing:1px;line-height:1;transition: font-size 0.4s ease;}
-.kb-price-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:40px;color:#fff;font-weight:700;line-height:1;transition: font-size 0.4s ease;}
-.kb-unit{font-size:12px;font-family:'Rajdhani',sans-serif;letter-spacing:1.5px;color:rgba(140,200,255,0.7);text-transform:uppercase;font-weight:700;margin-top:2px;}
-.kb-unit-ar{font-size:12px;font-family:'Noto Kufi Arabic',sans-serif;color:rgba(140,200,255,0.7);font-weight:600;margin-top:2px;}
+.kb-table-inner { width: 100%; border-collapse: collapse; }
+.kb-k{font-family:'Bebas Neue',sans-serif;font-size:52px;color:#fff;line-height:1;letter-spacing:2px; width: 35%; text-align: center;}
+.kb-k-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:32px;color:#fff;font-weight:700;line-height:1; width: 40%; text-align: center;}
+.kb-price{font-family:'Share Tech Mono',monospace;font-size:54px;color:#fff;letter-spacing:1px;line-height:1;}
+.kb-price-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:38px;color:#fff;font-weight:700;line-height:1;}
+.kb-unit{font-size:12px;font-family:'Rajdhani',sans-serif;letter-spacing:1.5px;color:rgba(140,200,255,0.7);text-transform:uppercase;font-weight:700;margin-top:4px;}
+.kb-unit-ar{font-size:12px;font-family:'Noto Kufi Arabic',sans-serif;color:rgba(140,200,255,0.7);font-weight:600;margin-top:4px;}
 
-/* ══ MAKING CHARGES CONTAINER (FIXED - NO MAX HEIGHT RESTRICITON) ══ */
+/* ══ MAKING CHARGES ROW (SOLID TABLE ENGINE) ══ */
 .row-mc-grid {
-  flex: 0 0 auto; display: flex; flex-direction: column; gap: 10px;
+  margin-top: 24px; display: block;
   background: rgba(0, 24, 60, 0.3); border: 1px solid rgba(30, 120, 255, 0.35);
-  padding: 14px 18px; border-radius: 12px;
-  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-  opacity: 1; overflow: hidden;
+  padding: 14px 18px; border-radius: 12px; height: 180px;
 }
 
-/* EXPAND RATES WHEN MC IS HIDDEN */
-.body.hide-mc-active .row-mc-grid {
-  opacity: 0; max-height: 0; padding: 0; margin: 0; border: none; flex: 0 0 0px; pointer-events: none;
-}
-.body.hide-mc-active .row-spots { flex: 3.2; }
-.body.hide-mc-active .row-karat { flex: 3.2; }
-.body.hide-mc-active .s-val { font-size: 110px; }
-.body.hide-mc-active .s-val-ar { font-size: 86px; }
+/* HIDE SYSTEM WHEN TOGGLED */
+.body.hide-mc-active .row-mc-grid { display: none !important; }
+.body.hide-mc-active .row-spots-table { height: 320px; }
+.body.hide-mc-active .row-karat-table { height: 290px; margin-top: 30px;}
+.body.hide-mc-active .s-val { font-size: 112px; }
+.body.hide-mc-active .s-val-ar { font-size: 88px; }
 .body.hide-mc-active .kb-price { font-size: 72px; }
-.body.hide-mc-active .kb-price-ar { font-size: 52px; }
-.body.hide-mc-active .kb-k { font-size: 64px; }
+.body.hide-mc-active .kb-price-ar { font-size: 50px; }
+.body.hide-mc-active .kb-k { font-size: 68px; }
 .body.hide-mc-active .kb-k-ar { font-size: 44px; }
 
-/* MC Title Bar */
 .mc-title-bar {
-  display: flex; justify-content: center; align-items: center; text-align: center;
-  border-bottom: 1px solid rgba(80, 160, 255, 0.15); padding-bottom: 8px; margin-bottom: 4px;
+  text-align: center; border-bottom: 1px solid rgba(80, 160, 255, 0.15); padding-bottom: 8px; margin-bottom: 12px;
 }
-.mc-main-lbl {
-  font-family: 'Rajdhani', sans-serif; font-size: 18px; font-weight: 700; color: #ffd700; letter-spacing: 2.5px; text-transform: uppercase;
-}
-.mc-main-lbl-ar {
-  font-family: 'Noto Kufi Arabic', sans-serif; font-size: 18px; font-weight: 700; color: #ffd700; letter-spacing: 0;
-}
+.mc-main-lbl { font-family: 'Rajdhani', sans-serif; font-size: 18px; font-weight: 700; color: #ffd700; letter-spacing: 2.5px; text-transform: uppercase; }
+.mc-main-lbl-ar { font-family: 'Noto Kufi Arabic', sans-serif; font-size: 18px; font-weight: 700; color: #ffd700; }
 
-/* MC Lines & Cells - UNLOCKED HEIGHT FOR LARGE TEXT & FULL VISIBILITY */
-.mc-container-cells {
-  display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: 1fr 1fr; gap: 12px;
-}
+/* 4-COLUMN BOX TABLE ENGINE — FIXED NO OVERLAP */
+.mc-table { width: 100%; border-collapse: separate; border-spacing: 12px; margin-top: -12px;}
 .mc-cell {
   background: linear-gradient(90deg, rgba(0,30,85,0.5) 0%, rgba(0,15,50,0.7) 100%);
-  border: 1px solid rgba(40, 130, 255, 0.25); border-radius: 8px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; height: 50px;
+  border: 1px solid rgba(40, 130, 255, 0.25); border-radius: 8px; 
+  height: 52px; padding: 0 14px; vertical-align: middle;
 }
-.mc-cell-left { display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1; }
-.mc-flag { font-size: 22px; line-height: 1; flex-shrink: 0; }
-
-/* Text Sizing & Space Allocation */
-.mc-name { font-family: 'Rajdhani', sans-serif; font-size: 17px; font-weight: 700; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: 0.5px; }
-.mc-name-ar { font-family: 'Noto Kufi Arabic', sans-serif; font-size: 15px; font-weight: 600; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mc-cell-inner-table { width: 100%; border-collapse: collapse; }
+.mc-flag { font-size: 22px; width: 30px; text-align: left; display: inline-block; vertical-align: middle;}
+.mc-name { font-family: 'Rajdhani', sans-serif; font-size: 17px; font-weight: 700; color: #ffffff; display: inline-block; vertical-align: middle;}
+.mc-name-ar { font-family: 'Noto Kufi Arabic', sans-serif; font-size: 15px; font-weight: 600; color: #ffffff; display: inline-block; vertical-align: middle; text-align: right;}
 
 .mc-val-box {
   background: rgba(0, 8, 24, 0.7); border: 1px solid rgba(255, 215, 0, 0.25); padding: 5px 12px; border-radius: 5px;
-  font-family: 'Share Tech Mono', monospace; font-size: 18px; color: #ffd700; font-weight: 600; flex-shrink: 0;
+  font-family: 'Share Tech Mono', monospace; font-size: 18px; color: #ffd700; font-weight: 600; text-align: center; float: right;
 }
 .mc-val-box-ar {
   background: rgba(0, 8, 24, 0.7); border: 1px solid rgba(255, 215, 0, 0.25); padding: 4px 12px; border-radius: 5px;
-  font-family: 'Noto Kufi Arabic', sans-serif; font-size: 14px; color: #ffd700; font-weight: 700; flex-shrink: 0;
+  font-family: 'Noto Kufi Arabic', sans-serif; font-size: 14px; color: #ffd700; font-weight: 700; text-align: center; float: left;
 }
 
-/* ══ LAST UPDATED STATUS ══ */
-.bottom-status-bar{display:flex;align-items:center;justify-content:center;padding-top:6px;flex:0 0 28px;}
+/* ══ LAST UPDATED BAR ══ */
+.bottom-status-bar{ text-align: center; padding-top: 18px; height: 40px;}
 .last-upd{font-family:'Share Tech Mono',monospace;font-size:20px;font-weight:600;color:rgba(150,210,255,0.95);letter-spacing:1px;text-shadow:0 0 12px rgba(0,140,255,0.25);}
 .last-upd-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:18px;font-weight:600;color:rgba(150,210,255,0.95);text-shadow:0 0 12px rgba(0,140,255,0.25);}
 
@@ -176,274 +164,232 @@ html,body{
 .ftr {
   position: absolute;
   bottom: 0; left: 0; width: 1920px; height: 56px;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 56px; border-top: 1px solid rgba(60,130,255,0.15); z-index: 99; 
-  background: rgba(0,6,20,0.98);
+  border-top: 1px solid rgba(60,130,255,0.15); z-index: 99; 
+  background: rgba(0,6,20,0.98); padding: 0 56px;
 }
-.ftr::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:gradient(90deg,transparent,rgba(60,130,255,0.3),transparent);}
-.ftr-left-dots {display: flex; gap: 24px; align-items: center;}
-.ftr-controls{display:flex;align-items:center;gap:28px;}
-.slide-dots{display:flex;gap:7px;align-items:center;}
-.sd{width:8px;height:8px;border-radius:50%;background:rgba(60,130,255,0.15);border:1px solid rgba(60,130,255,0.25);transition:all 0.3s;}
+.ftr-table { width: 100%; height: 100%; border-collapse: collapse; }
+.ftr-left-block { text-align: left; }
+.ftr-right-block { text-align: right; }
+
+.slide-dots{display:inline-block; vertical-align: middle; margin-right: 24px;}
+.sd{width:10px;height:10px;border-radius:50%;background:rgba(60,130,255,0.15);border:1px solid rgba(60,130,255,0.25);display: inline-block; margin-right: 6px; transition:all 0.3s;}
 .sd.active{background:rgba(100,180,255,0.9);box-shadow:0 0 10px rgba(60,130,255,0.5);}
 
-/* TOGGLE SWITCH */
-.toggle-wrap{display:flex;align-items:center;gap:8px;user-select:none;}
-.toggle-icon{font-size:18px;color:rgba(140,200,255,0.85);line-height:1;}
-.switch{position:relative;display:inline-block;width:44px;height:20px;}
+/* TOGGLE CONTROLS */
+.toggle-wrap{display:inline-block; vertical-align: middle; margin-right: 24px;}
+.toggle-icon{font-size:18px;color:rgba(140,200,255,0.85); margin-right: 6px; vertical-align: middle;}
+.switch{position:relative;display:inline-block;width:44px;height:20px; vertical-align: middle; cursor: pointer;}
 .switch input{opacity:0;width:0;height:0;}
-.slider{position:absolute;cursor:pointer;inset:0;background-color:rgba(255,255,255,0.1);border:1px solid rgba(60,130,255,0.3);border-radius:20px;transition:.3s;}
+.slider{position:absolute;inset:0;background-color:rgba(255,255,255,0.1);border:1px solid rgba(60,130,255,0.3);border-radius:20px;transition:.3s;}
 .slider:before{position:absolute;content:"";height:12px;width:12px;left:3px;bottom:3px;background-color:#7ab8ff;border-radius:50%;transition:.3s;}
 input:checked + .slider{background-color:rgba(0,230,118,0.2);border-color:#00e676;}
 input:checked + .slider:before{transform:translateX(24px);background-color:#00e676;box-shadow:0 0 8px #00e676;}
 
-/* STEPPER INTERVAL SELECTOR */
-.ctrl-stepper { display: flex; align-items: center; background: rgba(0,30,80,0.4); border: 1px solid rgba(60,130,255,0.3); border-radius: 20px; padding: 2px; }
+/* STEPPER SYSTEM */
+.ctrl-stepper { display:inline-block; vertical-align: middle; background: rgba(0,30,80,0.4); border: 1px solid rgba(60,130,255,0.3); border-radius: 20px; padding: 2px; }
 .st-btn {
   width: 32px; height: 32px; border-radius: 50%; background: transparent; border: none;
-  color: #7ab8ff; font-size: 15px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+  color: #7ab8ff; font-size: 15px; font-weight: 700; cursor: pointer; display: inline-block; text-align: center; line-height: 32px; transition: all 0.2s;
 }
-.st-btn:hover { background: rgba(60,130,255,0.2); color: #fff; }
 .st-lbl {
-  font-family: 'Rajdhani', sans-serif; font-size: 14px; font-weight: 700; color: #ffffff; min-width: 75px; text-align: center; letter-spacing: 1px; text-transform: uppercase;
+  font-family: 'Rajdhani', sans-serif; font-size: 14px; font-weight: 700; color: #ffffff; display: inline-block; min-width: 75px; text-align: center; letter-spacing: 1px; text-transform: uppercase;
 }
 
-/* ZOOM CONTROLLER */
-.zoom-wrap{display:flex;align-items:center;gap:6px;}
-.zbtn{width:32px;height:32px;border-radius:50%;background:rgba(0,15,50,0.9);border:1px solid rgba(60,130,255,0.3);color:#7ab8ff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;user-select:none;}
-.zpct{font-family:'Share Tech Mono',monospace;font-size:13px;color:rgba(100,170,255,0.6);min-width:38px;text-align:center;}
-.ibtn{width:36px;height:36px;background:rgba(0,15,50,0.9);color:rgba(100,180,255,0.85);font-size:16px;border:1px solid rgba(60,130,255,0.3);border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+/* BUTTONS & ZOOM */
+.ibtn{width:36px;height:36px;background:rgba(0,15,50,0.9);color:rgba(100,180,255,0.85);font-size:16px;border:1px solid rgba(60,130,255,0.3);border-radius:6px;cursor:pointer; display: inline-block; vertical-align: middle; margin-right: 12px;}
 .ibtn-fs{border-color:rgba(0,230,118,0.3);color:#00e676;}
+.zoom-wrap{display:inline-block; vertical-align: middle;}
+.zbtn{width:32px;height:32px;border-radius:50%;background:rgba(0,15,50,0.9);border:1px solid rgba(60,130,255,0.3);color:#7ab8ff;font-size:16px;cursor:pointer; display: inline-block; text-align: center; line-height: 30px;}
+.zpct{font-family:'Share Tech Mono',monospace;font-size:13px;color:rgba(100,170,255,0.6);display: inline-block; min-width: 38px; text-align: center;}
 </style>
 </head>
-<body class="slide-active-0">
+<body>
 
 <div id="zw">
   <div class="sw" id="sw">
 
-    <!-- ══ ENGLISH SLIDE ══ -->
     <div class="slide">
       <div class="hdr">
-        <div class="brand">SATTARDINA</div>
-        <div class="hdr-mid">
-          <div class="logo-ring">
-            <img src="https://i.ibb.co/pBK5Zct0/file-00000000e73c7246bafe41f8ba02719e.png" class="logo-img" alt="Logo">
-          </div>
-        </div>
-        <div class="hdr-right">
-          <div class="hdr-live-title">GOLD PRICE · LIVE</div>
-          <div class="clock" id="clockEN">--:--:--</div>
-          <div class="date-lbl" id="dateEN">---</div>
-        </div>
+        <table class="hdr-table">
+          <tr>
+            <td style="text-align: left; width: 33.33%;"><div class="brand">SATTARDINA</div></td>
+            <td style="text-align: center; width: 33.33%;"><div class="logo-ring"><img src="https://i.ibb.co/pBK5Zct0/file-00000000e73c7246bafe41f8ba02719e.png" class="logo-img" alt="Logo"></div></td>
+            <td style="text-align: right; width: 33.33%;"><div class="hdr-right-box"><div class="hdr-live-title">GOLD PRICE · LIVE</div><div class="clock" id="clockEN">--:--:--</div><div class="date-lbl" id="dateEN">---</div></div></td>
+          </tr>
+        </table>
       </div>
 
       <div class="body" id="bodyEN">
-        <div class="row-spots">
-          <div class="spot-card oz-card">
-            <div class="s-lbl">1 Ounce · International</div>
-            <div class="s-val" id="ozEN">—</div>
-            <div class="s-unit">USD</div>
-          </div>
-          <div class="spot-card tola-card">
-            <div class="s-lbl">21K Tola</div>
-            <div class="s-val" id="tolaEN">—</div>
-            <div class="s-unit">OMR</div>
-          </div>
-          <div class="spot-card tentola-card">
-            <div class="s-lbl">Ten Tola · 10 Tola</div>
-            <div class="s-val" id="tenTolaEN">—</div>
-            <div class="s-unit">OMR</div>
-          </div>
-        </div>
+        <table class="row-spots-table">
+          <tr>
+            <td class="spot-card oz-card" style="width:33.33%;">
+              <div class="s-lbl">1 Ounce · International</div>
+              <div class="s-val" id="ozEN">—</div>
+              <div class="s-unit">USD</div>
+            </td>
+            <td class="spot-card tola-card" style="width:33.33%;">
+              <div class="s-lbl">21K Tola</div>
+              <div class="s-val" id="tolaEN">—</div>
+              <div class="s-unit">OMR</div>
+            </td>
+            <td class="spot-card tentola-card" style="width:33.33%;">
+              <div class="s-lbl">Ten Tola · 10 Tola</div>
+              <div class="s-val" id="tenTolaEN">—</div>
+              <div class="s-unit">OMR</div>
+            </td>
+          </tr>
+        </table>
 
-        <div class="row-karat">
-          <div class="karat-row">
-            <div class="kb" id="enKb24"><div class="kb-k">24K</div><div class="kb-r"><div class="kb-price" id="enK24">—</div><div class="kb-unit">OMR / Gram</div></div></div>
-            <div class="kb" id="enKb22"><div class="kb-k">22K</div><div class="kb-r"><div class="kb-price" id="enK22">—</div><div class="kb-unit">OMR / Gram</div></div></div>
-            <div class="kb" id="enKb21"><div class="kb-k">21K</div><div class="kb-r"><div class="kb-price" id="enK21">—</div><div class="kb-unit">OMR / Gram</div></div></div>
-            <div class="kb" id="enKb18"><div class="kb-k">18K</div><div class="kb-r"><div class="kb-price" id="enK18">—</div><div class="kb-unit">OMR / Gram</div></div></div>
-          </div>
-        </div>
+        <table class="row-karat-table">
+          <tr>
+            <td class="kb" id="enKb24" style="width: 25%;">
+              <table class="kb-table-inner"><tr><td class="kb-k">24K</td><td style="text-align:center;"><div class="kb-price" id="enK24">—</div><div class="kb-unit">OMR / Gram</div></td></tr></table>
+            </td>
+            <td class="kb" id="enKb22" style="width: 25%;">
+              <table class="kb-table-inner"><tr><td class="kb-k">22K</td><td style="text-align:center;"><div class="kb-price" id="enK22">—</div><div class="kb-unit">OMR / Gram</div></td></tr></table>
+            </td>
+            <td class="kb" id="enKb21" style="width: 25%;">
+              <table class="kb-table-inner"><tr><td class="kb-k">21K</td><td style="text-align:center;"><div class="kb-price" id="enK21">—</div><div class="kb-unit">OMR / Gram</div></td></tr></table>
+            </td>
+            <td class="kb" id="enKb18" style="width: 25%;">
+              <table class="kb-table-inner"><tr><td class="kb-k">18K</td><td style="text-align:center;"><div class="kb-price" id="enK18">—</div><div class="kb-unit">OMR / Gram</div></td></tr></table>
+            </td>
+          </tr>
+        </table>
 
-        <!-- 50% MINI BOXES GRID (UNLOCKED WRAPPER FOR FULL VIEW) -->
         <div class="row-mc-grid">
-          <div class="mc-title-bar">
-            <div class="mc-main-lbl">Making Charge Starting From</div>
-          </div>
-          <div class="mc-container-cells">
-            <div class="mc-cell">
-              <div class="mc-cell-left"><span class="mc-flag">🇴🇲</span><span class="mc-name">OMANI (Hand)</span></div>
-              <div class="mc-val-box">3.500</div>
-            </div>
-            <div class="mc-cell">
-              <div class="mc-cell-left"><span class="mc-flag">🇴🇲</span><span class="mc-name">OMANI (Machine)</span></div>
-              <div class="mc-val-box">2.000</div>
-            </div>
-            <div class="mc-cell">
-              <div class="mc-cell-left"><span class="mc-flag">🇸🇬</span><span class="mc-name">SINGAPORE</span></div>
-              <div class="mc-val-box">3.500</div>
-            </div>
-            <div class="mc-cell">
-              <div class="mc-cell-left"><span class="mc-flag">🇸🇦</span><span class="mc-name">SAUDI</span></div>
-              <div class="mc-val-box">4.000</div>
-            </div>
-            <div class="mc-cell">
-              <div class="mc-cell-left"><span class="mc-flag">🇹🇷</span><span class="mc-name">TURKISH</span></div>
-              <div class="mc-val-box">4.500</div>
-            </div>
-            <div class="mc-cell">
-              <div class="mc-cell-left"><span class="mc-flag">🇰🇼</span><span class="mc-name">KUWAITI</span></div>
-              <div class="mc-val-box">4.000</div>
-            </div>
-            <div class="mc-cell">
-              <div class="mc-cell-left"><span class="mc-flag">🇧🇭</span><span class="mc-name">BAHRAINI</span></div>
-              <div class="mc-val-box">4.500</div>
-            </div>
-            <div class="mc-cell">
-              <div class="mc-cell-left"><span class="mc-flag">🇦🇪</span><span class="mc-name">EMIRATI</span></div>
-              <div class="mc-val-box">3.500</div>
-            </div>
-          </div>
+          <div class="mc-title-bar"><div class="mc-main-lbl">Making Charge Starting From</div></div>
+          <table class="mc-table">
+            <tr>
+              <td class="mc-cell" style="width: 25%;"><span class="mc-flag">🇴🇲</span><span class="mc-name">OMANI (Hand)</span><div class="mc-val-box">3.500</div></td>
+              <td class="mc-cell" style="width: 25%;"><span class="mc-flag">🇴🇲</span><span class="mc-name">OMANI (Mech)</span><div class="mc-val-box">2.000</div></td>
+              <td class="mc-cell" style="width: 25%;"><span class="mc-flag">🇸🇬</span><span class="mc-name">SINGAPORE</span><div class="mc-val-box">3.500</div></td>
+              <td class="mc-cell" style="width: 25%;"><span class="mc-flag">🇸🇦</span><span class="mc-name">SAUDI</span><div class="mc-val-box">4.000</div></td>
+            </tr>
+            <tr>
+              <td class="mc-cell"><span class="mc-flag">🇹🇷</span><span class="mc-name">TURKISH</span><div class="mc-val-box">4.500</div></td>
+              <td class="mc-cell"><span class="mc-flag">🇰🇼</span><span class="mc-name">KUWAITI</span><div class="mc-val-box">4.000</div></td>
+              <td class="mc-cell"><span class="mc-flag">🇧🇭</span><span class="mc-name">BAHRAINI</span><div class="mc-val-box">4.500</div></td>
+              <td class="mc-cell"><span class="mc-flag">🇦🇪</span><span class="mc-name">EMIRATI</span><div class="mc-val-box">3.500</div></td>
+            </tr>
+          </table>
         </div>
 
-        <div class="bottom-status-bar">
-          <div class="last-upd" id="updEN">Last Updated: —</div>
-        </div>
+        <div class="bottom-status-bar"><div class="last-upd" id="updEN">Last Updated: —</div></div>
       </div>
     </div>
 
-    <!-- ══ ARABIC SLIDE ══ -->
     <div class="slide">
-      <div class="hdr" style="direction:rtl;">
-        <div class="brand-ar">ستاردينا</div>
-        <div class="hdr-mid">
-          <div class="logo-ring">
-            <img src="https://i.ibb.co/pBK5Zct0/file-00000000e73c7246bafe41f8ba02719e.png" class="logo-img" alt="Logo">
-          </div>
-        </div>
-        <div class="hdr-left-ar">
-          <div class="hdr-live-title-ar">سعر الذهب · مباشر</div>
-          <div class="clock-ar" id="clockAR">--:--:--</div>
-          <div class="date-lbl-ar" id="dateAR">---</div>
-        </div>
+      <div class="hdr">
+        <table class="hdr-table" style="direction: rtl;">
+          <tr>
+            <td style="text-align: right; width: 33.33%;"><div class="brand-ar">ستاردينا</div></td>
+            <td style="text-align: center; width: 33.33%;"><div class="logo-ring"><img src="https://i.ibb.co/pBK5Zct0/file-00000000e73c7246bafe41f8ba02719e.png" class="logo-img" alt="Logo"></div></td>
+            <td style="text-align: left; width: 33.33%;"><div class="hdr-left-box-ar"><div class="hdr-live-title-ar">سعر الذهب · مباشر</div><div class="clock-ar" id="clockAR">--:--:--</div><div class="date-lbl-ar" id="dateAR">---</div></div></td>
+          </tr>
+        </table>
       </div>
 
       <div class="body" id="bodyAR">
-        <div class="row-spots" style="direction:rtl;">
-          <div class="spot-card oz-card">
-            <div class="s-lbl-ar">١ أونصة عالمي</div>
-            <div class="s-val-ar" id="ozAR">—</div>
-            <div class="s-unit-ar" style="color:rgba(100,180,255,0.45)">دولار</div>
-          </div>
-          <div class="spot-card tola-card">
-            <div class="s-lbl-ar">تولة ٢١ عيار</div>
-            <div class="s-val-ar" id="tolaAR">—</div>
-            <div class="s-unit-ar" style="color:rgba(0,200,100,0.45)">ر.ع</div>
-          </div>
-          <div class="spot-card tentola-card">
-            <div class="s-lbl-ar">عشرة تولات</div>
-            <div class="s-val-ar" id="tenTolaAR">—</div>
-            <div class="s-unit-ar" style="color:rgba(160,100,255,0.45)">ر.ع</div>
-          </div>
+        <table class="row-spots-table" style="direction: rtl;">
+          <tr>
+            <td class="spot-card oz-card" style="width:33.33%;">
+              <div class="s-lbl-ar">١ أونصة عالمي</div>
+              <div class="s-val-ar" id="ozAR">—</div>
+              <div class="s-unit-ar" style="color:rgba(100,180,255,0.45)">دولار</div>
+            </td>
+            <td class="spot-card tola-card" style="width:33.33%;">
+              <div class="s-lbl-ar">تولة ٢١ عيار</div>
+              <div class="s-val-ar" id="tolaAR">—</div>
+              <div class="s-unit-ar" style="color:rgba(0,200,100,0.45)">ر.ع</div>
+            </td>
+            <td class="spot-card tentola-card" style="width:33.33%;">
+              <div class="s-lbl-ar">عشرة تولات</div>
+              <div class="s-val-ar" id="tenTolaAR">—</div>
+              <div class="s-unit-ar" style="color:rgba(160,100,255,0.45)">ر.ع</div>
+            </td>
+          </tr>
+        </table>
+
+        <table class="row-karat-table" style="direction: rtl;">
+          <tr>
+            <td class="kb" id="arKb24" style="width: 25%;">
+              <table class="kb-table-inner"><tr><td class="kb-k-ar">٢٤ عيار</td><td style="text-align:center;"><div class="kb-price-ar" id="arK24">—</div><div class="kb-unit-ar">ر.ع / جرام</div></td></tr></table>
+            </td>
+            <td class="kb" id="arKb22" style="width: 25%;">
+              <table class="kb-table-inner"><tr><td class="kb-k-ar">٢٢ عيار</td><td style="text-align:center;"><div class="kb-price-ar" id="arK22">—</div><div class="kb-unit-ar">ر.ع / جرام</div></td></tr></table>
+            </td>
+            <td class="kb" id="arKb21" style="width: 25%;">
+              <table class="kb-table-inner"><tr><td class="kb-k-ar">٢١ عيار</td><td style="text-align:center;"><div class="kb-price-ar" id="arK21">—</div><div class="kb-unit-ar">ر.ع / جرام</div></td></tr></table>
+            </td>
+            <td class="kb" id="arKb18" style="width: 25%;">
+              <table class="kb-table-inner"><tr><td class="kb-k-ar">١٨ عيار</td><td style="text-align:center;"><div class="kb-price-ar" id="arK18">—</div><div class="kb-unit-ar">ر.ع / جرام</div></td></tr></table>
+            </td>
+          </tr>
+        </table>
+
+        <div class="row-mc-grid" style="direction: rtl;">
+          <div class="mc-title-bar"><div class="mc-main-lbl-ar">أسعار المصنعية تبدأ من (ر.ع)</div></div>
+          <table class="mc-table">
+            <tr>
+              <td class="mc-cell" style="width: 25%;"><span class="mc-flag">🇴🇲</span><span class="mc-name-ar">عُماني (يدوي)</span><div class="mc-val-box-ar">٣.٥٠٠</div></td>
+              <td class="mc-cell" style="width: 25%;"><span class="mc-flag">🇴🇲</span><span class="mc-name-ar">عُماني (آلي)</span><div class="mc-val-box-ar">٢.٠٠٠</div></td>
+              <td class="mc-cell" style="width: 25%;"><span class="mc-flag">🇸🇬</span><span class="mc-name-ar">سنغافوري</span><div class="mc-val-box-ar">٣.٥٠٠</div></td>
+              <td class="mc-cell" style="width: 25%;"><span class="mc-flag">🇸🇦</span><span class="mc-name-ar">سعودي</span><div class="mc-val-box-ar">٤.٠٠٠</div></td>
+            </tr>
+            <tr>
+              <td class="mc-cell"><span class="mc-flag">🇹🇷</span><span class="mc-name-ar">تركي</span><div class="mc-val-box-ar">٤.٥٠٠</div></td>
+              <td class="mc-cell"><span class="mc-flag">🇰🇼</span><span class="mc-name-ar">كويتي</span><div class="mc-val-box-ar">٤.٠٠٠</div></td>
+              <td class="mc-cell"><span class="mc-flag">🇧🇭</span><span class="mc-name-ar">بحريني</span><div class="mc-val-box-ar">٤.٥٠٠</div></td>
+              <td class="mc-cell"><span class="mc-flag">🇦🇪</span><span class="mc-name-ar">إماراتي</span><div class="mc-val-box-ar">٣.٥٠٠</div></td>
+            </tr>
+          </table>
         </div>
 
-        <div class="row-karat" style="direction:rtl;">
-          <div class="karat-row">
-            <div class="kb" id="arKb24"><div class="kb-k-ar">٢٤ عيار</div><div class="kb-r"><div class="kb-price-ar" id="arK24">—</div><div class="kb-unit-ar">ر.ع / جرام</div></div></div>
-            <div class="kb" id="arKb22"><div class="kb-k-ar">٢٢ عيار</div><div class="kb-r"><div class="kb-price-ar" id="arK22">—</div><div class="kb-unit-ar">ر.ع / جرام</div></div></div>
-            <div class="kb" id="arKb21"><div class="kb-k-ar">٢١ عيار</div><div class="kb-r"><div class="kb-price-ar" id="arK21">—</div><div class="kb-unit-ar">ر.ع / جرام</div></div></div>
-            <div class="kb" id="arKb18"><div class="kb-k-ar">١٨ عيار</div><div class="kb-r"><div class="kb-price-ar" id="arK18">—</div><div class="kb-unit-ar">ر.ع / جرام</div></div></div>
-          </div>
-        </div>
-
-        <!-- 50% MINI BOXES GRID (ARABIC FIXED DIRECTION WITH PROPER LINE HEIGHTS) -->
-        <div class="row-mc-grid" style="direction:rtl;">
-          <div class="mc-title-bar">
-            <div class="mc-main-lbl-ar">أسعار المصنعية تبدأ من (ر.ع)</div>
-          </div>
-          <div class="mc-container-cells">
-            <div class="mc-cell">
-              <div class="mc-cell-left"><span class="mc-flag">🇴🇲</span><span class="mc-name-ar">عُماني (يدوي)</span></div>
-              <div class="mc-val-box-ar">٣.٥٠٠</div>
-            </div>
-            <div class="mc-cell">
-              <div class="mc-cell-left"><span class="mc-flag">🇴🇲</span><span class="mc-name-ar">عُماني (آلي)</span></div>
-              <div class="mc-val-box-ar">٢.٠٠0</div>
-            </div>
-            <div class="mc-cell">
-              <div class="mc-cell-left"><span class="mc-flag">🇸🇬</span><span class="mc-name-ar">سنغافوري</span></div>
-              <div class="mc-val-box-ar">٣.٥٠٠</div>
-            </div>
-            <div class="mc-cell">
-              <div class="mc-cell-left"><span class="mc-flag">🇸🇦</span><span class="mc-name-ar">سعودي</span></div>
-              <div class="mc-val-box-ar">٤.٠٠٠</div>
-            </div>
-            <div class="mc-cell">
-              <div class="mc-cell-left"><span class="mc-flag">🇹🇷</span><span class="mc-name-ar">تركي</span></div>
-              <div class="mc-val-box-ar">٤.٥٠٠</div>
-            </div>
-            <div class="mc-cell">
-              <div class="mc-cell-left"><span class="mc-flag">🇰🇼</span><span class="mc-name-ar">كويتي</span></div>
-              <div class="mc-val-box-ar">٤.٠٠٠</div>
-            </div>
-            <div class="mc-cell">
-              <div class="mc-cell-left"><span class="mc-flag">🇧🇭</span><span class="mc-name-ar">بحريني</span></div>
-              <div class="mc-val-box-ar">٤.٥٠٠</div>
-            </div>
-            <div class="mc-cell">
-              <div class="mc-cell-left"><span class="mc-flag">🇦🇪</span><span class="mc-name-ar">إماراتي</span></div>
-              <div class="mc-val-box-ar">٣.٥٠٠</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="bottom-status-bar" style="direction:rtl;">
-          <div class="last-upd-ar" id="updAR">آخر تحديث: —</div>
-        </div>
+        <div class="bottom-status-bar"><div class="last-upd-ar" id="updAR">آخر تحديث: —</div></div>
       </div>
     </div>
 
-  </div><!-- sw -->
+  </div><div class="ftr">
+    <table class="ftr-table">
+      <tr>
+        <td class="ftr-left-block">
+          <div class="slide-dots">
+            <div class="sd active" id="d0"></div>
+            <div class="sd" id="d1"></div>
+          </div>
+          
+          <div class="toggle-wrap">
+            <span class="toggle-icon">🏷️</span>
+            <label class="switch">
+              <input type="checkbox" id="mcToggle" checked onclick="toggleMCBox()">
+              <span class="slider"></span>
+            </label>
+          </div>
 
-  <!-- FIXED FOOTER -->
-  <div class="ftr">
-    <div class="ftr-left-dots">
-      <div class="slide-dots">
-        <div class="sd active" id="d0"></div>
-        <div class="sd" id="d1"></div>
-      </div>
-      
-      <div class="toggle-wrap">
-        <span class="toggle-icon" title="Toggle Making Charges Box">🏷️</span>
-        <label class="switch">
-          <input type="checkbox" id="mcToggle" checked onchange="toggleMCBox()">
-          <span class="slider"></span>
-        </label>
-      </div>
-
-      <div class="ctrl-stepper">
-        <button class="st-btn" onclick="stepInterval(-1)">&lt;</button>
-        <span class="st-lbl" id="currentIntervalLbl">LIVE</span>
-        <button class="st-btn" onclick="stepInterval(1)">&gt;</button>
-      </div>
-    </div>
-    
-    <div class="ftr-controls">
-      <button class="ibtn ibtn-fs" onclick="toggleFS()" title="Full Screen">🖥️</button>
-      
-      <div class="zoom-wrap">
-        <button class="zbtn" onclick="z(-0.05)">−</button>
-        <span class="zpct" id="zpct">100%</span>
-        <button class="zbtn" onclick="z(+0.05)">+</button>
-      </div>
-      
-      <button class="ibtn" onclick="load()" title="Refresh Rates">↻</button>
-    </div>
+          <div class="ctrl-stepper">
+            <button class="st-btn" onclick="stepInterval(-1)">&lt;</button>
+            <span class="st-lbl" id="currentIntervalLbl">LIVE</span>
+            <button class="st-btn" onclick="stepInterval(1)">&gt;</button>
+          </div>
+        </td>
+        
+        <td class="ftr-right-block">
+          <button class="ibtn ibtn-fs" onclick="toggleFS()">🖥️</button>
+          
+          <div class="zoom-wrap">
+            <button class="zbtn" onclick="z(-0.05)">−</button>
+            <span class="zpct" id="zpct">100%</span>
+            <button class="zbtn" onclick="z(+0.05)">+</button>
+          </div>
+          
+          <button class="ibtn" onclick="load()">↻</button>
+        </td>
+      </tr>
+    </table>
   </div>
 
-</div><!-- zw -->
-
-<script>
+</div><script>
 function toAr(n){const id=['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];return n.toString().replace(/[0-9]/g,w=>id[+w]);}
 
 function tick(){
@@ -459,12 +405,15 @@ function tick(){
 setInterval(tick,1000);tick();
 
 function toggleFS() {
-  if (!document.fullscreenElement) {
-    document.documentElement.requestFullscreen().catch(err => {
-      alert(`Fullscreen error: ${err.message}`);
-    });
+  var doc = window.document;
+  var docEl = doc.documentElement;
+  var requestFS = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
+  var exitFS = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
+
+  if (!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+    if (requestFS) requestFS.call(docEl);
   } else {
-    document.exitFullscreen();
+    if (exitFS) exitFS.call(doc);
   }
 }
 
@@ -486,31 +435,28 @@ function z(d){
 }
 window.addEventListener('resize',applyZoom);
 
-/* SMART DYNAMIC VISIBILITY & EXPANSION */
+/* DYNAMIC MC BOX VISIBILITY HACK FOR TV */
 function toggleMCBox() {
-  const isChecked = document.getElementById('mcToggle').checked;
-  const bodyEN = document.getElementById('bodyEN');
-  const bodyAR = document.getElementById('bodyAR');
+  var isChecked = document.getElementById('mcToggle').checked;
+  var bodyEN = document.getElementById('bodyEN');
+  var bodyAR = document.getElementById('bodyAR');
   
   if (isChecked) {
-    bodyEN.classList.remove('hide-mc-active');
-    bodyAR.classList.remove('hide-mc-active');
+    bodyEN.className = "body";
+    bodyAR.className = "body";
   } else {
-    bodyEN.classList.add('hide-mc-active');
-    bodyAR.classList.add('hide-mc-active');
+    bodyEN.className = "body hide-mc-active";
+    bodyAR.className = "body hide-mc-active";
   }
 }
 
-/* SLIDE TIMING (25 SECONDS) */
+/* SLIDE TIMING */
 let cur=0;
 function goSlide(n){
   cur=n;
   document.getElementById('sw').style.transform='translate3d('+(n*-1920)+'px, 0, 0)';
-  document.body.className = 'slide-active-' + n;
-
-  [0,1].forEach(i=>{
-    document.getElementById('d'+i).className='sd'+(i===n?' active':'');
-  });
+  document.getElementById('d0').className = (n===0?'sd active':'sd');
+  document.getElementById('d1').className = (n===1?'sd active':'sd');
 
   if(modes[activeModeIdx].id === 'live') {
     load();
@@ -589,8 +535,6 @@ function render(p){
 }
 
 async function load(){
-  const refreshBtn = document.querySelector('.ftr-controls .ibtn:not(.ibtn-fs)');
-  if(refreshBtn) refreshBtn.textContent = '...';
   try{
     const res=await fetch("https://api.gold-api.com/price/XAU");
     const data=await res.json();
@@ -599,7 +543,6 @@ async function load(){
     document.getElementById('updEN').textContent='Error: '+e.message;
     console.error(e);
   }
-  if(refreshBtn) refreshBtn.textContent = '↻';
 }
 
 window.onload=function(){
@@ -612,3 +555,4 @@ window.addEventListener('resize',applyZoom);
 </html>
 HTMLEOF
 echo "done"
+
