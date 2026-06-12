@@ -1,4 +1,4 @@
-
+cat > /mnt/user-data/outputs/sattardina-tv-display.html << 'HTMLEOF'
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,7 +74,7 @@ html,body{
   position:relative;z-index:1;
 }
 
-/* SPOTS — Flexible height (auto expands when MC is off) */
+/* SPOTS */
 .row-spots{
   display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;
   flex:2; transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
@@ -91,7 +91,7 @@ html,body{
 .s-unit{font-family:'Rajdhani',sans-serif;font-size:16px;letter-spacing:2px;margin-top:6px;font-weight:700;color:rgba(255,255,255,0.8);}
 .s-unit-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:16px;margin-top:6px;font-weight:600;color:rgba(255,255,255,0.8);}
 
-/* KARATS ROW — Flexible height (auto expands when MC is off) */
+/* KARATS ROW */
 .row-karat{
   flex:2; display:flex; align-items:center;
   transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
@@ -109,25 +109,21 @@ html,body{
 .kb-unit{font-size:12px;font-family:'Rajdhani',sans-serif;letter-spacing:1.5px;color:rgba(140,200,255,0.7);text-transform:uppercase;font-weight:700;margin-top:2px;}
 .kb-unit-ar{font-size:12px;font-family:'Noto Kufi Arabic',sans-serif;color:rgba(140,200,255,0.7);font-weight:600;margin-top:2px;}
 
-/* ══ SUPER COMPACT 50% SMALLER MAKING CHARGES GRID ══ */
+/* ══ MAKING CHARGES GRID (COMPACT BUT HIGH READABILITY) ══ */
 .row-mc-grid {
-  flex: 0 0 105px; display: flex; flex-direction: column; gap: 4px;
+  flex: 0 0 115px; display: flex; flex-direction: column; gap: 6px;
   background: rgba(0, 24, 60, 0.3); border: 1px solid rgba(30, 120, 255, 0.35);
-  padding: 6px 16px 8px; border-radius: 10px;
+  padding: 8px 16px; border-radius: 10px;
   transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-  opacity: 1; max-height: 120px; overflow: hidden;
+  opacity: 1; max-height: 130px; overflow: hidden;
 }
 
 /* EXPAND RATES WHEN MC IS HIDDEN */
 .body.hide-mc-active .row-mc-grid {
   opacity: 0; max-height: 0; padding: 0; margin: 0; border: none; flex: 0 0 0px; pointer-events: none;
 }
-.body.hide-mc-active .row-spots {
-  flex: 3.2;
-}
-.body.hide-mc-active .row-karat {
-  flex: 3.2;
-}
+.body.hide-mc-active .row-spots { flex: 3.2; }
+.body.hide-mc-active .row-karat { flex: 3.2; }
 .body.hide-mc-active .s-val { font-size: 110px; }
 .body.hide-mc-active .s-val-ar { font-size: 86px; }
 .body.hide-mc-active .kb-price { font-size: 72px; }
@@ -135,40 +131,43 @@ html,body{
 .body.hide-mc-active .kb-k { font-size: 64px; }
 .body.hide-mc-active .kb-k-ar { font-size: 44px; }
 
-/* MC Inner Text Styling - Shrunk by 50% */
+/* MC Title Bar - Center Aligned */
 .mc-title-bar {
-  display: flex; align-items: center; border-bottom: 1px solid rgba(80, 160, 255, 0.15); padding-bottom: 2px; margin-bottom: 2px;
+  display: flex; justify-content: center; align-items: center; text-align: center;
+  border-bottom: 1px solid rgba(80, 160, 255, 0.15); padding-bottom: 4px; margin-bottom: 2px;
 }
 .mc-main-lbl {
-  font-family: 'Rajdhani', sans-serif; font-size: 13px; font-weight: 700; color: #ffd700; letter-spacing: 2px; text-transform: uppercase;
+  font-family: 'Rajdhani', sans-serif; font-size: 14px; font-weight: 700; color: #ffd700; letter-spacing: 2.5px; text-transform: uppercase;
 }
 .mc-main-lbl-ar {
-  font-family: 'Noto Kufi Arabic', sans-serif; font-size: 12px; font-weight: 700; color: #ffd700;
+  font-family: 'Noto Kufi Arabic', sans-serif; font-size: 14px; font-weight: 700; color: #ffd700; letter-spacing: 0;
 }
+
+/* MC Lines & Cells - Thoda Bada kiya Readability ke liye */
 .mc-container-cells {
-  display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: 1fr 1fr; gap: 6px; flex: 1;
+  display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: 1fr 1fr; gap: 8px; flex: 1;
 }
 .mc-cell {
   background: linear-gradient(90deg, rgba(0,30,85,0.5) 0%, rgba(0,15,50,0.7) 100%);
-  border: 1px solid rgba(40, 130, 255, 0.25); border-radius: 5px; display: flex; align-items: center; justify-content: space-between; padding: 0 10px; height: 32px;
+  border: 1px solid rgba(40, 130, 255, 0.25); border-radius: 5px; display: flex; align-items: center; justify-content: space-between; padding: 0 12px; height: 36px;
 }
-.mc-cell-left { display: flex; align-items: center; gap: 6px; min-width: 0; }
-.mc-flag { font-size: 14px; line-height: 1; flex-shrink: 0; }
-.mc-name { font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 700; color: #ffffff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; letter-spacing: 0.5px; }
-.mc-name-ar { font-family: 'Noto Kufi Arabic', sans-serif; font-size: 11px; font-weight: 600; color: #ffffff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mc-cell-left { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.mc-flag { font-size: 16px; line-height: 1; flex-shrink: 0; }
+.mc-name { font-family: 'Rajdhani', sans-serif; font-size: 14px; font-weight: 700; color: #ffffff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; letter-spacing: 0.5px; }
+.mc-name-ar { font-family: 'Noto Kufi Arabic', sans-serif; font-size: 13px; font-weight: 600; color: #ffffff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .mc-val-box {
-  background: rgba(0, 8, 24, 0.7); border: 1px solid rgba(255, 215, 0, 0.25); padding: 1px 6px; border-radius: 3px;
-  font-family: 'Share Tech Mono', monospace; font-size: 13px; color: #ffd700; font-weight: 600; flex-shrink: 0;
+  background: rgba(0, 8, 24, 0.7); border: 1px solid rgba(255, 215, 0, 0.25); padding: 2px 8px; border-radius: 3px;
+  font-family: 'Share Tech Mono', monospace; font-size: 15px; color: #ffd700; font-weight: 600; flex-shrink: 0;
 }
 .mc-val-box-ar {
-  background: rgba(0, 8, 24, 0.7); border: 1px solid rgba(255, 215, 0, 0.25); padding: 1px 6px; border-radius: 3px;
-  font-family: 'Noto Kufi Arabic', sans-serif; font-size: 11px; color: #ffd700; font-weight: 700; flex-shrink: 0;
+  background: rgba(0, 8, 24, 0.7); border: 1px solid rgba(255, 215, 0, 0.25); padding: 1px 8px; border-radius: 3px;
+  font-family: 'Noto Kufi Arabic', sans-serif; font-size: 12px; color: #ffd700; font-weight: 700; flex-shrink: 0;
 }
 
-/* LAST UPDATED STATUS */
-.bottom-status-bar{display:flex;align-items:center;justify-content:center;padding-top:2px;flex:0 0 15px;}
-.last-upd{font-family:'Share Tech Mono',monospace;font-size:14px;color:rgba(140,200,255,0.5);letter-spacing:1px;}
-.last-upd-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:13px;color:rgba(140,200,255,0.5);}
+/* ══ LAST UPDATED STATUS (BADA & CLEAR KIYA) ══ */
+.bottom-status-bar{display:flex;align-items:center;justify-content:center;padding-top:4px;flex:0 0 20px;}
+.last-upd{font-family:'Share Tech Mono',monospace;font-size:17px;color:rgba(140,200,255,0.85);letter-spacing:1px;text-shadow:0 0 10px rgba(0,140,255,0.2);}
+.last-upd-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:15px;color:rgba(140,200,255,0.85);text-shadow:0 0 10px rgba(0,140,255,0.2);}
 
 /* ══ FOOTER ══ */
 .ftr {
@@ -263,7 +262,7 @@ input:checked + .slider:before{transform:translateX(24px);background-color:#00e6
           </div>
         </div>
 
-        <!-- 50% MINI BOXES GRID -->
+        <!-- 50% MINI BOXES GRID (CENTER ALIGNED & LEGIBLE) -->
         <div class="row-mc-grid">
           <div class="mc-title-bar">
             <div class="mc-main-lbl">Making Charge Starting From</div>
@@ -354,7 +353,7 @@ input:checked + .slider:before{transform:translateX(24px);background-color:#00e6
           </div>
         </div>
 
-        <!-- 50% MINI BOXES GRID (ARABIC) -->
+        <!-- 50% MINI BOXES GRID (ARABIC - CENTER ALIGNED) -->
         <div class="row-mc-grid" style="direction:rtl;">
           <div class="mc-title-bar">
             <div class="mc-main-lbl-ar">أسعار المصنعية تبدأ من (ر.ع)</div>
@@ -608,3 +607,6 @@ window.addEventListener('resize',applyZoom);
 </script>
 </body>
 </html>
+HTMLEOF
+echo "done"
+
