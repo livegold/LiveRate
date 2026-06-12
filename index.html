@@ -69,8 +69,8 @@ html,body{
 .body{
   flex:1;min-height:0;
   display:flex;flex-direction:column;
-  gap:20px;
-  padding:24px 56px 76px; 
+  gap:16px;
+  padding:20px 56px 76px; 
   position:relative;z-index:1;
 }
 
@@ -109,13 +109,13 @@ html,body{
 .kb-unit{font-size:12px;font-family:'Rajdhani',sans-serif;letter-spacing:1.5px;color:rgba(140,200,255,0.7);text-transform:uppercase;font-weight:700;margin-top:2px;}
 .kb-unit-ar{font-size:12px;font-family:'Noto Kufi Arabic',sans-serif;color:rgba(140,200,255,0.7);font-weight:600;margin-top:2px;}
 
-/* ══ MAKING CHARGES GRID (COMPACT BUT HIGH READABILITY) ══ */
+/* ══ MAKING CHARGES GRID (OPTIMIZED FOR HEIGHT & BIGGER TEXT) ══ */
 .row-mc-grid {
-  flex: 0 0 115px; display: flex; flex-direction: column; gap: 6px;
+  flex: 0 0 135px; display: flex; flex-direction: column; gap: 8px;
   background: rgba(0, 24, 60, 0.3); border: 1px solid rgba(30, 120, 255, 0.35);
-  padding: 8px 16px; border-radius: 10px;
+  padding: 10px 16px; border-radius: 12px;
   transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-  opacity: 1; max-height: 130px; overflow: hidden;
+  opacity: 1; max-height: 150px; overflow: hidden;
 }
 
 /* EXPAND RATES WHEN MC IS HIDDEN */
@@ -134,40 +134,43 @@ html,body{
 /* MC Title Bar - Center Aligned */
 .mc-title-bar {
   display: flex; justify-content: center; align-items: center; text-align: center;
-  border-bottom: 1px solid rgba(80, 160, 255, 0.15); padding-bottom: 4px; margin-bottom: 2px;
+  border-bottom: 1px solid rgba(80, 160, 255, 0.15); padding-bottom: 6px; margin-bottom: 2px;
 }
 .mc-main-lbl {
-  font-family: 'Rajdhani', sans-serif; font-size: 14px; font-weight: 700; color: #ffd700; letter-spacing: 2.5px; text-transform: uppercase;
+  font-family: 'Rajdhani', sans-serif; font-size: 16px; font-weight: 700; color: #ffd700; letter-spacing: 2.5px; text-transform: uppercase;
 }
 .mc-main-lbl-ar {
-  font-family: 'Noto Kufi Arabic', sans-serif; font-size: 14px; font-weight: 700; color: #ffd700; letter-spacing: 0;
+  font-family: 'Noto Kufi Arabic', sans-serif; font-size: 16px; font-weight: 700; color: #ffd700; letter-spacing: 0;
 }
 
-/* MC Lines & Cells - Thoda Bada kiya Readability ke liye */
+/* MC Lines & Cells - Bigger & Layout Fixes for Arabic Wrapping */
 .mc-container-cells {
-  display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: 1fr 1fr; gap: 8px; flex: 1;
+  display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: 1fr 1fr; gap: 10px; flex: 1;
 }
 .mc-cell {
   background: linear-gradient(90deg, rgba(0,30,85,0.5) 0%, rgba(0,15,50,0.7) 100%);
-  border: 1px solid rgba(40, 130, 255, 0.25); border-radius: 5px; display: flex; align-items: center; justify-content: space-between; padding: 0 12px; height: 36px;
+  border: 1px solid rgba(40, 130, 255, 0.25); border-radius: 6px; display: flex; align-items: center; justify-content: space-between; padding: 0 14px; height: 44px;
 }
-.mc-cell-left { display: flex; align-items: center; gap: 8px; min-width: 0; }
-.mc-flag { font-size: 16px; line-height: 1; flex-shrink: 0; }
-.mc-name { font-family: 'Rajdhani', sans-serif; font-size: 14px; font-weight: 700; color: #ffffff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; letter-spacing: 0.5px; }
-.mc-name-ar { font-family: 'Noto Kufi Arabic', sans-serif; font-size: 13px; font-weight: 600; color: #ffffff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mc-cell-left { display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1; }
+.mc-flag { font-size: 20px; line-height: 1; flex-shrink: 0; }
+
+/* Text Sizing & Full Visibility Prevent Overflow/Wrapping */
+.mc-name { font-family: 'Rajdhani', sans-serif; font-size: 16px; font-weight: 700; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: 0.5px; }
+.mc-name-ar { font-family: 'Noto Kufi Arabic', sans-serif; font-size: 15px; font-weight: 600; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
 .mc-val-box {
-  background: rgba(0, 8, 24, 0.7); border: 1px solid rgba(255, 215, 0, 0.25); padding: 2px 8px; border-radius: 3px;
-  font-family: 'Share Tech Mono', monospace; font-size: 15px; color: #ffd700; font-weight: 600; flex-shrink: 0;
+  background: rgba(0, 8, 24, 0.7); border: 1px solid rgba(255, 215, 0, 0.25); padding: 4px 10px; border-radius: 4px;
+  font-family: 'Share Tech Mono', monospace; font-size: 17px; color: #ffd700; font-weight: 600; flex-shrink: 0;
 }
 .mc-val-box-ar {
-  background: rgba(0, 8, 24, 0.7); border: 1px solid rgba(255, 215, 0, 0.25); padding: 1px 8px; border-radius: 3px;
-  font-family: 'Noto Kufi Arabic', sans-serif; font-size: 12px; color: #ffd700; font-weight: 700; flex-shrink: 0;
+  background: rgba(0, 8, 24, 0.7); border: 1px solid rgba(255, 215, 0, 0.25); padding: 2px 10px; border-radius: 4px;
+  font-family: 'Noto Kufi Arabic', sans-serif; font-size: 14px; color: #ffd700; font-weight: 700; flex-shrink: 0;
 }
 
-/* ══ LAST UPDATED STATUS (BADA & CLEAR KIYA) ══ */
-.bottom-status-bar{display:flex;align-items:center;justify-content:center;padding-top:4px;flex:0 0 20px;}
-.last-upd{font-family:'Share Tech Mono',monospace;font-size:17px;color:rgba(140,200,255,0.85);letter-spacing:1px;text-shadow:0 0 10px rgba(0,140,255,0.2);}
-.last-upd-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:15px;color:rgba(140,200,255,0.85);text-shadow:0 0 10px rgba(0,140,255,0.2);}
+/* ══ LAST UPDATED STATUS (LARGE & highly LEGIBLE) ══ */
+.bottom-status-bar{display:flex;align-items:center;justify-content:center;padding-top:4px;flex:0 0 24px;}
+.last-upd{font-family:'Share Tech Mono',monospace;font-size:20px;font-weight:600;color:rgba(150,210,255,0.95);letter-spacing:1px;text-shadow:0 0 12px rgba(0,140,255,0.25);}
+.last-upd-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:18px;font-weight:600;color:rgba(150,210,255,0.95);text-shadow:0 0 12px rgba(0,140,255,0.25);}
 
 /* ══ FOOTER ══ */
 .ftr {
