@@ -93,20 +93,20 @@ html,body{
 .s-unit{font-family:'Rajdhani',sans-serif;font-size:18px;letter-spacing:2px;margin-top:8px;font-weight:700;color:rgba(255,255,255,0.8);}
 .s-unit-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:18px;margin-top:8px;font-weight:600;color:rgba(255,255,255,0.8);}
 
-/* KARATS LAYOUT VIA TABLE */
+/* KARATS LAYOUT VIA TABLE — TOP TO BOTTOM FLOW */
 .row-karat-table {
   width: 100%; border-collapse: separate; border-spacing: 24px 0; margin-left: -24px; width: calc(100% + 48px);
   height: 230px; margin-top: 30px;
 }
-.kb{vertical-align: middle; text-align: center; border-radius:18px;background:linear-gradient(145deg,rgba(0,40,100,0.65),rgba(0,20,60,0.9));border-top:5px solid rgba(0,140,255,0.8);border-left:1px solid rgba(0,140,255,0.25);border-right:1px solid rgba(0,140,255,0.25);border-bottom:1px solid rgba(0,140,255,0.25);box-shadow:0 15px 30px rgba(0,0,0,0.4);padding: 15px 0;}
+.kb{vertical-align: middle; text-align: center; border-radius:18px;background:linear-gradient(145deg,rgba(0,40,100,0.65),rgba(0,20,60,0.9));border-top:5px solid rgba(0,140,255,0.8);border-left:1px solid rgba(0,140,255,0.25);border-right:1px solid rgba(0,140,255,0.25);border-bottom:1px solid rgba(0,140,255,0.25);box-shadow:0 15px 30px rgba(0,0,0,0.4);padding: 20px 0;}
 .kb.flash{animation:kf 0.5s ease;}
 @keyframes kf{0%,100%{}50%{background:rgba(0,100,255,0.25);}}
 
 .kb-table-inner { width: 100%; border-collapse: collapse; }
-.kb-k{font-family:'Bebas Neue',sans-serif;font-size:56px;color:#fff;line-height:1;letter-spacing:2px; width: 35%; text-align: center;}
-.kb-k-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:36px;color:#fff;font-weight:700;line-height:1; width: 40%; text-align: center;}
-.kb-price{font-family:'Share Tech Mono',monospace;font-size:60px;color:#fff;letter-spacing:1px;line-height:1;}
-.kb-price-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:42px;color:#fff;font-weight:700;line-height:1;}
+.kb-k{font-family:'Bebas Neue',sans-serif;font-size:52px;color:#ffd700;line-height:1;letter-spacing:2px; text-align: center; margin-bottom: 10px;}
+.kb-k-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:34px;color:#ffd700;font-weight:700;line-height:1; text-align: center; margin-bottom: 8px;}
+.kb-price{font-family:'Share Tech Mono',monospace;font-size:62px;color:#fff;letter-spacing:1px;line-height:1.1;}
+.kb-price-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:42px;color:#fff;font-weight:700;line-height:1.1;}
 .kb-unit{font-size:13px;font-family:'Rajdhani',sans-serif;letter-spacing:1.5px;color:rgba(140,200,255,0.7);text-transform:uppercase;font-weight:700;margin-top:6px;}
 .kb-unit-ar{font-size:13px;font-family:'Noto Kufi Arabic',sans-serif;color:rgba(140,200,255,0.7);font-weight:600;margin-top:6px;}
 
@@ -123,10 +123,10 @@ html,body{
 .body.hide-mc-active .row-karat-table { height: 330px; margin-top: 40px;}
 .body.hide-mc-active .s-val { font-size: 130px; }
 .body.hide-mc-active .s-val-ar { font-size: 100px; }
-.body.hide-mc-active .kb-price { font-size: 82px; }
-.body.hide-mc-active .kb-price-ar { font-size: 58px; }
-.body.hide-mc-active .kb-k { font-size: 78px; }
-.body.hide-mc-active .kb-k-ar { font-size: 52px; }
+.body.hide-mc-active .kb-price { font-size: 84px; }
+.body.hide-mc-active .kb-price-ar { font-size: 60px; }
+.body.hide-mc-active .kb-k { font-size: 68px; }
+.body.hide-mc-active .kb-k-ar { font-size: 46px; }
 
 .mc-title-bar {
   text-align: center; border-bottom: 1px solid rgba(80, 160, 255, 0.15); padding-bottom: 10px; margin-bottom: 16px;
@@ -175,15 +175,15 @@ html,body{
 .sd{width:12px;height:12px;border-radius:50%;background:rgba(60,130,255,0.15);border:1px solid rgba(60,130,255,0.25);display: inline-block; margin-right: 6px; transition:all 0.3s;}
 .sd.active{background:rgba(100,180,255,0.9);box-shadow:0 0 10px rgba(60,130,255,0.5);}
 
-/* TOGGLE CONTROLS */
+/* TOGGLE CONTROLS — LONGER SWITCH DESIGN */
 .toggle-wrap{display:inline-block; vertical-align: middle; margin-right: 24px;}
 .toggle-icon{font-size:20px;color:rgba(140,200,255,0.85); margin-right: 6px; vertical-align: middle;}
-.switch{position:relative;display:inline-block;width:48px;height:24px; vertical-align: middle; cursor: pointer;}
+.switch{position:relative;display:inline-block;width:85px;height:26px; vertical-align: middle; cursor: pointer;}
 .switch input{opacity:0;width:0;height:0;}
-.slider{position:absolute;inset:0;background-color:rgba(255,255,255,0.1);border:1px solid rgba(60,130,255,0.3);border-radius:20px;transition:.3s;}
-.slider:before{position:absolute;content:"";height:16px;width:16px;left:3px;bottom:3px;background-color:#7ab8ff;border-radius:50%;transition:.3s;}
+.slider{position:absolute;inset:0;background-color:rgba(255,255,255,0.1);border:1px solid rgba(60,130,255,0.4);border-radius:20px;transition:.3s;}
+.slider:before{position:absolute;content:"";height:18px;width:18px;left:4px;bottom:3px;background-color:#7ab8ff;border-radius:50%;transition:.3s;}
 input:checked + .slider{background-color:rgba(0,230,118,0.2);border-color:#00e676;}
-input:checked + .slider:before{transform:translateX(24px);background-color:#00e676;box-shadow:0 0 8px #00e676;}
+input:checked + .slider:before{transform:translateX(57px);background-color:#00e676;box-shadow:0 0 8px #00e676;}
 
 /* STEPPER SYSTEM */
 .ctrl-stepper { display:inline-block; vertical-align: middle; background: rgba(0,30,80,0.4); border: 1px solid rgba(60,130,255,0.3); border-radius: 20px; padding: 2px; }
@@ -243,16 +243,24 @@ input:checked + .slider:before{transform:translateX(24px);background-color:#00e6
         <table class="row-karat-table">
           <tr>
             <td class="kb" id="enKb24" style="width: 25%;">
-              <table class="kb-table-inner"><tr><td class="kb-k">24K</td><td style="text-align:center;"><div class="kb-price" id="enK24">—</div><div class="kb-unit">OMR / Gram</div></td></tr></table>
+              <div class="kb-k">24K</div>
+              <div class="kb-price" id="enK24">—</div>
+              <div class="kb-unit">OMR / Gram</div>
             </td>
             <td class="kb" id="enKb22" style="width: 25%;">
-              <table class="kb-table-inner"><tr><td class="kb-k">22K</td><td style="text-align:center;"><div class="kb-price" id="enK22">—</div><div class="kb-unit">OMR / Gram</div></td></tr></table>
+              <div class="kb-k">22K</div>
+              <div class="kb-price" id="enK22">—</div>
+              <div class="kb-unit">OMR / Gram</div>
             </td>
             <td class="kb" id="enKb21" style="width: 25%;">
-              <table class="kb-table-inner"><tr><td class="kb-k">21K</td><td style="text-align:center;"><div class="kb-price" id="enK21">—</div><div class="kb-unit">OMR / Gram</div></td></tr></table>
+              <div class="kb-k">21K</div>
+              <div class="kb-price" id="enK21">—</div>
+              <div class="kb-unit">OMR / Gram</div>
             </td>
             <td class="kb" id="enKb18" style="width: 25%;">
-              <table class="kb-table-inner"><tr><td class="kb-k">18K</td><td style="text-align:center;"><div class="kb-price" id="enK18">—</div><div class="kb-unit">OMR / Gram</div></td></tr></table>
+              <div class="kb-k">18K</div>
+              <div class="kb-price" id="enK18">—</div>
+              <div class="kb-unit">OMR / Gram</div>
             </td>
           </tr>
         </table>
@@ -314,16 +322,24 @@ input:checked + .slider:before{transform:translateX(24px);background-color:#00e6
         <table class="row-karat-table" style="direction: rtl;">
           <tr>
             <td class="kb" id="arKb24" style="width: 25%;">
-              <table class="kb-table-inner"><tr><td class="kb-k-ar">٢٤ عيار</td><td style="text-align:center;"><div class="kb-price-ar" id="arK24">—</div><div class="kb-unit-ar">ر.ع / جرام</div></td></tr></table>
+              <div class="kb-k-ar">٢٤ عيار</div>
+              <div class="kb-price-ar" id="arK24">—</div>
+              <div class="kb-unit-ar">ر.ع / جرام</div>
             </td>
             <td class="kb" id="arKb22" style="width: 25%;">
-              <table class="kb-table-inner"><tr><td class="kb-k-ar">٢٢ عيار</td><td style="text-align:center;"><div class="kb-price-ar" id="arK22">—</div><div class="kb-unit-ar">ر.ع / جرام</div></td></tr></table>
+              <div class="kb-k-ar">٢٢ عيار</div>
+              <div class="kb-price-ar" id="arK22">—</div>
+              <div class="kb-unit-ar">ر.ع / جرام</div>
             </td>
             <td class="kb" id="arKb21" style="width: 25%;">
-              <table class="kb-table-inner"><tr><td class="kb-k-ar">٢١ عيار</td><td style="text-align:center;"><div class="kb-price-ar" id="arK21">—</div><div class="kb-unit-ar">ر.ع / جرام</div></td></tr></table>
+              <div class="kb-k-ar">٢١ عيار</div>
+              <div class="kb-price-ar" id="arK21">—</div>
+              <div class="kb-unit-ar">ر.ع / جرام</div>
             </td>
             <td class="kb" id="arKb18" style="width: 25%;">
-              <table class="kb-table-inner"><tr><td class="kb-k-ar">١٨ عيار</td><td style="text-align:center;"><div class="kb-price-ar" id="arK18">—</div><div class="kb-unit-ar">ر.ع / جرام</div></td></tr></table>
+              <div class="kb-k-ar">١٨ عيار</div>
+              <div class="kb-price-ar" id="arK18">—</div>
+              <div class="kb-unit-ar">ر.ع / جرام</div>
             </td>
           </tr>
         </table>
