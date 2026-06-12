@@ -1,4 +1,4 @@
-cat > /mnt/user-data/outputs/sattardina-tv-display.html << 'HTMLEOF'
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,23 +10,25 @@ cat > /mnt/user-data/outputs/sattardina-tv-display.html << 'HTMLEOF'
 *{margin:0;padding:0;box-sizing:border-box;}
 html,body{
   width:100%;height:100%;overflow:hidden;
-  background:linear-gradient(160deg,#001830 0%,#00102a 50%,#001428 100%);
+  background:#000d1d;
 }
 
-/* ZOOM WRAPPER — clips to exactly viewport */
+/* ZOOM WRAPPER — GPU Optimized */
 #zw{
   position:fixed;
   top:0;left:0;
   width:1920px;height:1080px;
   transform-origin:top left;
-  overflow:hidden; 
+  overflow:hidden;
+  backface-visibility:hidden;
+  transform:translateZ(0);
 }
 
-/* SLIDES TRACK — 2 Slides Only */
+/* SLIDES TRACK */
 .sw{
   width:3840px;height:1080px;
   display:flex;
-  transition:transform 1.2s cubic-bezier(0.77,0,0.18,1);
+  transition:transform 1.0s cubic-bezier(0.25,1,0.5,1);
   will-change:transform;
 }
 
@@ -35,193 +37,181 @@ html,body{
   flex:0 0 1920px; 
   display:flex;flex-direction:column;
   overflow:hidden;position:relative;
-  background:linear-gradient(160deg,#001830 0%,#00102a 50%,#001428 100%);
-}
-.slide::before{
-  content:'';position:absolute;inset:0;pointer-events:none;
-  background:
-    radial-gradient(ellipse 80% 40% at 50% 0%,rgba(30,120,255,0.12) 0%,transparent 55%),
-    radial-gradient(ellipse 60% 60% at 100% 100%,rgba(0,80,200,0.08) 0%,transparent 50%),
-    radial-gradient(ellipse 60% 60% at 0% 100%,rgba(0,80,200,0.08) 0%,transparent 50%);
+  background:linear-gradient(160deg,#001428 0%,#000a18 60%,#000f22 100%);
 }
 
-/* ══ HEADER 120px ══ */
+/* ══ HEADER ══ */
 .hdr{
-  flex:0 0 120px;
+  flex:0 0 110px;
   display:flex;align-items:center;justify-content:space-between;
   padding:0 56px;position:relative;z-index:2;
-  background:linear-gradient(180deg,rgba(0,10,40,0.98),rgba(0,15,50,0.6));
+  background:rgba(0,8,24,0.95);
 }
 .hdr::after{
   content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,transparent,rgba(30,120,255,0.5) 15%,rgba(100,180,255,0.95) 50%,rgba(30,120,255,0.5) 85%,transparent);
+  background:linear-gradient(90deg,transparent,rgba(30,120,255,0.4) 15%,rgba(100,180,255,0.8) 50%,rgba(30,120,255,0.4) 85%,transparent);
 }
-.brand{font-family:'Bebas Neue',sans-serif;font-size:58px;letter-spacing:10px;color:#fff;text-shadow:0 0 30px rgba(80,160,255,0.5);}
-.brand-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:52px;font-weight:700;color:#fff;text-shadow:0 0 30px rgba(80,160,255,0.5);}
-.hdr-mid{display:flex;flex-direction:column;align-items:center;gap:4px;}
-.logo-ring{width:88px;height:88px;border-radius:50%;background:rgba(0,20,60,0.9);border:3px solid rgba(80,160,255,0.45);display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 0 25px rgba(50,130,255,0.4);animation:lg 4s ease-in-out infinite alternate;}
-@keyframes lg{from{box-shadow:0 0 10px rgba(50,130,255,0.2);}to{box-shadow:0 0 40px rgba(80,160,255,0.7);}}
-.logo-img{width:80px;height:80px;object-fit:contain;border-radius:50%;}
-.hdr-right{display:flex;flex-direction:column;align-items:flex-end;gap:4px;}
-.hdr-left-ar{display:flex;flex-direction:column;align-items:flex-start;gap:4px;}
-.hdr-live-title{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:4px;color:#00e676;text-shadow:0 0 15px rgba(0,230,118,0.4);}
-.hdr-live-title-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:24px;font-weight:600;color:#00e676;}
-.clock{font-family:'Share Tech Mono',monospace;font-size:28px;color:#fff;letter-spacing:2px;line-height:1;}
-.clock-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:24px;color:#fff;line-height:1;}
-.date-lbl{font-family:'Rajdhani',sans-serif;font-size:13px;color:rgba(120,190,255,0.45);letter-spacing:2px;}
-.date-lbl-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:13px;color:rgba(120,190,255,0.6);}
+.brand{font-family:'Bebas Neue',sans-serif;font-size:54px;letter-spacing:10px;color:#fff;text-shadow:0 0 20px rgba(80,160,255,0.4);}
+.brand-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:46px;font-weight:700;color:#fff;text-shadow:0 0 20px rgba(80,160,255,0.4);}
+.hdr-mid{display:flex;flex-direction:column;align-items:center;}
+.logo-ring{width:80px;height:80px;border-radius:50%;background:rgba(0,15,45,0.9);border:2px solid rgba(80,160,255,0.4);display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 0 20px rgba(50,130,255,0.3);}
+.logo-img{width:72px;height:72px;object-fit:contain;border-radius:50%;}
+.hdr-right{display:flex;flex-direction:column;align-items:flex-end;gap:2px;}
+.hdr-left-ar{display:flex;flex-direction:column;align-items:flex-start;gap:2px;}
+.hdr-live-title{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:3px;color:#00e676;}
+.hdr-live-title-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:20px;font-weight:600;color:#00e676;}
+.clock{font-family:'Share Tech Mono',monospace;font-size:26px;color:#fff;letter-spacing:1px;line-height:1;}
+.clock-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:22px;color:#fff;line-height:1;}
+.date-lbl{font-family:'Rajdhani',sans-serif;font-size:12px;color:rgba(120,190,255,0.5);letter-spacing:1px;}
+.date-lbl-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:12px;color:rgba(120,190,255,0.5);}
 
-/* ══ BODY ══ */
+/* ══ BODY WITH DYNAMIC SPACING ══ */
 .body{
   flex:1;min-height:0;
-  display:grid;
-  grid-template-rows:1fr 1.1fr auto auto;
-  gap:24px;
-  padding:30px 56px 84px; 
+  display:flex;flex-direction:column;
+  gap:20px;
+  padding:24px 56px 76px; 
   position:relative;z-index:1;
 }
 
-/* SPOTS */
-.row-spots{display:grid;grid-template-columns:1fr 1fr 1fr;gap:36px;}
-.spot-card{border-radius:14px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative;overflow:hidden;padding:18px;}
-.oz-card{background:linear-gradient(160deg,rgba(0,60,160,0.7),rgba(0,30,100,0.85));border:1px solid rgba(80,150,255,0.35);box-shadow:0 8px 40px rgba(0,0,0,0.4),inset 0 1px 0 rgba(100,170,255,0.1);}
-.oz-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,#40c4ff,rgba(150,220,255,0.9),#40c4ff,transparent);}
-.tola-card{background:linear-gradient(160deg,rgba(0,80,40,0.7),rgba(0,40,20,0.85));border:1px solid rgba(0,200,100,0.32);box-shadow:0 8px 40px rgba(0,0,0,0.4),inset 0 1px 0 rgba(0,200,100,0.08);}
-.tola-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,#00c864,rgba(0,220,120,0.9),#00c864,transparent);}
-.tentola-card{background:linear-gradient(160deg,rgba(80,0,160,0.7),rgba(40,0,100,0.85));border:1px solid rgba(160,80,255,0.35);box-shadow:0 8px 40px rgba(0,0,0,0.4),inset 0 1px 0 rgba(160,100,255,0.08);}
-.tentola-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,#a855f7,rgba(200,150,255,0.9),#a855f7,transparent);}
-.s-lbl{font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:600;letter-spacing:4px;text-transform:uppercase;margin-bottom:8px;}
-.oz-card .s-lbl{color:rgba(100,180,255,0.7);}
-.tola-card .s-lbl{color:rgba(0,200,100,0.7);}
-.tentola-card .s-lbl{color:rgba(160,100,255,0.7);}
-.s-lbl-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:20px;margin-bottom:8px;}
-.oz-card .s-lbl-ar{color:rgba(100,180,255,0.7);}
-.tola-card .s-lbl-ar{color:rgba(0,200,100,0.7);}
-.tentola-card .s-lbl-ar{color:rgba(160,100,255,0.7);}
-.s-val{font-family:'Share Tech Mono',monospace;font-size:96px;line-height:1;color:#fff;}
-.s-val-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:80px;line-height:1;color:#fff;font-weight:700;}
-.oz-card .s-val,.oz-card .s-val-ar{text-shadow:0 0 30px rgba(50,130,255,0.55);}
-.tola-card .s-val,.tola-card .s-val-ar{text-shadow:0 0 30px rgba(0,200,100,0.5);}
-.tentola-card .s-val,.tentola-card .s-val-ar{text-shadow:0 0 30px rgba(160,80,255,0.5);}
-.s-unit{font-family:'Rajdhani',sans-serif;font-size:18px;letter-spacing:4px;margin-top:8px;font-weight:600;}
-.s-unit-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:18px;margin-top:8px;font-weight:600;}
+/* SPOTS — Flexible height (auto expands when MC is off) */
+.row-spots{
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;
+  flex:2; transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.spot-card{border-radius:16px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;box-shadow:0 15px 35px rgba(0,0,0,0.4);transition: all 0.4s ease;}
+.oz-card{background:linear-gradient(160deg,rgba(0,50,140,0.65),rgba(0,20,80,0.85));border:1px solid rgba(80,160,255,0.35);}
+.tola-card{background:linear-gradient(160deg,rgba(0,70,35,0.65),rgba(0,35,15,0.85));border:1px solid rgba(0,200,100,0.3);}
+.tentola-card{background:linear-gradient(160deg,rgba(75,0,150,0.65),rgba(40,0,90,0.85));border:1px solid rgba(160,80,255,0.35);}
 
-/* KARATS */
-.row-karat{display:flex;flex-direction:column;justify-content:center;}
-.karat-block{flex:1;display:flex;flex-direction:column;justify-content:center;}
-.karat-row{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:36px;}
-.kb{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 18px;border-radius:16px;background:linear-gradient(145deg,rgba(0,45,115,0.65),rgba(0,20,65,0.85));border-top:4px solid rgba(0,140,255,0.75);border-left:1px solid rgba(0,140,255,0.25);border-right:1px solid rgba(0,140,255,0.25);border-bottom:1px solid rgba(0,140,255,0.25);box-shadow:0 15px 35px rgba(0,0,0,0.4);text-align:center;gap:10px;}
-.kb.flash{animation:kf 0.8s ease;}
+.s-lbl{font-family:'Rajdhani',sans-serif;font-size:18px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:6px;color:rgba(160,210,255,0.85);}
+.s-lbl-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:20px;font-weight:600;margin-bottom:6px;color:rgba(160,210,255,0.85);}
+.s-val{font-family:'Share Tech Mono',monospace;font-size:86px;line-height:1;color:#fff;text-shadow:0 0 30px rgba(255,255,255,0.15);transition: font-size 0.4s ease;}
+.s-val-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:68px;line-height:1;color:#fff;font-weight:700;text-shadow:0 0 30px rgba(255,255,255,0.15);transition: font-size 0.4s ease;}
+.s-unit{font-family:'Rajdhani',sans-serif;font-size:16px;letter-spacing:2px;margin-top:6px;font-weight:700;color:rgba(255,255,255,0.8);}
+.s-unit-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:16px;margin-top:6px;font-weight:600;color:rgba(255,255,255,0.8);}
+
+/* KARATS ROW — Flexible height (auto expands when MC is off) */
+.row-karat{
+  flex:2; display:flex; align-items:center;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.karat-row{width:100%;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:24px;height:100%;}
+.kb{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;border-radius:16px;background:linear-gradient(145deg,rgba(0,40,100,0.65),rgba(0,20,60,0.9));border-top:4px solid rgba(0,140,255,0.8);border-left:1px solid rgba(0,140,255,0.25);border-right:1px solid rgba(0,140,255,0.25);border-bottom:1px solid rgba(0,140,255,0.25);box-shadow:0 15px 30px rgba(0,0,0,0.4);text-align:center;gap:4px;transition: all 0.4s ease;}
+.kb.flash{animation:kf 0.5s ease;}
 @keyframes kf{0%,100%{}50%{background:rgba(0,100,255,0.25);}}
+
 .kb-k{font-family:'Bebas Neue',sans-serif;font-size:52px;color:#fff;line-height:1;letter-spacing:2px;}
 .kb-k-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:36px;color:#fff;font-weight:700;line-height:1;}
-.kb-r{display:flex;flex-direction:column;align-items:center;gap:4px;}
-.kb-price{font-family:'Share Tech Mono',monospace;font-size:54px;color:#fff;letter-spacing:1px;line-height:1;}
-.kb-price-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:42px;color:#fff;font-weight:700;line-height:1;}
-.kb-unit{font-size:13px;font-family:'Rajdhani',sans-serif;letter-spacing:1px;color:rgba(140,200,255,0.6);text-transform:uppercase;font-weight:600;}
-.kb-unit-ar{font-size:13px;font-family:'Noto Kufi Arabic',sans-serif;color:rgba(140,200,255,0.7);font-weight:600;}
+.kb-r{display:flex;flex-direction:column;align-items:center;}
+.kb-price{font-family:'Share Tech Mono',monospace;font-size:56px;color:#fff;letter-spacing:1px;line-height:1;transition: font-size 0.4s ease;}
+.kb-price-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:40px;color:#fff;font-weight:700;line-height:1;transition: font-size 0.4s ease;}
+.kb-unit{font-size:12px;font-family:'Rajdhani',sans-serif;letter-spacing:1.5px;color:rgba(140,200,255,0.7);text-transform:uppercase;font-weight:700;margin-top:2px;}
+.kb-unit-ar{font-size:12px;font-family:'Noto Kufi Arabic',sans-serif;color:rgba(140,200,255,0.7);font-weight:600;margin-top:2px;}
 
-/* ══ PERFECT RIGHT-TO-LEFT TICKER SCROLL FOR BOTH SLIDES ══ */
-.row-marquee {
-  width: 100%; overflow: hidden; height: 56px;
-  background: linear-gradient(90deg, rgba(0, 32, 74, 0.9) 0%, rgba(0, 52, 112, 0.95) 50%, rgba(0, 32, 74, 0.9) 100%);
-  border-top: 2px solid rgba(255, 215, 0, 0.4); border-bottom: 2px solid rgba(255, 215, 0, 0.4);
-  border-radius: 8px; display: flex; align-items: center; position: relative;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-  transition: all 0.4s ease-in-out;
-}
-.row-marquee.hide-mc {
-  opacity: 0; height: 0; padding: 0; margin: 0; border: none; pointer-events: none;
-}
-.mq-wrap {
-  position: absolute; display: flex; align-items: center; white-space: nowrap; width: 100%; left: 0; height: 100%;
+/* ══ SUPER COMPACT 50% SMALLER MAKING CHARGES GRID ══ */
+.row-mc-grid {
+  flex: 0 0 105px; display: flex; flex-direction: column; gap: 4px;
+  background: rgba(0, 24, 60, 0.3); border: 1px solid rgba(30, 120, 255, 0.35);
+  padding: 6px 16px 8px; border-radius: 10px;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  opacity: 1; max-height: 120px; overflow: hidden;
 }
 
-/* English Line — Starts at 1920px (right) and moves left */
-.mq-text {
-  position: absolute; display: flex; align-items: center; white-space: nowrap; height: 100%;
-  font-family: 'Rajdhani', sans-serif; font-size: 22px; font-weight: 700; color: #ffffff; letter-spacing: 1px;
-  line-height: 1; transform: translate3d(1920px, 0, 0);
+/* EXPAND RATES WHEN MC IS HIDDEN */
+.body.hide-mc-active .row-mc-grid {
+  opacity: 0; max-height: 0; padding: 0; margin: 0; border: none; flex: 0 0 0px; pointer-events: none;
 }
-.slide-active-0 .mq-text {
-  animation: run-ticker 24.5s linear forwards;
+.body.hide-mc-active .row-spots {
+  flex: 3.2;
+}
+.body.hide-mc-active .row-karat {
+  flex: 3.2;
+}
+.body.hide-mc-active .s-val { font-size: 110px; }
+.body.hide-mc-active .s-val-ar { font-size: 86px; }
+.body.hide-mc-active .kb-price { font-size: 72px; }
+.body.hide-mc-active .kb-price-ar { font-size: 52px; }
+.body.hide-mc-active .kb-k { font-size: 64px; }
+.body.hide-mc-active .kb-k-ar { font-size: 44px; }
+
+/* MC Inner Text Styling - Shrunk by 50% */
+.mc-title-bar {
+  display: flex; align-items: center; border-bottom: 1px solid rgba(80, 160, 255, 0.15); padding-bottom: 2px; margin-bottom: 2px;
+}
+.mc-main-lbl {
+  font-family: 'Rajdhani', sans-serif; font-size: 13px; font-weight: 700; color: #ffd700; letter-spacing: 2px; text-transform: uppercase;
+}
+.mc-main-lbl-ar {
+  font-family: 'Noto Kufi Arabic', sans-serif; font-size: 12px; font-weight: 700; color: #ffd700;
+}
+.mc-container-cells {
+  display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: 1fr 1fr; gap: 6px; flex: 1;
+}
+.mc-cell {
+  background: linear-gradient(90deg, rgba(0,30,85,0.5) 0%, rgba(0,15,50,0.7) 100%);
+  border: 1px solid rgba(40, 130, 255, 0.25); border-radius: 5px; display: flex; align-items: center; justify-content: space-between; padding: 0 10px; height: 32px;
+}
+.mc-cell-left { display: flex; align-items: center; gap: 6px; min-width: 0; }
+.mc-flag { font-size: 14px; line-height: 1; flex-shrink: 0; }
+.mc-name { font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 700; color: #ffffff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; letter-spacing: 0.5px; }
+.mc-name-ar { font-family: 'Noto Kufi Arabic', sans-serif; font-size: 11px; font-weight: 600; color: #ffffff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mc-val-box {
+  background: rgba(0, 8, 24, 0.7); border: 1px solid rgba(255, 215, 0, 0.25); padding: 1px 6px; border-radius: 3px;
+  font-family: 'Share Tech Mono', monospace; font-size: 13px; color: #ffd700; font-weight: 600; flex-shrink: 0;
+}
+.mc-val-box-ar {
+  background: rgba(0, 8, 24, 0.7); border: 1px solid rgba(255, 215, 0, 0.25); padding: 1px 6px; border-radius: 3px;
+  font-family: 'Noto Kufi Arabic', sans-serif; font-size: 11px; color: #ffd700; font-weight: 700; flex-shrink: 0;
 }
 
-/* Arabic Line — Correct text sequence order, forced into Left-To-Right layout logic, scrolling from Right to Left */
-.mq-text-ar {
-  position: absolute; display: flex; align-items: center; white-space: nowrap; height: 100%;
-  font-family: 'Noto Kufi Arabic', sans-serif; font-size: 20px; font-weight: 600; color: #ffffff; letter-spacing: 0.5px;
-  line-height: 1; transform: translate3d(1920px, 0, 0); direction: ltr !important; text-align: left;
-}
-.slide-active-1 .mq-text-ar {
-  animation: run-ticker 24.5s linear forwards;
-}
+/* LAST UPDATED STATUS */
+.bottom-status-bar{display:flex;align-items:center;justify-content:center;padding-top:2px;flex:0 0 15px;}
+.last-upd{font-family:'Share Tech Mono',monospace;font-size:14px;color:rgba(140,200,255,0.5);letter-spacing:1px;}
+.last-upd-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:13px;color:rgba(140,200,255,0.5);}
 
-/* Inline items configurations */
-.mq-text span, .mq-text-ar span {
-  color: #ffd700; font-family: 'Share Tech Mono', monospace; font-size: 24px; margin-right: 30px; margin-left: 8px;
-  background: rgba(0, 10, 30, 0.6); padding: 2px 10px; border-radius: 4px; border: 1px solid rgba(255, 215, 0, 0.25);
-  display: inline-flex; align-items: center; line-height: 1;
-}
-.mq-text-ar span {
-  font-family: 'Noto Kufi Arabic', sans-serif; font-size: 20px; font-weight: 700; display: inline-flex; direction: rtl !important;
-}
-.mq-text-ar .main-lbl-ar {
-  font-family: 'Noto Kufi Arabic', sans-serif; font-size: 20px; font-weight: 700; color: #ffffff; background: none; border: none; padding: 0; margin-right: 25px;
-}
-.flag-emoji {
-  font-size: 24px; vertical-align: middle; margin-right: 6px; margin-left: 10px; display: inline-block; line-height: 1;
-}
-
-/* Uniform Ticker Keyframe: Moves everything right to left dynamically based on content width */
-@keyframes run-ticker {
-  0% { transform: translate3d(1920px, 0, 0); }
-  100% { transform: translate3d(calc(960px - 100%), 0, 0); }
-}
-
-/* LAST UPDATED */
-.bottom-status-bar{display:flex;align-items:center;justify-content:center;padding:2px 0 0 0;}
-.last-upd{font-family:'Share Tech Mono',monospace;font-size:18px;color:rgba(140,200,255,0.8);letter-spacing:2px;}
-.last-upd-ar{font-family:'Noto Kufi Arabic',sans-serif;font-size:16px;color:rgba(140,200,255,0.8);}
-
-/* ══ FOOTER 56px ══ */
+/* ══ FOOTER ══ */
 .ftr {
   position: absolute;
-  bottom: 0; left: 0; width: 1920px;
-  height: 56px;
+  bottom: 0; left: 0; width: 1920px; height: 56px;
   display: flex; align-items: center; justify-content: space-between;
-  padding: 0 56px;
-  border-top: 1px solid rgba(60,130,255,0.15);
-  z-index: 99; 
-  background: rgba(0,8,30,0.95);
+  padding: 0 56px; border-top: 1px solid rgba(60,130,255,0.15); z-index: 99; 
+  background: rgba(0,6,20,0.98);
 }
-.ftr::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(60,130,255,0.35),rgba(100,180,255,0.6),rgba(60,130,255,0.35),transparent);}
-.ftr-left-dots {display: flex; gap: 20px; align-items: center;}
-.ftr-controls{display:flex;align-items:center;gap:24px;}
+.ftr::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:gradient(90deg,transparent,rgba(60,130,255,0.3),transparent);}
+.ftr-left-dots {display: flex; gap: 24px; align-items: center;}
+.ftr-controls{display:flex;align-items:center;gap:28px;}
 .slide-dots{display:flex;gap:7px;align-items:center;}
 .sd{width:8px;height:8px;border-radius:50%;background:rgba(60,130,255,0.15);border:1px solid rgba(60,130,255,0.25);transition:all 0.3s;}
 .sd.active{background:rgba(100,180,255,0.9);box-shadow:0 0 10px rgba(60,130,255,0.5);}
 
-/* TOGGLE WITH PRICE TAG ICON ONLY */
+/* TOGGLE WITH LABEL ICON */
 .toggle-wrap{display:flex;align-items:center;gap:8px;user-select:none;}
-.toggle-icon{font-size:20px;color:rgba(140,200,255,0.85);line-height:1;}
-.switch{position:relative;display:inline-block;width:46px;height:22px;}
+.toggle-icon{font-size:18px;color:rgba(140,200,255,0.85);line-height:1;}
+.switch{position:relative;display:inline-block;width:44px;height:20px;}
 .switch input{opacity:0;width:0;height:0;}
-.slider{position:absolute;cursor:pointer;inset:0;background-color:rgba(255,255,255,0.1);border:1px solid rgba(60,130,255,0.3);border-radius:22px;transition:.3s;}
-.slider:before{position:absolute;content:"";height:14px;width:14px;left:3px;bottom:3px;background-color:#7ab8ff;border-radius:50%;transition:.3s;}
+.slider{position:absolute;cursor:pointer;inset:0;background-color:rgba(255,255,255,0.1);border:1px solid rgba(60,130,255,0.3);border-radius:20px;transition:.3s;}
+.slider:before{position:absolute;content:"";height:12px;width:12px;left:3px;bottom:3px;background-color:#7ab8ff;border-radius:50%;transition:.3s;}
 input:checked + .slider{background-color:rgba(0,230,118,0.2);border-color:#00e676;}
 input:checked + .slider:before{transform:translateX(24px);background-color:#00e676;box-shadow:0 0 8px #00e676;}
 
-.zoom-wrap{display:flex;align-items:center;gap:6px;}
-.zbtn{width:34px;height:34px;border-radius:50%;background:rgba(0,20,70,0.9);border:1px solid rgba(60,130,255,0.35);color:#7ab8ff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;user-select:none;}
-.zbtn:hover{background:rgba(0,40,120,0.9);}
-.zpct{font-family:'Share Tech Mono',monospace;font-size:13px;color:rgba(100,170,255,0.6);min-width:42px;text-align:center;}
+/* STEPPER INTERVAL SELECTOR */
+.ctrl-stepper { display: flex; align-items: center; background: rgba(0,30,80,0.4); border: 1px solid rgba(60,130,255,0.3); border-radius: 20px; padding: 2px; }
+.st-btn {
+  width: 32px; height: 32px; border-radius: 50%; background: transparent; border: none;
+  color: #7ab8ff; font-size: 15px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+}
+.st-btn:hover { background: rgba(60,130,255,0.2); color: #fff; }
+.st-lbl {
+  font-family: 'Rajdhani', sans-serif; font-size: 14px; font-weight: 700; color: #ffffff; min-width: 75px; text-align: center; letter-spacing: 1px; text-transform: uppercase;
+}
 
-/* ICON BUTTONS */
-.ibtn{width:38px;height:38px;background:rgba(0,20,70,0.9);color:rgba(100,180,255,0.85);font-size:18px;border:1px solid rgba(60,130,255,0.3);border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
-.ibtn:hover{background:rgba(0,40,120,0.9);color:#fff;}
+/* ZOOM CONTROLLER */
+.zoom-wrap{display:flex;align-items:center;gap:6px;}
+.zbtn{width:32px;height:32px;border-radius:50%;background:rgba(0,15,50,0.9);border:1px solid rgba(60,130,255,0.3);color:#7ab8ff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;user-select:none;}
+.zpct{font-family:'Share Tech Mono',monospace;font-size:13px;color:rgba(100,170,255,0.6);min-width:38px;text-align:center;}
+.ibtn{width:36px;height:36px;background:rgba(0,15,50,0.9);color:rgba(100,180,255,0.85);font-size:16px;border:1px solid rgba(60,130,255,0.3);border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
 .ibtn-fs{border-color:rgba(0,230,118,0.3);color:#00e676;}
-.ibtn-fs:hover{background:rgba(0,100,50,0.4);border-color:#00e676;}
 </style>
 </head>
 <body class="slide-active-0">
@@ -229,6 +219,7 @@ input:checked + .slider:before{transform:translateX(24px);background-color:#00e6
 <div id="zw">
   <div class="sw" id="sw">
 
+    <!-- ══ ENGLISH SLIDE ══ -->
     <div class="slide">
       <div class="hdr">
         <div class="brand">SATTARDINA</div>
@@ -244,7 +235,7 @@ input:checked + .slider:before{transform:translateX(24px);background-color:#00e6
         </div>
       </div>
 
-      <div class="body">
+      <div class="body" id="bodyEN">
         <div class="row-spots">
           <div class="spot-card oz-card">
             <div class="s-lbl">1 Ounce · International</div>
@@ -264,28 +255,51 @@ input:checked + .slider:before{transform:translateX(24px);background-color:#00e6
         </div>
 
         <div class="row-karat">
-          <div class="karat-block">
-            <div class="karat-row">
-              <div class="kb" id="enKb24"><div class="kb-k">24K</div><div class="kb-r"><div class="kb-price" id="enK24">—</div><div class="kb-unit">OMR / Gram</div></div></div>
-              <div class="kb" id="enKb22"><div class="kb-k">22K</div><div class="kb-r"><div class="kb-price" id="enK22">—</div><div class="kb-unit">OMR / Gram</div></div></div>
-              <div class="kb" id="enKb21"><div class="kb-k">21K</div><div class="kb-r"><div class="kb-price" id="enK21">—</div><div class="kb-unit">OMR / Gram</div></div></div>
-              <div class="kb" id="enKb18"><div class="kb-k">18K</div><div class="kb-r"><div class="kb-price" id="enK18">—</div><div class="kb-unit">OMR / Gram</div></div></div>
-            </div>
+          <div class="karat-row">
+            <div class="kb" id="enKb24"><div class="kb-k">24K</div><div class="kb-r"><div class="kb-price" id="enK24">—</div><div class="kb-unit">OMR / Gram</div></div></div>
+            <div class="kb" id="enKb22"><div class="kb-k">22K</div><div class="kb-r"><div class="kb-price" id="enK22">—</div><div class="kb-unit">OMR / Gram</div></div></div>
+            <div class="kb" id="enKb21"><div class="kb-k">21K</div><div class="kb-r"><div class="kb-price" id="enK21">—</div><div class="kb-unit">OMR / Gram</div></div></div>
+            <div class="kb" id="enKb18"><div class="kb-k">18K</div><div class="kb-r"><div class="kb-price" id="enK18">—</div><div class="kb-unit">OMR / Gram</div></div></div>
           </div>
         </div>
 
-        <div class="row-marquee mq-container">
-          <div class="mq-wrap">
-            <div class="mq-text">
-              Making Charge Starting From: 
-              <span class="flag-emoji">🇴🇲</span>OMANI (Hand Made) <span>3.500 OMR</span> 
-              <span class="flag-emoji">🇴🇲</span>OMANI (Machine Made) <span>2.000 OMR</span> 
-              <span class="flag-emoji">🇸🇬</span>SINGAPORE <span>3.500 OMR</span> 
-              <span class="flag-emoji">🇸🇦</span>SAUDI <span>4.000 OMR</span> 
-              <span class="flag-emoji">🇹🇷</span>TURKISH <span>4.500 OMR</span> 
-              <span class="flag-emoji">🇰🇼</span>KUWAITI <span>4.000 OMR</span> 
-              <span class="flag-emoji">🇧🇭</span>BAHRAINI <span>4.500 OMR</span> 
-              <span class="flag-emoji">🇦🇪</span>EMIRATI <span>3.500 OMR</span>
+        <!-- 50% MINI BOXES GRID -->
+        <div class="row-mc-grid">
+          <div class="mc-title-bar">
+            <div class="mc-main-lbl">Making Charge Starting From</div>
+          </div>
+          <div class="mc-container-cells">
+            <div class="mc-cell">
+              <div class="mc-cell-left"><span class="mc-flag">🇴🇲</span><span class="mc-name">OMANI (Hand)</span></div>
+              <div class="mc-val-box">3.500</div>
+            </div>
+            <div class="mc-cell">
+              <div class="mc-cell-left"><span class="mc-flag">🇴🇲</span><span class="mc-name">OMANI (Machine)</span></div>
+              <div class="mc-val-box">2.000</div>
+            </div>
+            <div class="mc-cell">
+              <div class="mc-cell-left"><span class="mc-flag">🇸🇬</span><span class="mc-name">SINGAPORE</span></div>
+              <div class="mc-val-box">3.500</div>
+            </div>
+            <div class="mc-cell">
+              <div class="mc-cell-left"><span class="mc-flag">🇸🇦</span><span class="mc-name">SAUDI</span></div>
+              <div class="mc-val-box">4.000</div>
+            </div>
+            <div class="mc-cell">
+              <div class="mc-cell-left"><span class="mc-flag">🇹🇷</span><span class="mc-name">TURKISH</span></div>
+              <div class="mc-val-box">4.500</div>
+            </div>
+            <div class="mc-cell">
+              <div class="mc-cell-left"><span class="mc-flag">🇰🇼</span><span class="mc-name">KUWAITI</span></div>
+              <div class="mc-val-box">4.000</div>
+            </div>
+            <div class="mc-cell">
+              <div class="mc-cell-left"><span class="mc-flag">🇧🇭</span><span class="mc-name">BAHRAINI</span></div>
+              <div class="mc-val-box">4.500</div>
+            </div>
+            <div class="mc-cell">
+              <div class="mc-cell-left"><span class="mc-flag">🇦🇪</span><span class="mc-name">EMIRATI</span></div>
+              <div class="mc-val-box">3.500</div>
             </div>
           </div>
         </div>
@@ -296,6 +310,7 @@ input:checked + .slider:before{transform:translateX(24px);background-color:#00e6
       </div>
     </div>
 
+    <!-- ══ ARABIC SLIDE ══ -->
     <div class="slide">
       <div class="hdr" style="direction:rtl;">
         <div class="brand-ar">ستاردينا</div>
@@ -311,7 +326,7 @@ input:checked + .slider:before{transform:translateX(24px);background-color:#00e6
         </div>
       </div>
 
-      <div class="body">
+      <div class="body" id="bodyAR">
         <div class="row-spots" style="direction:rtl;">
           <div class="spot-card oz-card">
             <div class="s-lbl-ar">١ أونصة عالمي</div>
@@ -331,28 +346,51 @@ input:checked + .slider:before{transform:translateX(24px);background-color:#00e6
         </div>
 
         <div class="row-karat" style="direction:rtl;">
-          <div class="karat-block">
-            <div class="karat-row">
-              <div class="kb" id="arKb24"><div class="kb-k-ar">٢٤ عيار</div><div class="kb-r"><div class="kb-price-ar" id="arK24">—</div><div class="kb-unit-ar">ر.ع / جرام</div></div></div>
-              <div class="kb" id="arKb22"><div class="kb-k-ar">٢٢ عيار</div><div class="kb-r"><div class="kb-price-ar" id="arK22">—</div><div class="kb-unit-ar">ر.ع / جرام</div></div></div>
-              <div class="kb" id="arKb21"><div class="kb-k-ar">٢١ عيار</div><div class="kb-r"><div class="kb-price-ar" id="arK21">—</div><div class="kb-unit-ar">ر.ع / جرام</div></div></div>
-              <div class="kb" id="arKb18"><div class="kb-k-ar">١٨ عيار</div><div class="kb-r"><div class="kb-price-ar" id="arK18">—</div><div class="kb-unit-ar">ر.ع / جرام</div></div></div>
-            </div>
+          <div class="karat-row">
+            <div class="kb" id="arKb24"><div class="kb-k-ar">٢٤ عيار</div><div class="kb-r"><div class="kb-price-ar" id="arK24">—</div><div class="kb-unit-ar">ر.ع / جرام</div></div></div>
+            <div class="kb" id="arKb22"><div class="kb-k-ar">٢٢ عيار</div><div class="kb-r"><div class="kb-price-ar" id="arK22">—</div><div class="kb-unit-ar">ر.ع / جرام</div></div></div>
+            <div class="kb" id="arKb21"><div class="kb-k-ar">٢١ عيار</div><div class="kb-r"><div class="kb-price-ar" id="arK21">—</div><div class="kb-unit-ar">ر.ع / جرام</div></div></div>
+            <div class="kb" id="arKb18"><div class="kb-k-ar">١٨ عيار</div><div class="kb-r"><div class="kb-price-ar" id="arK18">—</div><div class="kb-unit-ar">ر.ع / جرام</div></div></div>
           </div>
         </div>
 
-        <div class="row-marquee mq-container">
-          <div class="mq-wrap">
-            <div class="mq-text-ar">
-              <span class="main-lbl-ar">أسعار المصنعية تبدأ من:</span>
-              <span class="flag-emoji">🇴🇲</span> <span>عُماني (صنع يدوي)</span> <span>٣.٥٠٠ ر.ع</span> 
-              <span class="flag-emoji">🇴🇲</span> <span>عُماني (صنع آلي)</span> <span>٢.٠٠٠ ر.ع</span> 
-              <span class="flag-emoji">🇸🇬</span> <span>سنغافوري</span> <span>٣.٥٠٠ ر.ع</span> 
-              <span class="flag-emoji">🇸🇦</span> <span>سعودي</span> <span>٤.٠٠٠ ر.ع</span> 
-              <span class="flag-emoji">🇹🇷</span> <span>تركي</span> <span>٤.٥٠٠ ر.ع</span> 
-              <span class="flag-emoji">🇰🇼</span> <span>كويتي</span> <span>٤.٠٠٠ ر.ع</span> 
-              <span class="flag-emoji">🇧🇭</span> <span>بحريني</span> <span>٤.٥٠٠ ر.ع</span> 
-              <span class="flag-emoji">🇦🇪</span> <span>إماراتي</span> <span>٣.٥٠٠ ر.ع</span>
+        <!-- 50% MINI BOXES GRID (ARABIC) -->
+        <div class="row-mc-grid" style="direction:rtl;">
+          <div class="mc-title-bar">
+            <div class="mc-main-lbl-ar">أسعار المصنعية تبدأ من (ر.ع)</div>
+          </div>
+          <div class="mc-container-cells">
+            <div class="mc-cell">
+              <div class="mc-cell-left"><span class="mc-flag">🇴🇲</span><span class="mc-name-ar">عُماني (يدوي)</span></div>
+              <div class="mc-val-box-ar">٣.٥٠٠</div>
+            </div>
+            <div class="mc-cell">
+              <div class="mc-cell-left"><span class="mc-flag">🇴🇲</span><span class="mc-name-ar">عُماني (آلي)</span></div>
+              <div class="mc-val-box-ar">٢.٠٠٠</div>
+            </div>
+            <div class="mc-cell">
+              <div class="mc-cell-left"><span class="mc-flag">🇸🇬</span><span class="mc-name-ar">سنغافوري</span></div>
+              <div class="mc-val-box-ar">٣.٥٠٠</div>
+            </div>
+            <div class="mc-cell">
+              <div class="mc-cell-left"><span class="mc-flag">🇸🇦</span><span class="mc-name-ar">سعودي</span></div>
+              <div class="mc-val-box-ar">٤.٠٠٠</div>
+            </div>
+            <div class="mc-cell">
+              <div class="mc-cell-left"><span class="mc-flag">🇹🇷</span><span class="mc-name-ar">تركي</span></div>
+              <div class="mc-val-box-ar">٤.٥٠٠</div>
+            </div>
+            <div class="mc-cell">
+              <div class="mc-cell-left"><span class="mc-flag">🇰🇼</span><span class="mc-name-ar">كويتي</span></div>
+              <div class="mc-val-box-ar">٤.٠٠٠</div>
+            </div>
+            <div class="mc-cell">
+              <div class="mc-cell-left"><span class="mc-flag">🇧🇭</span><span class="mc-name-ar">بحريني</span></div>
+              <div class="mc-val-box-ar">٤.٥٠٠</div>
+            </div>
+            <div class="mc-cell">
+              <div class="mc-cell-left"><span class="mc-flag">🇦🇪</span><span class="mc-name-ar">إماراتي</span></div>
+              <div class="mc-val-box-ar">٣.٥٠٠</div>
             </div>
           </div>
         </div>
@@ -363,7 +401,10 @@ input:checked + .slider:before{transform:translateX(24px);background-color:#00e6
       </div>
     </div>
 
-  </div><div class="ftr">
+  </div><!-- sw -->
+
+  <!-- FIXED FOOTER -->
+  <div class="ftr">
     <div class="ftr-left-dots">
       <div class="slide-dots">
         <div class="sd active" id="d0"></div>
@@ -371,11 +412,17 @@ input:checked + .slider:before{transform:translateX(24px);background-color:#00e6
       </div>
       
       <div class="toggle-wrap">
-        <span class="toggle-icon" title="Toggle Making Charges">🏷️</span>
+        <span class="toggle-icon" title="Toggle Making Charges Box">🏷️</span>
         <label class="switch">
-          <input type="checkbox" id="mcToggle" checked onchange="toggleMarquee()">
+          <input type="checkbox" id="mcToggle" checked onchange="toggleMCBox()">
           <span class="slider"></span>
         </label>
+      </div>
+
+      <div class="ctrl-stepper">
+        <button class="st-btn" onclick="stepInterval(-1)">&lt;</button>
+        <span class="st-lbl" id="currentIntervalLbl">LIVE</span>
+        <button class="st-btn" onclick="stepInterval(1)">&gt;</button>
       </div>
     </div>
     
@@ -383,16 +430,18 @@ input:checked + .slider:before{transform:translateX(24px);background-color:#00e6
       <button class="ibtn ibtn-fs" onclick="toggleFS()" title="Full Screen">🖥️</button>
       
       <div class="zoom-wrap">
-        <button class="zbtn" onclick="z(-0.05)" title="Zoom Out">−</button>
+        <button class="zbtn" onclick="z(-0.05)">−</button>
         <span class="zpct" id="zpct">100%</span>
-        <button class="zbtn" onclick="z(+0.05)" title="Zoom In">+</button>
+        <button class="zbtn" onclick="z(+0.05)">+</button>
       </div>
       
       <button class="ibtn" onclick="load()" title="Refresh Rates">↻</button>
     </div>
   </div>
 
-</div><script>
+</div><!-- zw -->
+
+<script>
 function toAr(n){const id=['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];return n.toString().replace(/[0-9]/g,w=>id[+w]);}
 
 function tick(){
@@ -407,18 +456,17 @@ function tick(){
 }
 setInterval(tick,1000);tick();
 
-/* ── FULLSCREEN TOGGLE ── */
 function toggleFS() {
   if (!document.fullscreenElement) {
     document.documentElement.requestFullscreen().catch(err => {
-      alert(`Error trying to enable fullscreen: ${err.message}`);
+      alert(`Fullscreen error: ${err.message}`);
     });
   } else {
     document.exitFullscreen();
   }
 }
 
-/* ── ZOOM ── */
+/* ZOOM */
 let sc=1;
 function applyZoom(){
   const vw=window.innerWidth, vh=window.innerHeight;
@@ -436,34 +484,71 @@ function z(d){
 }
 window.addEventListener('resize',applyZoom);
 
-/* ── MARQUEE VISIBILITY TOGGLE ── */
-function toggleMarquee() {
+/* SMART DYNAMIC VISIBILITY & EXPANSION */
+function toggleMCBox() {
   const isChecked = document.getElementById('mcToggle').checked;
-  const containers = document.querySelectorAll('.mq-container');
-  containers.forEach(el => {
-    if (isChecked) {
-      el.classList.remove('hide-mc');
-    } else {
-      el.classList.add('hide-mc');
-    }
-  });
+  const bodyEN = document.getElementById('bodyEN');
+  const bodyAR = document.getElementById('bodyAR');
+  
+  if (isChecked) {
+    bodyEN.classList.remove('hide-mc-active');
+    bodyAR.classList.remove('hide-mc-active');
+  } else {
+    bodyEN.classList.add('hide-mc-active');
+    bodyAR.classList.add('hide-mc-active');
+  }
 }
 
-/* ── SLIDE TIMING (EXACT 25 SECONDS WITH LINEAR RESETS) ── */
+/* SLIDE TIMING (25 SECONDS) */
 let cur=0;
 function goSlide(n){
   cur=n;
-  document.getElementById('sw').style.transform='translateX('+(n*-1920)+'px)';
-  
+  document.getElementById('sw').style.transform='translate3d('+(n*-1920)+'px, 0, 0)';
   document.body.className = 'slide-active-' + n;
 
   [0,1].forEach(i=>{
     document.getElementById('d'+i).className='sd'+(i===n?' active':'');
   });
+
+  if(modes[activeModeIdx].id === 'live') {
+    load();
+  }
 }
 setInterval(()=>goSlide(cur===0?1:0), 25000);
 
-/* ── RENDER DATA ── */
+/* STEPPER INTERVALS */
+const modes = [
+  { id: 'live', text: 'LIVE' },
+  { id: '15', text: '15 MIN', val: 15 },
+  { id: '30', text: '30 MIN', val: 30 },
+  { id: '60', text: '1 HR', val: 60 }
+];
+let activeModeIdx = 0;
+let fetchTimer = null;
+
+function stepInterval(dir) {
+  activeModeIdx += dir;
+  if(activeModeIdx < 0) activeModeIdx = modes.length - 1;
+  if(activeModeIdx >= modes.length) activeModeIdx = 0;
+  
+  const selected = modes[activeModeIdx];
+  document.getElementById('currentIntervalLbl').textContent = selected.text;
+
+  if(fetchTimer) {
+    clearInterval(fetchTimer);
+    fetchTimer = null;
+  }
+
+  if(selected.id === 'live') {
+    load();
+  } else {
+    const ms = selected.val * 60 * 1000;
+    fetchTimer = setInterval(load, ms);
+    load();
+  }
+}
+
+/* DATA RENDERER */
 function render(p){
   const p24k=(p*1.4485+15)/116.64;
   const p22k=p24k*0.920, p21k=p24k*0.879, p18k=p24k*0.755;
@@ -501,7 +586,6 @@ function render(p){
   document.getElementById('updAR').textContent='آخر تحديث: '+toAr(tsAR);
 }
 
-/* ── FETCH API ── */
 async function load(){
   const refreshBtn = document.querySelector('.ftr-controls .ibtn:not(.ibtn-fs)');
   if(refreshBtn) refreshBtn.textContent = '...';
@@ -521,10 +605,6 @@ window.onload=function(){
   load();
 };
 window.addEventListener('resize',applyZoom);
-setInterval(load,30000);
 </script>
 </body>
 </html>
-HTMLEOF
-echo "done"
-
